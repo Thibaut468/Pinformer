@@ -30,6 +30,9 @@ public class Jeu implements Runnable, KeyListener {
     //Objets
     private Joueur joueur;
 
+    //Textures
+    public chargementImage textures;
+
     public Jeu(String titre, int largeur, int hauteur){
         this.largeur = largeur;
         this.hauteur = hauteur;
@@ -38,6 +41,8 @@ public class Jeu implements Runnable, KeyListener {
         this.keys = new boolean[4];
 
         this.joueur=new Joueur(10,10,30,30,10,5,this);
+
+        this.textures=new chargementImage();
     }
 
     private void init(){

@@ -22,6 +22,6 @@ public class Joueur extends Personnage {
     }
 
     public void aff(Graphics g) {
-        g.fillRect(super.x,super.y,super.largeur,super.hauteur);
+        g.drawImage(this.jeu.textures.joueur,super.x,super.y,null);
     }
 }
