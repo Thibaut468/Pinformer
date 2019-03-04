@@ -1,5 +1,3 @@
-package fr.pinformer;
-
 import java.awt.*;
 
 public abstract class Entite {

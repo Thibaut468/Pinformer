@@ -1,5 +1,3 @@
-package fr.pinformer;
-
 //9 AVRIL 7H (Rendu)
 
 public class Launch {

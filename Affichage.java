@@ -1,5 +1,3 @@
-package fr.pinformer;
-
 import javax.swing.*;
 import java.awt.*;
 
