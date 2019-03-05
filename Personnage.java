@@ -19,4 +19,21 @@ public abstract class Personnage extends Entite {
         super.x+=this.depX;
         super.y+=this.depY;
     }
+    
+      public void setVie(int v){
+        this.vie=v;
+    }
+
+    public int getVie(){
+        return this.vie;
+    }
+    
+    
+      public void setVitesse(int vitesse){
+        this.vitesse=vitesse;
+    }
+
+    public int getVitesse(){
+        return this.vitesse;
+    }
 }
