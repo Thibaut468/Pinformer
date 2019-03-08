@@ -30,6 +30,7 @@ public class Jeu implements Runnable, KeyListener {
 
     //Objets
     private Joueur joueur;
+    private PlateformeMobile p1;
 
     //Textures
     public chargementImage textures;
@@ -44,6 +45,8 @@ public class Jeu implements Runnable, KeyListener {
         this.joueur=new Joueur(10,10,32,32,10,5,this);
 
         this.textures=new chargementImage();
+        
+        this.p1= new PlateformeMobile(50, 110, 60, 30, 15, 90, 15);
     }
 
     private void init(){
@@ -63,9 +66,10 @@ public class Jeu implements Runnable, KeyListener {
         bas=keys[1];
         gauche=keys[2];
         droite=keys[3];
-
+		
         //On update les objets
         joueur.tick();
+        p1.tick();
     }
 
     private void aff(){
@@ -79,6 +83,7 @@ public class Jeu implements Runnable, KeyListener {
 
         //Dessin
         joueur.aff(g);
+        p1.aff(g);
 
         //Gère les buffeurs d'affichage
         buff.show();
