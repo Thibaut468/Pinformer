@@ -1,6 +1,9 @@
+import javax.imageio.ImageIO;
+import java.io.File;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*; 
+import java.awt.event.*;
+import java.io.IOException;
 
 
 public class FenetreSelection extends JFrame implements ActionListener {
@@ -13,10 +16,9 @@ public class FenetreSelection extends JFrame implements ActionListener {
     private FenetreParametres parametres;
     private JFrame menu;
 
-
     public FenetreSelection(){
 
-        this.jeu = new Jeu("Pinformer",400,400);
+        this.jeu = new Jeu("Pinformer",800,800);
         menu = new JFrame();
         menu.setTitle("Menu du jeu");
         menu.setSize(500,500);
@@ -55,8 +57,6 @@ public class FenetreSelection extends JFrame implements ActionListener {
         boutonQuitter.setForeground(Color.white);
 
 
-
-
         JPanel conteneur1 = new JPanel();
         conteneur1.setLayout(null);
         conteneur1.setBounds(100,125,400,475);
@@ -64,8 +64,6 @@ public class FenetreSelection extends JFrame implements ActionListener {
         conteneur1.add(boutonParam);
         conteneur1.add(boutonCredits);
         conteneur1.add(boutonQuitter);
-
-
 
         menu.add(conteneur1);
 

@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class Affichage {
 
@@ -37,7 +38,7 @@ public class Affichage {
         panel.setFocusable(false);
 
         temps=new JLabel("");
-        temps.setBounds(300,10,80,20);
+        temps.setBounds(largeur-100,10,80,20);
 
         this.frame.add(temps);
         this.frame.add(panel);

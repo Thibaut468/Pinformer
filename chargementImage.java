@@ -5,12 +5,12 @@ import java.io.File;
 
 public class chargementImage {
 
-    public BufferedImage joueur;
+    public BufferedImage joueur, backgroundJeu;
 
     public chargementImage(){
 
         joueur=load("./textures/joueur.png");
-
+        backgroundJeu=load("./textures/background1.png");
     }
 
     public BufferedImage load(String acces){

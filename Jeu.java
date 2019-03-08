@@ -42,7 +42,7 @@ public class Jeu implements Runnable, KeyListener {
 
         this.keys = new boolean[4];
 
-        this.joueur=new Joueur(10,10,32,32,10,5,this);
+        this.joueur=new Joueur(10,10,64,64,10,5,this);
 
         this.textures=new chargementImage();
         
@@ -82,6 +82,7 @@ public class Jeu implements Runnable, KeyListener {
         g.clearRect(0, 0, largeur, hauteur);
 
         //Dessin
+        g.drawImage(textures.backgroundJeu,0,0,null);
         joueur.aff(g);
         p1.aff(g);
 

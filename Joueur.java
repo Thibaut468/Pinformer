@@ -10,12 +10,13 @@ public class Joueur extends Personnage {
         depX=0;
         depY=0;
 
-        if(super.jeu.haut) super.depY=-vitesse;
-        if(super.jeu.bas) super.depY=vitesse;
+        //if(super.jeu.haut) super.depY=-vitesse;
+        //if(super.jeu.bas) super.depY=vitesse;
         if(super.jeu.gauche) super.depX=-vitesse;
         if(super.jeu.droite) super.depX=vitesse;
 
         super.chute();
+        if(super.jeu.haut) super.saut(30);
         super.deplacement();
 
     }

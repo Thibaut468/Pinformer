@@ -9,7 +9,7 @@ public abstract class Personnage extends Entite {
     protected Jeu jeu;
     protected final double GRAVITE = 2;
     protected boolean falling = true;
-    protected boolean jumping = false;
+    protected boolean jumping = true;
 
     public Personnage(int x, int y, int largeur, int hauteur, int vie, double vitesse, Jeu jeu){
         super(x, y, largeur, hauteur);
@@ -26,21 +26,26 @@ public abstract class Personnage extends Entite {
     }
 
     public void chute(){
-        if(falling || jumping){
-            depY+=GRAVITE;
-            System.out.println("Gravite car chute : "+falling);
-            System.out.println("Gravite car saut : "+jumping);
+        if(falling){
+            this.depY+=GRAVITE;
+        }
+    }
+
+    public void saut(double hauteurSaut){
+        if(!jumping){
+            this.depY-=hauteurSaut;
+            jumping=true;
         }
     }
 
     public void deplacementX() {
         int testX = 0;
-        if (this.depX > 0) {
+        if (this.depX > 0) { //Si mouvement vers la droite
             testX = (int) (x + largeur + depX);
             if (testX < this.jeu.getLargeur()) {
                 super.x += (int)this.depX;
             }
-        } else if (this.depX <0){
+        } else if (this.depX <0){ //Si mouvement vers la gauche
             testX = (int) (x + depX);
             if (testX > 0) {
                 super.x += (int)this.depX;
@@ -49,24 +54,19 @@ public abstract class Personnage extends Entite {
     }
     public void deplacementY(){
         int testY = 0;
-        if (this.depY > 0) {
+        if (this.depY > 0) { //Si mouvement vers le bas
             testY = (int) (y + hauteur + depY);
-            if (testY < this.jeu.getHauteur()) {
+            if (testY < this.jeu.getHauteur()) { //Si on peut descendre
                 super.y += (int)this.depY;
-                falling = true;
+                //falling = true;
+            } else { //collision au sol
                 jumping = false;
-            } else {
                 falling = false;
-                jumping = false;
             }
-        } else if (this.depY <0){
+        } else if (this.depY <0){ //mouvement vers le haut
             testY = (int) (y + depY);
             if (testY > 0) {
                 super.y += (int)this.depY;
-                jumping = true;
-                falling = false;
-            } else {
-                jumping = false;
                 falling = true;
             }
         }
