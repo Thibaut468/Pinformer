@@ -3,13 +3,13 @@ import java.awt.*;
 public abstract class Monstre extends Entite {
 	
 	protected int vieEnlevee; // si c'est un montre gentil, on met un vie enlevé négatif comme ca dans la méthode perd vie ca fera - (un nombre négatif) ce qui rajoutera des vies)
-	protected int vitesseRalenti; // pareil comme commentaire pour la vitesse de la ligne d'avant
-	protected int vitesse;
-    protected int depX;
-    protected int depY;
+	protected double vitesseRalenti; // pareil comme commentaire pour la vitesse de la ligne d'avant
+	protected double vitesse;
+    protected double depX;
+    protected double depY;
     protected Color couleur;
 	
-	public Monstre(int x, int y, int largeur, int hauteur, int vieE, int vitesse, int vitesseR, Color couleur) {
+	public Monstre(int x, int y, int largeur, int hauteur, int vieE, double vitesse, double vitesseR, Color couleur) {
 		
 		super(x, y, largeur, hauteur);
 		this.vieEnlevee=vieE;
@@ -19,9 +19,7 @@ public abstract class Monstre extends Entite {
         this.couleur = couleur;
         this.vitesseRalenti = vitesseR;
 	}
-	
-	
-	
+
     public abstract void tick();
 
     public abstract void aff(Graphics g);
@@ -33,7 +31,7 @@ public abstract class Monstre extends Entite {
 	}
 	
 	public void perdVitesse(Joueur j) {
-		int nouvelleVitesse = j.getVitesse() - this.vitesseRalenti;
+		double nouvelleVitesse = j.getVitesse() - this.vitesseRalenti;
 		j.setVitesse(nouvelleVitesse);
 		
 	}

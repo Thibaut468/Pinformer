@@ -1,15 +1,15 @@
 import java.awt.*;
 
 public class MonstreDistance extends Monstre {
-	//private Balle balle;
+	private Balle balle;
 	
-	private double vitesseBalle;
+	private double vitesseB;
 	private int duree;
 	
-	public MonstreDistance(int x, int y, int largeur, int hauteur, int vieE, int vitesse, int vitesseR, Color couleur, double VitessB, int duree) {
+	public MonstreDistance(int x, int y, int largeur, int hauteur, int vieE, double vitesse, double vitesseR, Color couleur, double vitesseB, int duree) {
 		super(x, y, largeur, hauteur, vieE, vitesse, vitesseR,couleur);
 		//this.balle = new Balle();
-		this.vitesseBalle = vitesseB;
+		this.vitesseB = vitesseB;
 		this.duree=duree;
 	}
 	
@@ -29,9 +29,9 @@ public class MonstreDistance extends Monstre {
 		
 	public boolean lanceBalle(Joueur j){
 		double temps = 0;
-		for(int i = 0, i<this.duree, i++) {
-			this.balle.setX() = vitesseB*(1.O/sqrt(2))*temps;
-			this.balle.setY()= -0.5*9.81*temps*temps+VitesseB*(1.O/sqrt(2))*temps;
+		for(int i = 0; i<this.duree; i++) {
+			this.balle.setX((int)(vitesseB*(1.0/Math.sqrt(2))*temps));
+			this.balle.setY((int)(-0.5*9.81*temps*temps+vitesseB*(1.0/Math.sqrt(2))*temps));
 		}
 		
 		if ((balle.getX() == j.getX())&&(balle.getY() == j.getY())) {
@@ -42,7 +42,7 @@ public class MonstreDistance extends Monstre {
 	}
 	
 	public void aTouche(Joueur j){
-		if (this.lanceBalle() == true) {
+		if (this.lanceBalle(j) == true) {
 			this.perdVie(j);
 			this.perdVitesse(j);
 		}

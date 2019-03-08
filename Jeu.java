@@ -2,6 +2,7 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
+import javax.swing.Timer;
 
 public class Jeu implements Runnable, KeyListener {
     private Affichage affichage;
@@ -40,7 +41,7 @@ public class Jeu implements Runnable, KeyListener {
 
         this.keys = new boolean[4];
 
-        this.joueur=new Joueur(10,10,30,30,10,5,this);
+        this.joueur=new Joueur(10,10,32,32,10,5,this);
 
         this.textures=new chargementImage();
     }
@@ -53,6 +54,9 @@ public class Jeu implements Runnable, KeyListener {
     private void tick(){
         //Gestion des fps
         x += 1;
+
+        //Timer
+        this.affichage.tickTimer();
 
         //On regarde les touches au début
         haut=keys[0];
@@ -178,5 +182,13 @@ public class Jeu implements Runnable, KeyListener {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    public int getLargeur(){
+        return this.largeur;
+    }
+
+    public int getHauteur(){
+        return this.hauteur;
     }
 }
