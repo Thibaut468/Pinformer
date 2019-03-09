@@ -2,6 +2,7 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
+import java.util.LinkedList;
 import javax.swing.Timer;
 
 public class Jeu implements Runnable, KeyListener {
@@ -29,8 +30,7 @@ public class Jeu implements Runnable, KeyListener {
     public boolean droite;
 
     //Objets
-    private Joueur joueur;
-    private PlateformeMobile p1;
+    LinkedList<Entite> ent;
 
     //Textures
     public chargementImage textures;
@@ -42,11 +42,15 @@ public class Jeu implements Runnable, KeyListener {
 
         this.keys = new boolean[4];
 
-        this.joueur=new Joueur(10,10,64,64,10,5,this);
-
         this.textures=new chargementImage();
-        
-        this.p1= new PlateformeMobile(50, 110, 60, 30, 15, 90, 15);
+
+        this.ent = new LinkedList<Entite>();
+
+        ent.add(new Joueur(10,10,64,64,10,5,this));
+        ent.add(new PlateformeMobile(50, 110, 60, 30, 15, 90, 15));
+        ent.add(new Healer(40,getHauteur()-40,40,40,1));
+        ent.add(new Drainer(220,getHauteur()-40,40,40,1));
+
     }
 
     private void init(){
@@ -68,8 +72,9 @@ public class Jeu implements Runnable, KeyListener {
         droite=keys[3];
 		
         //On update les objets
-        joueur.tick();
-        p1.tick();
+        for (Entite e : ent) {
+            e.tick();
+        }
     }
 
     private void aff(){
@@ -83,9 +88,9 @@ public class Jeu implements Runnable, KeyListener {
 
         //Dessin
         g.drawImage(textures.backgroundJeu,0,0,null);
-        joueur.aff(g);
-        p1.aff(g);
-
+        for (Entite e : ent) {
+            e.aff(g);
+        }
         //Gère les buffeurs d'affichage
         buff.show();
         g.dispose();

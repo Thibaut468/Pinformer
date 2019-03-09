@@ -13,6 +13,8 @@ public class Drainer extends Objet {
     }
 
     public void aff(Graphics g){
+        g.setColor(new Color(76, 76, 255));
+        g.fillRect(x, y, hauteur, largeur);
     }
     
     public void heal(Joueur joueur, int vieEnlevee){

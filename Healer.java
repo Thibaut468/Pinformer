@@ -10,9 +10,12 @@ public class Healer extends Objet {
     }
 
     public void tick(){
+
     }
 
     public void aff(Graphics g){
+        g.setColor(new Color(255, 119, 128));
+        g.fillRect(x, y, hauteur, largeur);
     }
     
     public void heal(Joueur joueur, int vieDonnee){
