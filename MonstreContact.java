@@ -2,8 +2,8 @@ import java.awt.*;
 
 public class MonstreContact extends Monstre {
 	
-	public MonstreContact(int x, int y, int largeur, int hauteur, int vieE, int vitesse, int vitesseR, Color couleur) {
-		super(x, y, largeur, hauteur, vieE, vitesse, vitesseR, couleur);
+	public MonstreContact(int x, int y, int largeur, int hauteur, int vie, int vieE, double vitesseR, Color couleur, Jeu jeu) {
+		super(x, y, largeur, hauteur, vieE, vie, vitesseR, couleur, jeu);
 	}
 	
 	
@@ -16,10 +16,15 @@ public class MonstreContact extends Monstre {
 	}
 		
 		
-	public void estTouche(Joueur j){
+	public void joueurEstTouche(Joueur j){
 		if ((j.getX() == this.x)&&(j.getY()== this.y)){ // provisoire je sais pas comment on va modéliser le contact?
 			this.perdVie(j);
 			this.perdVitesse(j);
 		}
 	}
+    
+    public void monstreContactEstTouche(){
+        // condition que c'est le joueur qui attaque le monstre pas l'inverse
+        this.monstrePerdvie();
+    }
 }
