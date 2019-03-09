@@ -19,18 +19,16 @@ public class MonstreDistance extends Monstre {
 	
     public void tick(){
         compteur = compteur +1;
-        if (compteur > intervalleTire) {
-         while (this.monstreEstMort()==false) {
+        if ((compteur > intervalleTire) && (this.monstreEstMort()==false)){
              // il rest envoyer en boucles des balles en boucle chaque 10
 		double temps = 0; 
 		for(int i = 0; i<this.duree; i++) {
 			this.balle.setX((int)(vitesseB*(1.0/Math.sqrt(2))*temps));
 			this.balle.setY((int)(-0.5*9.81*temps*temps+vitesseB*(1.0/Math.sqrt(2))*temps));
 		}
-        }
         compteur = 0;
     }
-	}
+    }
 
     public void aff(Graphics g){
 		g.setColor(this.couleur);
