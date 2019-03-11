@@ -2,9 +2,12 @@ import java.awt.*;
 
 public abstract class Plateforme extends Entite {
 
-    public Plateforme(int x, int y, int largeur, int hauteur){
+	public int nbreImage;
+	
+    public Plateforme(int x, int y, int largeur, int hauteur, int nbreImage){
         
         super(x,y,largeur,hauteur);
+        this.nbreImage=nbreImage;
         
     }
     

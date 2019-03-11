@@ -6,14 +6,15 @@ public class PlateformeMobile extends Plateforme {
     private int vitesse;
     private int positionInitialeX;
     private int positionFinaleX;
+    boolean sens = false;
 
     
-     public PlateformeMobile(int x, int y, int largeur, int hauteur, int vitesse, int positionFinaleX, int positionInitialeX){
+     public PlateformeMobile(int x, int y, int largeur, int hauteur, int vitesse, int positionFinaleX, int nbreImage){
         
-        super(x,y,largeur,hauteur);
+        super(x,y,largeur,hauteur, nbreImage);
         this.vitesse=vitesse;
         this.positionFinaleX=positionFinaleX;
-        this.positionInitialeX=positionInitialeX;
+        this.positionInitialeX=super.x;
         
     }
     
@@ -30,17 +31,22 @@ public class PlateformeMobile extends Plateforme {
     public void deplacement () {
        //à faire en boucle
        
-       int xinf = super.x;
-       
-        if(super.x!=positionFinaleX && xinf<super.x){
-            xinf=super.x;
+        if(!sens){
             super.x+=vitesse;
-            
         }
-        if(super.x!=positionInitialeX && xinf>super.x){
-            xinf=super.x;
+        
+        if(super.x>=positionFinaleX){
+			sens=true;
+		}
+
+        if(sens){
             super.x-=vitesse;
         }
+        
+        if(super.x<=positionInitialeX){
+			sens=false;
+		}
+		
     }
 
 }

@@ -47,7 +47,7 @@ public class Jeu implements Runnable, KeyListener {
         this.ent = new LinkedList<Entite>();
 
         ent.add(new Joueur(10,10,64,64,10,5,this));
-        ent.add(new PlateformeMobile(50, 110, 60, 30, 15, 90, 15));
+        ent.add(new PlateformeMobile(15, 110, 60, 30, 2, 90));
         ent.add(new Healer(40,getHauteur()-40,40,40,1));
         ent.add(new Drainer(220,getHauteur()-40,40,40,1));
 

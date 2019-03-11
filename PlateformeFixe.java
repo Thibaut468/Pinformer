@@ -2,9 +2,9 @@ import java.awt.*;
 
 public class PlateformeFixe extends Plateforme {
     
-    public PlateformeFixe(int x, int y, int largeur, int hauteur){
+    public PlateformeFixe(int x, int y, int largeur, int hauteur, int nbreImage){
         
-        super(x,y,largeur,hauteur);
+        super(x,y,largeur,hauteur, nbreImage);
         
     }
     
