@@ -1,18 +1,11 @@
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
-public class PlateformeFixe extends Plateforme {
-    
-    public PlateformeFixe(int x, int y, int largeur, int hauteur){
-        
-        super(x,y,largeur,hauteur);
-        
-    }
-    
-    public void tick(){
-        
-    }
 
-    public void aff(Graphics g){
-        g.fillRect(super.x,super.y,super.largeur,super.hauteur);
+public class PlateformeFixe extends Bloc {
+
+    private final int ID = 1;
+    public PlateformeFixe(int x, int y){
+        super(x, y, 1);
     }
 }

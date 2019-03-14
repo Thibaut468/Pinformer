@@ -35,7 +35,6 @@ public abstract class Personnage extends Entite {
 
     public void saut(double hauteurSaut, int t){
         if(!jumping || enTrainDeSauter){
-			System.out.println("Methode saut OK");
 			enTrainDeSauter=true;
 			jumping=true;
 			compteurT++;
@@ -49,6 +48,7 @@ public abstract class Personnage extends Entite {
     }
 
     public void deplacementX() {
+
         int testX = 0;
         if (this.depX > 0) { //Si mouvement vers la droite
             testX = (int) (x + largeur + depX);
@@ -61,6 +61,7 @@ public abstract class Personnage extends Entite {
                 super.x += (int)this.depX;
             }
         }
+
     }
     public void deplacementY(){
         int testY = 0;
@@ -80,6 +81,18 @@ public abstract class Personnage extends Entite {
                 falling = true;
             }
         }
+
+        /*
+        if(this.depY>0){
+            testY =(int)(y+hauteur+depY);
+            if(!this.jeu.getMonde().blocDetection(x, testY)){
+                super.y+=(int)this.depY;
+            } else {
+                jumping = false;
+                falling = false;
+            }
+        }
+        */
     }
 
     public void setVie(int v){

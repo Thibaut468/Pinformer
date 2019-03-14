@@ -35,6 +35,9 @@ public class Jeu implements Runnable, KeyListener {
     //Textures
     public chargementImage textures;
 
+    //Monde
+    private Monde monde;
+
     public Jeu(String titre, int largeur, int hauteur){
         this.largeur = largeur;
         this.hauteur = hauteur;
@@ -44,9 +47,10 @@ public class Jeu implements Runnable, KeyListener {
 
         this.textures=new chargementImage();
 
+        this.monde = new Monde("./mondes/monde1.txt", this);
+
         this.ent = new LinkedList<Entite>();
 
-        ent.add(new Joueur(10,10,64,64,10,5,this));
         ent.add(new PlateformeMobile(50, 110, 60, 30, 15, 90, 15));
         ent.add(new Healer(40,getHauteur()-40,40,40,1));
         ent.add(new Drainer(220,getHauteur()-40,40,40,1));
@@ -71,10 +75,9 @@ public class Jeu implements Runnable, KeyListener {
         gauche=keys[2];
         droite=keys[3];
 		
-        //On update les objets
-        for (Entite e : ent) {
-            e.tick();
-        }
+        //On update le monde
+        monde.tick();
+
     }
 
     private void aff(){
@@ -88,9 +91,7 @@ public class Jeu implements Runnable, KeyListener {
 
         //Dessin
         g.drawImage(textures.backgroundJeu,0,0,null);
-        for (Entite e : ent) {
-            e.aff(g);
-        }
+        monde.aff(g);
         //Gère les buffeurs d'affichage
         buff.show();
         g.dispose();
@@ -202,4 +203,6 @@ public class Jeu implements Runnable, KeyListener {
     public int getHauteur(){
         return this.hauteur;
     }
+
+    public Monde getMonde(){ return this.monde; }
 }
