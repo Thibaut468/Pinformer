@@ -10,9 +10,9 @@ public class PlateformeMobile extends Entite{
     boolean sens = false;
 
     
-     public PlateformeMobile(int x, int y, int largeur, int hauteur, int vitesse, int positionFinaleX, int nbreImage){
+     public PlateformeMobile(int x, int y, int largeur, int hauteur, int vitesse, int positionFinaleX){
         
-        super(x,y,largeur,hauteur, nbreImage);
+        super(x,y,largeur,hauteur);
         this.vitesse=vitesse;
         this.positionFinaleX=positionFinaleX;
         this.positionInitialeX=super.x;
