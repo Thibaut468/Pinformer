@@ -7,9 +7,11 @@ public abstract class Personnage extends Entite {
     protected double depX;
     protected double depY;
     protected Jeu jeu;
-    protected final double GRAVITE = 2;
+    protected final double GRAVITE = 3;
     protected boolean falling = true;
     protected boolean jumping = true;
+    protected int compteurT = 0;
+	protected boolean enTrainDeSauter = false;
 
     public Personnage(int x, int y, int largeur, int hauteur, int vie, double vitesse, Jeu jeu){
         super(x, y, largeur, hauteur);
@@ -31,11 +33,19 @@ public abstract class Personnage extends Entite {
         }
     }
 
-    public void saut(double hauteurSaut){
-        if(!jumping){
-            this.depY-=hauteurSaut;
-            jumping=true;
-        }
+    public void saut(double hauteurSaut, int t){
+        if(!jumping || enTrainDeSauter){
+			System.out.println("Methode saut OK");
+			enTrainDeSauter=true;
+			jumping=true;
+			compteurT++;
+			if(compteurT<(int)(hauteurSaut/t)){
+				this.depY-=t;
+			}else{
+				enTrainDeSauter=false;
+				compteurT=0;
+			}	
+		}
     }
 
     public void deplacementX() {

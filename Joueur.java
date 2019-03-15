@@ -16,9 +16,9 @@ public class Joueur extends Personnage {
         if(super.jeu.droite) super.depX=vitesse;
 
         super.chute();
-        if(super.jeu.haut) super.saut(30);
+        if(super.enTrainDeSauter) super.saut(150,8);
+        if(super.jeu.haut && !enTrainDeSauter) super.saut(150,8);
         super.deplacement();
-
     }
 
     public void aff(Graphics g) {
