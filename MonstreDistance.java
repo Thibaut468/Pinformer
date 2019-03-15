@@ -1,34 +1,42 @@
 import java.awt.*;
-
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 public class MonstreDistance extends Monstre {
-	private Balle balle;
 	
-	private double vitesseB;
-	private int duree;
     private int compteur = 0;
     private int intervalleTire;
+    private int positionInitialeX;
+    private int positionFinaleX;
+    private int vitesse;
+    boolean sens = false;
+    private int xb;
+    private int yb;
 	
-	public MonstreDistance(int intervalleTire, int xB, int yB, int largB, int hautB, int x, int y, int largeur, int hauteur, int vie, int vieE, double vitesse, double vitesseR, Color couleur, double vitesseB, int duree, Jeu jeu) {
+	public MonstreDistance(int intervalleTire, int x, int y, int largeur, int hauteur, int vie, int vieE, int vitesse, int vitesseR, Color couleur, Jeu jeu, int positionFinaleX) {
 		super(x, y, largeur, hauteur, vieE, vie, vitesseR, couleur, jeu);
-		this.balle = new Balle(xB, yB, largB, hautB);
-		this.vitesseB = vitesseB;
-		this.duree=duree;
         this.intervalleTire=intervalleTire;
+        this.vitesse=vitesse;
+        this.positionFinaleX=positionFinaleX;
+        this.positionInitialeX=this.x;
+        
 	}
 	
 	
     public void tick(){
-        compteur = compteur +1;
-        if ((compteur > intervalleTire) && (this.monstreEstMort()==false)){
-             // il rest envoyer en boucles des balles en boucle chaque 10
-		double temps = 0; 
-		for(int i = 0; i<this.duree; i++) {
-			this.balle.setX((int)(vitesseB*(1.0/Math.sqrt(2))*temps));
-			this.balle.setY((int)(-0.5*9.81*temps*temps+vitesseB*(1.0/Math.sqrt(2))*temps));
-		}
-        compteur = 0;
+        
+        this.deplacement();
+        
+        
     }
+    
+    public Balle creationBalle() {
+        System.out.println("a creee'");
+        xb =this.x;
+        yb =  this.y;
+        Balle balle = new Balle(xb, yb, 30, 30, this.sens);
+        return balle;
     }
+    
 
     public void aff(Graphics g){
 		g.setColor(this.couleur);
@@ -39,21 +47,12 @@ public class MonstreDistance extends Monstre {
 	 // condition de déplacement de balle, voir si elle touche
 	 // méthode qui renvoie si la balle a touché de le personnage ou pas
 		
-        public boolean balleAtouche(Joueur j){
-		if ((balle.getX() == j.getX())&&(balle.getY() == j.getY())) {
-			return true;
-		} else {
-			return false;
-		}
-    }
-
-
-	
+ 
 	public void aTouche(Joueur j){
-		if (this.balleAtouche(j) == true) {
+		//if (this.balleAtouche(j) == true) {
 			this.perdVie(j);
 			this.perdVitesse(j);
-		}
+		
 	}
     
     public void monstreDistanceEstTouche(Joueur j) {
@@ -64,5 +63,45 @@ public class MonstreDistance extends Monstre {
             this.monstrePerdvie();
         }
     }
+    
+      
+ 
+    public void deplacement () {
+       //à faire en boucle
+       
+        if(!sens){
+            super.x+=vitesse;
+        }
+        
+        if(super.x>=positionFinaleX){
+			sens=true;
+		}
+
+        if(sens){
+            super.x-=vitesse;
+        }
+        
+        if(super.x<=positionInitialeX){
+			sens=false;
+		}
+		
+    }
+    
+    public boolean compt() {
+        compteur = compteur +1;
+        //System.out.println(compteur);
+        
+        if (compteur > intervalleTire+200 ) {
+        compteur = 0;
+        return true;
+        } else{
+        return false;
+    }
+    }
+    
+    public boolean renvoiSens() {
+        return sens;
+    }
 }
+
 

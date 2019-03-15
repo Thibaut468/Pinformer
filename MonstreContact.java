@@ -1,13 +1,24 @@
 import java.awt.*;
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 
 public class MonstreContact extends Monstre {
-	
-	public MonstreContact(int x, int y, int largeur, int hauteur, int vie, int vieE, double vitesseR, Color couleur, Jeu jeu) {
+    
+    private int positionInitialeX;
+    private int positionFinaleX;
+    private int vitesse;
+    boolean sens = false;
+
+	public MonstreContact(int x, int y, int largeur, int hauteur, int vie, int vieE, double vitesseR, int vitesse, Color couleur, Jeu jeu,  int positionFinaleX) {
 		super(x, y, largeur, hauteur, vieE, vie, vitesseR, couleur, jeu);
+        this.vitesse=vitesse;
+        this.positionFinaleX=positionFinaleX;
+        this.positionInitialeX=this.x;
 	}
 	
 	
     public void tick(){
+        this.deplacement();
 	}
 
     public void aff(Graphics g){
@@ -27,4 +38,27 @@ public class MonstreContact extends Monstre {
         // condition que c'est le joueur qui attaque le monstre pas l'inverse
         this.monstrePerdvie();
     }
+    
+     
+    public void deplacement () {
+       //à faire en boucle
+       
+        if(!sens){
+            super.x+=vitesse;
+        }
+        
+        if(super.x>=positionFinaleX){
+			sens=true;
+		}
+
+        if(sens){
+            super.x-=vitesse;
+        }
+        
+        if(super.x<=positionInitialeX){
+			sens=false;
+		}
+		
+    }
 }
+

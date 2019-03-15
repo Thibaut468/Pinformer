@@ -11,6 +11,7 @@ public class Monde {
     private int spawnY;
     public LinkedList<Bloc> blocs = new LinkedList<Bloc>();
     public LinkedList<Entite> entites = new LinkedList<Entite>();
+    private MonstreDistance Monstred1;
 
     public Monde(String chemin, Jeu jeu){
         this.jeu = jeu;
@@ -41,7 +42,10 @@ public class Monde {
                     break;
             }
         }
+        Monstred1= new MonstreDistance(100, 10, 200, 60, 60, 30, 1, 2, 1, Color.blue, this.jeu, 750);
         entites.add(new Joueur(spawnX,spawnY,64,64,10,8,this.jeu));
+        entites.add(new MonstreContact(100, 500, 60, 60, 10, 1, 1, 1, Color.pink, this.jeu,  750));
+        entites.add(Monstred1);       
     }
 
     public void tick(){
@@ -50,6 +54,11 @@ public class Monde {
         }
         for (Entite e : entites) {
             e.tick();
+        }
+        
+        if (Monstred1.compt() == true) {
+            System.out.println("affiche");
+            entites.add(Monstred1.creationBalle());
         }
     }
 
