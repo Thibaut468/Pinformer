@@ -41,7 +41,7 @@ public class Monde {
                     break;
             }
         }
-        entites.add(new Joueur(spawnX,spawnY,64,64,10,5,this.jeu));
+        entites.add(new Joueur(spawnX,spawnY,64,64,10,8,this.jeu));
     }
 
     public void tick(){
