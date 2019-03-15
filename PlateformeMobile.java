@@ -1,7 +1,8 @@
 import java.awt.*;
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 
-public class PlateformeMobile extends Plateforme {
+public class PlateformeMobile extends Entite{
 
     private int vitesse;
     private int positionInitialeX;
@@ -19,7 +20,7 @@ public class PlateformeMobile extends Plateforme {
     }
     
     public void tick(){
-        
+
         this.deplacement();
     }
 
@@ -47,6 +48,10 @@ public class PlateformeMobile extends Plateforme {
 			sens=false;
 		}
 		
+    }
+
+    public boolean solide(){
+        return true;
     }
 
 }

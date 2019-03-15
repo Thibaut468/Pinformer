@@ -7,7 +7,9 @@ public abstract class Personnage extends Entite {
     protected double depX;
     protected double depY;
     protected Jeu jeu;
-    protected final double GRAVITE = 3;
+    protected final double GRAVITE = 2;
+    protected final double FROTTEMENTS = 1;
+    protected boolean glissade = false;
     protected boolean falling = true;
     protected boolean jumping = true;
     protected int compteurT = 0;
@@ -35,7 +37,6 @@ public abstract class Personnage extends Entite {
 
     public void saut(double hauteurSaut, int t){
         if(!jumping || enTrainDeSauter){
-			System.out.println("Methode saut OK");
 			enTrainDeSauter=true;
 			jumping=true;
 			compteurT++;
@@ -49,18 +50,32 @@ public abstract class Personnage extends Entite {
     }
 
     public void deplacementX() {
+
         int testX = 0;
         if (this.depX > 0) { //Si mouvement vers la droite
             testX = (int) (x + largeur + depX);
             if (testX < this.jeu.getLargeur()) {
+                if((this.depX-FROTTEMENTS)>0 && glissade==true){
+                    this.depX-=FROTTEMENTS;
+                }else {
+                    this.depX = 0;
+                    glissade = false;
+                }
                 super.x += (int)this.depX;
             }
         } else if (this.depX <0){ //Si mouvement vers la gauche
             testX = (int) (x + depX);
             if (testX > 0) {
+                if((this.depX-FROTTEMENTS)<0 && glissade==true) {
+                    this.depX+=FROTTEMENTS;
+                }else {
+                    this.depX = 0;
+                    glissade = false;
+                }
                 super.x += (int)this.depX;
             }
         }
+
     }
     public void deplacementY(){
         int testY = 0;
@@ -70,6 +85,7 @@ public abstract class Personnage extends Entite {
                 super.y += (int)this.depY;
                 //falling = true;
             } else { //collision au sol
+                super.y =  (int) (this.jeu.getHauteur()-hauteur);
                 jumping = false;
                 falling = false;
             }
@@ -80,6 +96,18 @@ public abstract class Personnage extends Entite {
                 falling = true;
             }
         }
+
+        /*
+        if(this.depY>0){
+            testY =(int)(y+hauteur+depY);
+            if(!this.jeu.getMonde().blocDetection(x, testY)){
+                super.y+=(int)this.depY;
+            } else {
+                jumping = false;
+                falling = false;
+            }
+        }
+        */
     }
 
     public void setVie(int v){
