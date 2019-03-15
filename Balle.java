@@ -59,7 +59,7 @@ public class Balle extends Entite {
 
 
     
-    public boolean atteint() {
+    /*public boolean atteint() {
         this.compta = compta +1;
         //System.out.println(compta);
         
@@ -69,6 +69,6 @@ public class Balle extends Entite {
         } else{
         return false;
     }
-    }
+}*/
 
 }
