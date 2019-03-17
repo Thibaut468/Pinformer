@@ -17,8 +17,10 @@ public class Joueur extends Personnage {
         if(!super.jeu.gauche && !super.jeu.droite) super.glissade=true;
 
         super.chute();
-        if(super.enTrainDeSauter) super.saut(60,8);
-        if(super.jeu.haut && !enTrainDeSauter) super.saut(60,8);
+        super.frottements();
+        if(super.jeu.haut && !jumping) super.saut(20,8);
+        //if(super.enTrainDeSauter) super.saut(60,8);
+        //if(super.jeu.haut && !enTrainDeSauter) super.saut(60,8);
         super.deplacement();
     }
 

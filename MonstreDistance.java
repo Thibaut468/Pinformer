@@ -30,7 +30,7 @@ public class MonstreDistance extends Monstre {
     }
     
     public Balle creationBalle() {
-        System.out.println("a creee'");
+        //System.out.println("a creee'");
         xb =this.x;
         yb =  this.y;
         Balle balle = new Balle(xb, yb, 30, 30, this.sens);

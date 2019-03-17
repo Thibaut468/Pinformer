@@ -5,7 +5,7 @@ public class Bloc  {
 
     protected chargementImage textures = new chargementImage();
     protected final int LARGEUR = 64;
-    protected final int HAUTEUR = 64;
+    protected final int HAUTEUR = 32;
     public int x;
     public int y;
     protected int id;
