@@ -68,14 +68,14 @@ public class Monde {
             }
         }
         
-        Monstred1 = new MonstreDistance(100, 10, 200, 60, 60, 30, 1, 2, 1, Color.blue, this.jeu, 750, 1);
-        Monstred2 = new MonstreDistance(100, 10, 500, 60, 60, 30, 1, 1, 1, Color.black, this.jeu, 750, -1);
-        joueur = new Joueur(spawnX,spawnY,64,64,10,8,this.jeu);
+        //Monstred1 = new MonstreDistance(100, 10, 200, 60, 60, 30, 1, 2, 1, Color.blue, this.jeu, 750, 1);
+        //Monstred2 = new MonstreDistance(100, 10, 500, 60, 60, 30, 1, 1, 1, Color.black, this.jeu, 750, -1);
+        joueur = new Joueur(spawnX,spawnY,48,48,10,8,this.jeu);
         entites.add(joueur);
         entites.add(new MonstreContact(80, 300, 60, 60, 10, 1, 1, 1, Color.pink, this.jeu,  750));
         
-        entites.add(Monstred1);
-        entites.add(Monstred2);
+        //entites.add(Monstred1);
+        //entites.add(Monstred2);
     }
 
     public void tick(){
@@ -85,7 +85,8 @@ public class Monde {
         for (Entite e : entites) {
             e.tick();
         }
-        
+
+        /*
         if (Monstred1.compt() == true) {
 			Balle balle1 = Monstred1.creationBalle();
 			balles.add(balle1);
@@ -96,6 +97,7 @@ public class Monde {
 			balles.add(balle2);
             entites.add(balle2);
 		}
+		*/
 		
 		for (int i=0; i<balles.size(); i++) {
 			if (!balles.get(i).aT()){
@@ -135,5 +137,14 @@ public class Monde {
              }
         }
         return false;
+    }
+
+    public Bloc getBloc(int y, int x, int l){
+        for(Bloc b : blocs){
+            if(b.y<y && (b.y+b.HAUTEUR)>y && (x+l)>b.x && x<(b.x+b.LARGEUR) && b.solide()){
+                return b;
+            }
+        }
+        return (new Bloc(0,0,-1,0));
     }
 }

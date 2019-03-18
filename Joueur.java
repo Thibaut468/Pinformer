@@ -2,6 +2,8 @@ import java.awt.*;
 
 public class Joueur extends Personnage {
 
+    private int compt = 0;
+
     public Joueur(int x, int y, int largeur, int hauteur, int vie, int vitesse, Jeu jeu){
         super(x, y, largeur, hauteur, vie, vitesse, jeu);
     }
@@ -10,15 +12,21 @@ public class Joueur extends Personnage {
         //depX=0;
         //depY=0;
 
-        if(super.jeu.haut && vie<10) vie++;
-        if(super.jeu.bas && vie>0) vie--;
+        if (!(compt==0)) compt --;
+
+        ///if(super.jeu.haut && vie<10) vie++;
+        //if(super.jeu.bas && vie>0) vie--;
+
         if(super.jeu.gauche) super.depX=-vitesse;
         if(super.jeu.droite) super.depX=vitesse;
         if(!super.jeu.gauche && !super.jeu.droite) super.glissade=true;
 
         super.chute();
         super.frottements();
-        if(super.jeu.haut && !jumping) super.saut(20,8);
+        if(super.jeu.haut && !jumping && compt==0){
+            super.saut(25);
+            compt+=15;
+        }
         //if(super.enTrainDeSauter) super.saut(60,8);
         //if(super.jeu.haut && !enTrainDeSauter) super.saut(60,8);
         super.deplacement();

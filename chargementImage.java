@@ -5,17 +5,19 @@ import java.io.File;
 
 public class chargementImage {
 
-    public BufferedImage joueur, backgroundJeu, l10, l9,l8, l7, l6, l5, l4, l3, l2, l1, l0, p_entier, p_gauche, p_droite, p_milieu;
+    public BufferedImage joueur, backgroundJeu, l10, l9,l8, l7, l6, l5, l4, l3, l2, l1, l0, p_entier, p_gauche, p_droite, p_milieu, healer;
 
     public chargementImage(){
 
-        joueur=load("./textures/joueur.png");
-        backgroundJeu=load("./textures/background1.png");
+        joueur=load("./textures/cube.png");
+        backgroundJeu=load("./textures/background.png");
         //plateforme = load("./textures/plateforme.png");
         p_entier = load("./textures/P_entier.png");
         p_gauche = load("./textures/P_gauche.png");
         p_droite = load("./textures/P_droite.png");
         p_milieu = load("./textures/P_milieu.png");
+
+        healer = load("./textures/coeur.png");
         
         l10=load("./textures/lifebar/100.png");
         l9=load("./textures/lifebar/90.png");
