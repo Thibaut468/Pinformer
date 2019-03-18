@@ -45,14 +45,14 @@ public class Balle extends Entite {
             if (!sens) {
                 super.x=(int) (super.x - dt*vitesse);
                 diff = Math.abs(super.x-xinit);
-                System.out.println("x1=   "+ super.x);
+                //System.out.println("x1=   "+ super.x);
             } else if ((sens)) {
                 super.x= (int)(super.x + dt*vitesse);
                 diff = Math.abs(xinit - super.x);
-                System.out.println("x2=   "+ super.x);
+                //System.out.println("x2=   "+ super.x);
             }
                 super.y = (int) ((+9.81*(diff*diff))/(10*vitesse*vitesse)+diff +yinit);
-                System.out.println("y2=   "+ super.y);
+                //System.out.println("y2=   "+ super.y);
         
         
         }

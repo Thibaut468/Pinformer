@@ -42,10 +42,10 @@ public class Monde {
                     break;
             }
         }
-        Monstred1= new MonstreDistance(100, 10, 200, 60, 60, 30, 1, 2, 1, Color.blue, this.jeu, 750);
         entites.add(new Joueur(spawnX,spawnY,64,64,10,8,this.jeu));
         entites.add(new MonstreContact(100, 500, 60, 60, 10, 1, 1, 1, Color.pink, this.jeu,  750));
-        entites.add(Monstred1);       
+        Monstred1 = new MonstreDistance(100, 10, 200, 60, 60, 30, 1, 2, 1, Color.blue, this.jeu, 750);
+        entites.add(Monstred1);
     }
 
     public void tick(){
@@ -57,7 +57,7 @@ public class Monde {
         }
         
         if (Monstred1.compt() == true) {
-            System.out.println("affiche");
+            //System.out.println("affiche");
             entites.add(Monstred1.creationBalle());
         }
     }
@@ -71,9 +71,20 @@ public class Monde {
         }
     }
 
-    public boolean blocDetection(int x, int y){
+    public boolean blocDetectionY(int y, int x, int l){
         for(Bloc b : blocs){
-            if(b.y==y && (x>b.x && x<(b.x+b.LARGEUR)) && b.solide()) return true;
+            if(b.y<y && (b.y+b.HAUTEUR)>y && (x+l)>b.x && x<(b.x+b.LARGEUR) && b.solide()){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean blocDetectionX(int x, int y, int h){
+        for(Bloc b : blocs){
+             if(b.x<x && (b.x+b.LARGEUR)>x && (y+h)>b.y && y<(b.y+b.HAUTEUR) && b.solide()){
+                 return true;
+             }
         }
         return false;
     }
