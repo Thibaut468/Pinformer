@@ -2,17 +2,19 @@ import java.awt.*;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
-public class PlateformeMobile extends Entite{
+public class PlateformeMobile extends Bloc{
 
     private int vitesse;
     private int positionInitialeX;
     private int positionFinaleX;
+    private int id;
     boolean sens = false;
 
     
-     public PlateformeMobile(int x, int y, int largeur, int hauteur, int vitesse, int positionFinaleX){
+     public PlateformeMobile(int x, int y, int id, int vitesse, int positionFinaleX){
         
-        super(x,y,largeur,hauteur);
+        super(x,y,id);
+        this.id=id;
         this.vitesse=vitesse;
         this.positionFinaleX=positionFinaleX;
         this.positionInitialeX=super.x;
@@ -20,14 +22,9 @@ public class PlateformeMobile extends Entite{
     }
     
     public void tick(){
-
         this.deplacement();
     }
 
-    public void aff(Graphics g){
-        g.setColor(Color.black);
-        g.fillRect(x,y,largeur,hauteur);
-    }
     
     public void deplacement () {
        //à faire en boucle

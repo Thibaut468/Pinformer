@@ -11,7 +11,11 @@ public class Monde {
     private int spawnY;
     public LinkedList<Bloc> blocs = new LinkedList<Bloc>();
     public LinkedList<Entite> entites = new LinkedList<Entite>();
+    private Joueur joueur;
     private MonstreDistance Monstred1;
+    private MonstreDistance Monstred2;
+    private LinkedList<Balle> balles = new LinkedList<Balle>();
+    private final int VPLAT=2;
 
     public Monde(String chemin, Jeu jeu){
         this.jeu = jeu;
@@ -36,16 +40,43 @@ public class Monde {
             y = Integer.parseInt(separation[i+2]);
             switch(id){
                 case 1:
-                    blocs.add(new PlateformeFixe(x, y));
+                    blocs.add(new PlateformeFixe(x, y, 1));
+                    break;
+                case 2:
+                    blocs.add(new PlateformeFixe(x, y, 2));
+                    break;
+                case 3:
+                    blocs.add(new PlateformeFixe(x, y, 3));
+                    break;
+                case 4:
+                    blocs.add(new PlateformeFixe(x, y, 4));
+                    break;
+                case 5:
+                    blocs.add(new PlateformeMobile(x, y, 5, VPLAT, 400));
+                    System.out.println("ID 5 cree");
+                    break;
+				case 6:
+                    blocs.add(new PlateformeMobile(x, y, 6, VPLAT, 250));
+                    break;
+                case 7:
+                    blocs.add(new PlateformeMobile(x, y, 7, VPLAT, 600));
+                    break;
+			    case 8:
+                    blocs.add(new PlateformeMobile(x, y, 8, VPLAT, 350));
                     break;
                 default:
                     break;
             }
         }
-        entites.add(new Joueur(spawnX,spawnY,64,64,10,8,this.jeu));
-        entites.add(new MonstreContact(100, 500, 60, 60, 10, 1, 1, 1, Color.pink, this.jeu,  750));
-        Monstred1 = new MonstreDistance(100, 10, 200, 60, 60, 30, 1, 2, 1, Color.blue, this.jeu, 750);
+        
+        Monstred1 = new MonstreDistance(100, 10, 200, 60, 60, 30, 1, 2, 1, Color.blue, this.jeu, 750, 1);
+        Monstred2 = new MonstreDistance(100, 10, 500, 60, 60, 30, 1, 1, 1, Color.black, this.jeu, 750, -1);
+        joueur = new Joueur(spawnX,spawnY,64,64,10,8,this.jeu);
+        entites.add(joueur);
+        entites.add(new MonstreContact(80, 300, 60, 60, 10, 1, 1, 1, Color.pink, this.jeu,  750));
+        
         entites.add(Monstred1);
+        entites.add(Monstred2);
     }
 
     public void tick(){
@@ -57,11 +88,28 @@ public class Monde {
         }
         
         if (Monstred1.compt() == true) {
-            //System.out.println("affiche");
-            entites.add(Monstred1.creationBalle());
+			Balle balle1 = Monstred1.creationBalle();
+			balles.add(balle1);
+            entites.add(balle1);
         }
+        if (Monstred2.compt() == true) {
+            Balle balle2 = Monstred2.creationBalle();
+			balles.add(balle2);
+            entites.add(balle2);
+		}
+		
+		for (int i=0; i<balles.size(); i++) {
+			if (!balles.get(i).aT()){
+			balles.get(i).aTouche(joueur);
+			}
+			
+			if (balles.get(i).aT()){
+			entites.remove(balles.get(i));
+			balles.remove(i);
+			
+			}
     }
-
+}
     public void aff(Graphics g){
         for (Bloc b: blocs) {
             b.aff(g);
@@ -69,6 +117,7 @@ public class Monde {
         for (Entite e : entites) {
             e.aff(g);
         }
+
     }
 
     public boolean blocDetectionY(int y, int x, int l){

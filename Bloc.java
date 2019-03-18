@@ -22,8 +22,29 @@ public class Bloc  {
 
     public void aff(Graphics g){
         switch(id){
-            case 1 :
-                g.drawImage(textures.plateforme,x,y,null);
+            case 1:
+                g.drawImage(textures.p_entier,x,y,null);
+                break;
+			case 2:
+				g.drawImage(textures.p_gauche,x,y,null);
+                break;
+            case 3 :
+                g.drawImage(textures.p_milieu,x,y,null);
+                break;
+			case 4 :
+				g.drawImage(textures.p_droite,x,y,null);
+                break;
+            case 5:
+                g.drawImage(textures.p_entier,x,y,null);
+                break;
+			case 6:
+				g.drawImage(textures.p_gauche,x,y,null);
+                break;
+            case 7 :
+                g.drawImage(textures.p_milieu,x,y,null);
+                break;
+			case 8 :
+				g.drawImage(textures.p_droite,x,y,null);
                 break;
             default :
                 break;
