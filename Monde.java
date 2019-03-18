@@ -53,7 +53,6 @@ public class Monde {
                     break;
                 case 5:
                     blocs.add(new PlateformeMobile(x, y, 5, VPLAT, 400));
-                    System.out.println("ID 5 cree");
                     break;
 				case 6:
                     blocs.add(new PlateformeMobile(x, y, 6, VPLAT, 250));
