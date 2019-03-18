@@ -260,4 +260,12 @@ public abstract class Personnage extends Entite {
     public double getVitesse(){
         return this.vitesse;
     }
+    
+    public int getLargeur() {
+		return this.largeur;
+	}
+	
+	public int getHauteur() {
+		return this.hauteur;
+	}
 }

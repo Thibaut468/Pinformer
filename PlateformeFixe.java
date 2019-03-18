@@ -3,8 +3,9 @@ import java.awt.image.BufferedImage;
 
 public class PlateformeFixe extends Bloc {
 
-    private final int ID = 1;
-    public PlateformeFixe(int x, int y){
-        super(x, y, 1);
+    private int ID;
+    public PlateformeFixe(int x, int y, int id){
+        super(x, y, id);
+        this.ID=id;
     }
 }
