@@ -9,7 +9,7 @@ public class chargementImage {
 
     public chargementImage(){
 
-        joueur=load("./textures/cube.png");
+        joueur=load("./textures/parrot2.png");
         backgroundJeu=load("./textures/background.png");
         //plateforme = load("./textures/plateforme.png");
         p_entier = load("./textures/P_entier.png");
