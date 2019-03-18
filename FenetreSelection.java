@@ -64,7 +64,15 @@ public class FenetreSelection extends JFrame implements ActionListener {
         conteneur1.add(boutonParam);
         conteneur1.add(boutonCredits);
         conteneur1.add(boutonQuitter);
-
+		
+		/**/
+		JLabel imageFond;
+		imageFond = new JLabel(new ImageIcon("./textures/vert.jpg"));
+		imageFond.setLocation(0,0);
+		imageFond.setSize(500,500);
+		conteneur1.add(imageFond);
+		/**/
+		
         menu.add(conteneur1);
 
         boutonJouer.addActionListener(this);
