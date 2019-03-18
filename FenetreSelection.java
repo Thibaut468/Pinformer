@@ -100,10 +100,10 @@ public class FenetreSelection extends JFrame implements ActionListener {
             parametres.setVisible(true);
         }
         if (e.getSource()==boutonCredits){
-            JOptionPane.showMessageDialog(this,"A MODIFIER");
+            JOptionPane.showMessageDialog(this,"Bienvenue dans Pinformer les loulous");
         }
         if (e.getSource()==boutonQuitter){
-            JOptionPane.showMessageDialog(this,"A MODIFIER");
+            System.exit(0);
         }
     }
 }

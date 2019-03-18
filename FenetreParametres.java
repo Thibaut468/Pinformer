@@ -8,7 +8,6 @@ import java.awt.event.*;
 		private JButton choix2;
 		private JButton choix3;
 		private JButton choix4;
-		
 		private JButton sauvegarde;
 		
 		private JRadioButton zqsd;
@@ -16,6 +15,8 @@ import java.awt.event.*;
 		boolean unselected = false;
 		boolean selected = true;
 		private ButtonGroup choixtouche;
+		
+		private Color couleur = new Color(166, 39, 86);
 		
 		public FenetreParametres(){
 			this.setTitle("Parametres"); 
@@ -31,46 +32,52 @@ import java.awt.event.*;
 			choix1.setFont(police);
 			choix1.setText("Choix 1");
 			choix1.setBounds(25,300,94,40);
-			choix1.setBackground(Color.black);
+			choix1.setBackground(couleur);
 			choix1.setForeground(Color.white);
 			
 			choix2 = new JButton();
 			choix2.setFont(police);
 			choix2.setText("Choix 2");
 			choix2.setBounds(144,300,94,40);
-			choix2.setBackground(Color.black);
+			choix2.setBackground(couleur);
 			choix2.setForeground(Color.white);
 			
 			choix3 = new JButton();
 			choix3.setFont(police);
 			choix3.setText("Choix 3");
 			choix3.setBounds(263,300,94,40);
-			choix3.setBackground(Color.black);
+			choix3.setBackground(couleur);
 			choix3.setForeground(Color.white);
 			
 			choix4 = new JButton();
 			choix4.setFont(police);
 			choix4.setText("Choix 4");
 			choix4.setBounds(382,300,94,40);
-			choix4.setBackground(Color.black);
+			choix4.setBackground(couleur);
 			choix4.setForeground(Color.white);
 			
 			sauvegarde = new JButton();
 			sauvegarde.setFont(police);
 			sauvegarde.setText("Sauvegarder");
 			sauvegarde.setBounds(200,420,120,40);
-			sauvegarde.setBackground(Color.black);
+			sauvegarde.setBackground(couleur);
 			sauvegarde.setForeground(Color.white);
 			
 			String text1 = "ZQSD";
 			zqsd = new JRadioButton(text1, unselected);
-			zqsd.setLocation(100,100);
-			zqsd.setSize(100,100);
+			zqsd.setLocation(100,200);
+			zqsd.setSize(100,40);
+			zqsd.setFont(police);
+			zqsd.setBackground(couleur);
+			zqsd.setForeground(Color.white);
 			
 			String text2 = "FLECHES";
 			fleches = new JRadioButton(text2,selected);
-			fleches.setLocation(200,100);
-			fleches.setSize(100,100);
+			fleches.setLocation(300,200);
+			fleches.setSize(100,40);
+			fleches.setFont(police);
+			fleches.setBackground(couleur);
+			fleches.setForeground(Color.white);
 			
 			choixtouche = new ButtonGroup();
 			choixtouche.add(zqsd);
@@ -93,7 +100,7 @@ import java.awt.event.*;
 			
 			this.add(conteneur1);
 			JLabel imageFondParametre;
-			imageFondParametre = new JLabel(new ImageIcon("./textures/vert.jpg"));
+			imageFondParametre = new JLabel(new ImageIcon("./textures/fond_menu.png"));
 			imageFondParametre.setLocation(0,0);
 			imageFondParametre.setSize(500,500);
 			
@@ -106,7 +113,7 @@ import java.awt.event.*;
 			choix3.addActionListener(this);
 			choix4.addActionListener(this);
 			
-			
+			sauvegarde.addActionListener(this);
 			
 		}
 		
@@ -128,6 +135,7 @@ import java.awt.event.*;
 			}
 			if (e.getSource()== sauvegarde){
 				System.out.println("choix sauvegardé");
+				this.setVisible(false);
 			}
 			
 		}
