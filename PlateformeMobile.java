@@ -13,7 +13,7 @@ public class PlateformeMobile extends Bloc{
     
      public PlateformeMobile(int x, int y, int id, int vitesse, int positionFinaleX){
         
-        super(x,y,id);
+        super(x,y,id, vitesse);
         this.id=id;
         this.vitesse=vitesse;
         this.positionFinaleX=positionFinaleX;
@@ -49,6 +49,12 @@ public class PlateformeMobile extends Bloc{
 
     public boolean solide(){
         return true;
+    }
+
+    public int getVitesse(){
+         if(sens==false) return vitesse;
+         if(sens==true) return -vitesse;
+         return 0;
     }
 
 }

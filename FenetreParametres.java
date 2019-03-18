@@ -21,7 +21,7 @@ import java.awt.event.*;
 			this.setTitle("Parametres"); 
 			this.setLayout(null); 
 			this.setSize(500,500); 
-			this.setLocation(100,50); 
+			this.setLocationRelativeTo(null);
 			this.setResizable(false); 
 			this.setVisible(false);	
 			

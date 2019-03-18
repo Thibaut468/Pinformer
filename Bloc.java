@@ -9,11 +9,13 @@ public class Bloc  {
     public int x;
     public int y;
     protected int id;
+    protected int vitesse;
 
-    public Bloc(int x, int y, int id){
+    public Bloc(int x, int y, int id, int vitesse){
         this.x=x;
         this.y=y;
         this.id=id;
+        this.vitesse = vitesse;
     }
 
     public void tick(){
@@ -54,4 +56,8 @@ public class Bloc  {
     public boolean solide(){
         return true;
     }
+
+    public int getId() { return this.id; }
+
+    public int getVitesse(){ return this.vitesse; }
 }

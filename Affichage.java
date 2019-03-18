@@ -27,6 +27,7 @@ public class Affichage {
         frame = new JFrame(titre);
         frame.setSize(largeur, hauteur);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLocationRelativeTo(null);
         //frame.setIgnoreRepaint(true);
         frame.setResizable(false);
         frame.setVisible(true);

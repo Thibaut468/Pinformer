@@ -51,22 +51,7 @@ public abstract class Personnage extends Entite {
         }
     }
 
-    public void saut(double hauteurSaut, int t){
-
-        /*
-        if(!jumping || enTrainDeSauter){
-			enTrainDeSauter=true;
-			jumping=true;
-			compteurT++;
-			if(compteurT<(int)(hauteurSaut/t)){
-				this.depY-=t;
-			}else{
-				enTrainDeSauter=false;
-				compteurT=0;
-			}
-		}
-		*/
-
+    public void saut(double hauteurSaut){
         jumping = true;
         this.depY-=hauteurSaut;
     }
@@ -179,6 +164,11 @@ public abstract class Personnage extends Entite {
                 super.y += diff-1;
                 jumping=false;
                 //falling=false;
+                int id = this.jeu.getMonde().getBloc(testY,x,largeur).getId();
+                int vit = this.jeu.getMonde().getBloc(testY,x,largeur).getVitesse();
+                if(id==5){
+                    super.x+=vit;
+                }
 
                 /*
                 do {
