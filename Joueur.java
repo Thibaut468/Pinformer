@@ -33,7 +33,7 @@ public class Joueur extends Personnage {
     }
 
     public void aff(Graphics g) {
-        g.drawImage(this.jeu.textures.joueur,super.x,super.y,null);
+        g.drawImage(this.jeu.textures.joueur1,super.x,super.y,null);
 
         switch(vie){
             case 0:
