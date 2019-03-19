@@ -34,6 +34,7 @@ import java.awt.event.*;
 			choix1.setBounds(25,300,94,40);
 			choix1.setBackground(couleur);
 			choix1.setForeground(Color.white);
+			choix1.setFocusPainted(false);
 			
 			choix2 = new JButton();
 			choix2.setFont(police);
@@ -41,6 +42,7 @@ import java.awt.event.*;
 			choix2.setBounds(144,300,94,40);
 			choix2.setBackground(couleur);
 			choix2.setForeground(Color.white);
+			choix2.setFocusPainted(false);
 			
 			choix3 = new JButton();
 			choix3.setFont(police);
@@ -48,13 +50,15 @@ import java.awt.event.*;
 			choix3.setBounds(263,300,94,40);
 			choix3.setBackground(couleur);
 			choix3.setForeground(Color.white);
-			
+			choix3.setFocusPainted(false);
+
 			choix4 = new JButton();
 			choix4.setFont(police);
 			choix4.setText("Choix 4");
 			choix4.setBounds(382,300,94,40);
 			choix4.setBackground(couleur);
 			choix4.setForeground(Color.white);
+			choix4.setFocusPainted(false);
 			
 			sauvegarde = new JButton();
 			sauvegarde.setFont(police);
@@ -62,6 +66,7 @@ import java.awt.event.*;
 			sauvegarde.setBounds(200,420,120,40);
 			sauvegarde.setBackground(couleur);
 			sauvegarde.setForeground(Color.white);
+			sauvegarde.setFocusPainted(false);
 			
 			String text1 = "ZQSD";
 			zqsd = new JRadioButton(text1, unselected);
@@ -70,6 +75,7 @@ import java.awt.event.*;
 			zqsd.setFont(police);
 			zqsd.setBackground(couleur);
 			zqsd.setForeground(Color.white);
+			zqsd.setFocusPainted(false);
 			
 			String text2 = "FLECHES";
 			fleches = new JRadioButton(text2,selected);
@@ -78,6 +84,7 @@ import java.awt.event.*;
 			fleches.setFont(police);
 			fleches.setBackground(couleur);
 			fleches.setForeground(Color.white);
+			fleches.setFocusPainted(false);
 			
 			choixtouche = new ButtonGroup();
 			choixtouche.add(zqsd);
