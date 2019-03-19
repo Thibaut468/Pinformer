@@ -9,8 +9,8 @@ public class MonstreContact extends Monstre {
     private int vitesse;
     boolean sens = false;
 
-	public MonstreContact(int x, int y, int largeur, int hauteur, int vie, int vieE, double vitesseR, int vitesse, Color couleur, Jeu jeu,  int positionFinaleX) {
-		super(x, y, largeur, hauteur, vieE, vie, vitesseR, couleur, jeu);
+	public MonstreContact(Jeu jeu, int x, int y, int largeur, int hauteur, int vie, int vieE, double vitesseR, int vitesse, Color couleur, int positionFinaleX) {
+		super(jeu, x, y, largeur, hauteur, vieE, vie, vitesseR, couleur);
         this.vitesse=vitesse;
         this.positionFinaleX=positionFinaleX;
         this.positionInitialeX=this.x;

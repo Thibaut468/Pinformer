@@ -4,8 +4,8 @@ public class Joueur extends Personnage {
 
     private int compt = 0;
 
-    public Joueur(int x, int y, int largeur, int hauteur, int vie, int vitesse, Jeu jeu){
-        super(x, y, largeur, hauteur, vie, vitesse, jeu);
+    public Joueur(Jeu jeu, int x, int y, int largeur, int hauteur, int vie, int vitesse){
+        super(jeu, x, y, largeur, hauteur, vie, vitesse);
     }
     public void tick() {
 
@@ -33,7 +33,7 @@ public class Joueur extends Personnage {
     }
 
     public void aff(Graphics g) {
-        g.drawImage(this.jeu.textures.joueur1,super.x,super.y,null);
+        g.drawImage(this.jeu.textures.joueur,super.x,super.y,null);
 
         switch(vie){
             case 0:

@@ -15,8 +15,8 @@ public class MonstreDistance extends Monstre {
     private int enl;
     private int venl;
 	
-	public MonstreDistance(int intervalleTire, int x, int y, int largeur, int hauteur, int vie, int vieE, int vitesse, int vitesseR, Color couleur, Jeu jeu, int positionFinaleX, int choixB) {
-		super(x, y, largeur, hauteur, vieE, vie, vitesseR, couleur, jeu);
+	public MonstreDistance(Jeu jeu, int intervalleTire, int x, int y, int largeur, int hauteur, int vie, int vieE, int vitesse, int vitesseR, Color couleur, int positionFinaleX, int choixB) {
+		super(jeu, x, y, largeur, hauteur, vieE, vie, vitesseR, couleur);
         this.intervalleTire=intervalleTire;
         this.vitesse=vitesse;
         this.positionFinaleX=positionFinaleX;
@@ -40,7 +40,7 @@ public class MonstreDistance extends Monstre {
         //System.out.println("a creee'");
         xb =this.x;
         yb =  this.y;
-        Balle balle = new Balle(xb, yb, 30, 30, this.sens, choixB, enl, venl);
+        Balle balle = new Balle(jeu, xb, yb, 30, 30, this.sens, choixB, enl, venl);
         return balle;
     }
     

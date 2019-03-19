@@ -18,8 +18,8 @@ public class Balle extends Entite {
     private boolean aDejat = false;
 
 
-    public Balle(int x, int y, int largeur, int hauteur, boolean sensMonstre, int choix, int vieE, int venl) {
-        super(x, y, largeur, hauteur);
+    public Balle(Jeu jeu, int x, int y, int largeur, int hauteur, boolean sensMonstre, int choix, int vieE, int venl) {
+        super(jeu,0, x, y, largeur, hauteur);
         this.yinit = y+1;
         this.xinit= x;
         this.sens = sensMonstre;
@@ -29,8 +29,10 @@ public class Balle extends Entite {
         this.direction = choix;
         this.vieE= vieE;
         this.venl = venl;
-        
-        
+    }
+
+    public void action(Personnage p){
+
     }
 
     public void tick() {

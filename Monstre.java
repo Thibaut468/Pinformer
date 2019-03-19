@@ -9,8 +9,8 @@ public abstract class Monstre extends Personnage {
     protected Color couleur;
     protected boolean apparent;
 	
-	public Monstre(int x, int y, int largeur, int hauteur, int vieE, int vie, double vitesseR, Color couleur, Jeu jeu) {
-        super(x, y, largeur, hauteur, vie, 0, jeu); // j'ai mis vitesse = 0 car les monstres sont fixes
+	public Monstre(Jeu jeu, int x, int y, int largeur, int hauteur, int vieE, int vie, double vitesseR, Color couleur) {
+        super(jeu, x, y, largeur, hauteur, vie, 0); // j'ai mis vitesse = 0 car les monstres sont fixes
 		this.vieEnlevee=vieE;
         this.depX=0;
         this.depY=0;
@@ -47,11 +47,7 @@ public abstract class Monstre extends Personnage {
     //méthode qui retourne vrai si le monstre est mort, si on recoit vrai, il faut l'effacer de l'affichage graphique
     
     public boolean monstreEstMort(){
-        if (this.vie ==0) {
-            return true;
-        } else {
-            return false;
-        }
+        return this.vie == 0;
     }
 		
 		

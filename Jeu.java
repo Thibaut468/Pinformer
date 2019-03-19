@@ -48,21 +48,21 @@ public class Jeu implements Runnable, KeyListener {
 
         this.keys = new boolean[4];
 
+        String fichier = chargementFichier.chargement("./sauvegardes/param.txt");
+        String[] separation = fichier.split("\\s+");
+        touche=Integer.parseInt(separation[0]);
+
         this.textures=new chargementImage();
 
         this.monde = new Monde("./mondes/monde1.txt", this);
 
         this.ent = new LinkedList<Entite>();
 
-        String fichier = chargementFichier.chargement("./sauvegardes/param.txt");
-        String[] separation = fichier.split("\\s+");
-        touche=Integer.parseInt(separation[0]);
         /*
         ent.add(new Joueur(10,10,64,64,10,5,this));
         ent.add(new PlateformeMobile(15, 110, 60, 30, 2, 90));
         ent.add(new PlateformeMobile(50, 110, 60, 30, 15, 90, 15));
         ent.add(new Healer(40,getHauteur()-40,40,40,1));
-        ent.add(new Drainer(220,getHauteur()-40,40,40,1));
         */
 
     }

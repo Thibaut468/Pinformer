@@ -30,55 +30,70 @@ public class Monde {
         spawnX = Integer.parseInt(separation[2]);
         spawnY = Integer.parseInt(separation[3]);
 
-        int x;
-        int y;
-        int id;
+        joueur = new Joueur(this.jeu, spawnX,spawnY,48,48,10,8);
+        entites.add(joueur);
 
-        for(int i=4;i<separation.length-2;i+=3){
-            id = Integer.parseInt(separation[i]);
-            x = Integer.parseInt(separation[i+1]);
-            y = Integer.parseInt(separation[i+2]);
-            switch(id){
-                case 1:
-                    blocs.add(new PlateformeFixe(x, y, 1));
-                    break;
-                case 2:
-                    blocs.add(new PlateformeFixe(x, y, 2));
-                    break;
-                case 3:
-                    blocs.add(new PlateformeFixe(x, y, 3));
-                    break;
-                case 4:
-                    blocs.add(new PlateformeFixe(x, y, 4));
-                    break;
-                case 5:
-                    blocs.add(new PlateformeMobile(x, y, 5, VPLAT, 400));
-                    break;
-				case 6:
-                    blocs.add(new PlateformeMobile(x, y, 6, VPLAT, 400));
-                    break;
-                case 7:
-                    blocs.add(new PlateformeMobile(x, y, 7, VPLAT, 464));
-                    break;
-			    case 8:
-                    blocs.add(new PlateformeMobile(x, y, 8, VPLAT, 528));
-                    break;
-                default:
-                    break;
+        int update = 0;
+
+        for(int i=4;i<separation.length-(update-1);i+=update){
+            int id = Integer.parseInt(separation[i]);
+            int x = Integer.parseInt(separation[i + 1]);
+            int y = Integer.parseInt(separation[i + 2]);
+            if(id >= 1 && id <= 8) {
+                update = 3;
+                switch (id) {
+                    case 1:
+                        blocs.add(new PlateformeFixe(x, y, 1));
+                        break;
+                    case 2:
+                        blocs.add(new PlateformeFixe(x, y, 2));
+                        break;
+                    case 3:
+                        blocs.add(new PlateformeFixe(x, y, 3));
+                        break;
+                    case 4:
+                        blocs.add(new PlateformeFixe(x, y, 4));
+                        break;
+                    case 5:
+                        blocs.add(new PlateformeMobile(x, y, 5, VPLAT, 400));
+                        break;
+                    case 6:
+                        blocs.add(new PlateformeMobile(x, y, 6, VPLAT, 400));
+                        break;
+                    case 7:
+                        blocs.add(new PlateformeMobile(x, y, 7, VPLAT, 464));
+                        break;
+                    case 8:
+                        blocs.add(new PlateformeMobile(x, y, 8, VPLAT, 528));
+                        break;
+                    default:
+                        break;
+                }
+            } else if (id==20 || id==21) {
+                int vieDonnee = Integer.parseInt(separation[i + 3]);
+                update = 4;
+                entites.add(new Healer(this.jeu, id, x, y, vieDonnee));
             }
         }
         
-        //Monstred1 = new MonstreDistance(100, 10, 200, 60, 60, 30, 1, 2, 1, Color.blue, this.jeu, 750, 1);
-        //Monstred2 = new MonstreDistance(100, 10, 500, 60, 60, 30, 1, 1, 1, Color.black, this.jeu, 750, -1);
-        joueur = new Joueur(spawnX,spawnY,48,48,10,8,this.jeu);
-        entites.add(joueur);
-        entites.add(new MonstreContact(80, 300, 60, 60, 10, 1, 1, 1, Color.pink, this.jeu,  750));
+        //Monstred1 = new MonstreDistance(this.jeu, 100, 10, 200, 60, 60, 30, 1, 2, 1, Color.blue, 750, 1);
+        //Monstred2 = new MonstreDistance(this.jeu, 100, 10, 500, 60, 60, 30, 1, 1, 1, Color.black, 750, -1);
+        //entites.add(new MonstreContact(this.jeu, 80, 300, 60, 60, 10, 1, 1, 1, Color.pink, 750));
         
         //entites.add(Monstred1);
         //entites.add(Monstred2);
     }
 
     public void tick(){
+
+        //Suppresion des inactif
+
+        for(Entite e : entites){
+            if(e.getInactif())  entites.remove(e);
+        }
+
+        //On tick tout
+
         for (Bloc b: blocs) {
             b.tick();
         }
@@ -118,7 +133,6 @@ public class Monde {
         for (Entite e : entites) {
             e.aff(g);
         }
-
     }
 
     public boolean blocDetectionY(int y, int x, int l){
@@ -137,6 +151,42 @@ public class Monde {
              }
         }
         return false;
+    }
+
+    public boolean objetDetectionX(int x, int y, int h){
+        for(Entite e : entites){
+            if(e.x<x && (e.x+e.largeur)>x && (y+h)>e.y && y<(e.y+e.hauteur)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean objetDetectionY(int y, int x, int l){
+        for(Entite e : entites){
+            if(e.y<y && (e.y+e.hauteur)>y && (x+l)>e.x && x<(e.x+e.largeur)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public Entite getEntiteX(int x, int y, int h){
+        for(Entite e : entites){
+            if(e.x<x && (e.x+e.largeur)>x && (y+h)>e.y && y<(e.y+e.hauteur)){
+                return e;
+            }
+        }
+        return (new Healer(jeu,-1,0,0,0));
+    }
+
+    public Entite getEntiteY(int y, int x, int l){
+        for(Entite e : entites){
+            if(e.y<y && (e.y+e.hauteur)>y && (x+l)>e.x && x<(e.x+e.largeur)){
+                return e;
+            }
+        }
+        return (new Healer(jeu,-1,0,0,0));
     }
 
     public Bloc getBloc(int y, int x, int l){

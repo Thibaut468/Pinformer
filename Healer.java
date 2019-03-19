@@ -3,24 +3,38 @@ import java.awt.*;
 public class Healer extends Objet {
     
     private int vieDonnee;
+    private int id;
     
-    public Healer (int x, int y,int largeur, int hauteur, int vieDonnee){
-        super(x,y,largeur,hauteur);
+    public Healer (Jeu jeu, int id, int x, int y, int vieDonnee){
+        super(jeu,id, x,y,32,32);
+        this.id=id;
         this.vieDonnee = vieDonnee;
     }
 
-    public void tick(){
+    public void action(Personnage p){
+        heal(p,vieDonnee);
+        inactif = true;
+    }
 
+    public void tick(){
     }
 
     public void aff(Graphics g){
-        g.setColor(new Color(255, 119, 128));
-        g.fillRect(x, y, hauteur, largeur);
+        g.drawImage(jeu.textures.healer,x,y,null);
     }
     
-    public void heal(Joueur joueur, int vieDonnee){
-        joueur.setVie(vieDonnee+joueur.getVie());
-        
-    }
+    public void heal(Personnage p, int vieDonnee){
+        if(id==20){
+            if((p.getVie()+vieDonnee)>10){
+                p.setVie(10);
+            }else {
+                p.setVie(vieDonnee + p.getVie());
+            }
+        }
 
+        if(id==21){
+            p.setVie(p.getVie()-vieDonnee);
+        }
+
+    }
 }

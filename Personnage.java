@@ -16,14 +16,16 @@ public abstract class Personnage extends Entite {
     protected int compteurT = 0;
 	protected boolean enTrainDeSauter = false;
 
-    public Personnage(int x, int y, int largeur, int hauteur, int vie, double vitesse, Jeu jeu){
-        super(x, y, largeur, hauteur);
+    public Personnage(Jeu jeu, int x, int y, int largeur, int hauteur, int vie, double vitesse){
+        super(jeu,0, x, y, largeur, hauteur);
         this.vie=vie;
         this.vitesse=vitesse;
         this.depX=0;
         this.depY=0;
         this.jeu=jeu;
     }
+
+    public void action(Personnage p){}
 
     public void deplacement(){
         this.deplacementX();
@@ -58,7 +60,100 @@ public abstract class Personnage extends Entite {
     }
 
     public void deplacementX() {
+        mapCollisionX();
+        blocCollisionX();
+        objetCollisionX();
+    }
 
+    public void deplacementY(){
+        mapCollisionY();
+        blocCollisionY();
+        objetCollisionY();
+    }
+
+    public void mapCollisionY(){
+        int testY = 0;
+        if(this.depY>0) { //Déplacement vers le bas
+            testY = (int) (y + hauteur + depY);
+            if (testY  > 720) {
+                //System.out.println("ENDGAME");
+                this.depY=0;
+                int diff = 0;
+                testY = y + hauteur + diff;
+                while(testY < 720){
+                    diff++;
+                    testY = y + hauteur + diff;
+                }
+                super.y += diff-1;
+                jumping=false;
+            }
+        }
+    }
+
+    public void mapCollisionX(){
+        int testX = 0;
+        if (this.depX > 0){ //Déplacement droite
+            testX = (int) (x + largeur + depX);
+            if(testX>1280){
+                //System.out.println("MapCoD");
+                this.depX=0;
+                int diff = 0;
+                testX = x + largeur + diff;
+                while(testX<1280){
+                    diff++;
+                    testX = x + largeur + diff;
+                }
+                super.x += diff-1;
+                glissade = false;
+            }
+        } else if (this.depX < 0) { //Déplacement gauche
+            testX = (int)(x+depX);
+            if(testX<0){
+                //System.out.println("MapCoG");
+                this.depX = 0;
+                int diff = 0;
+                testX = x + diff;
+                while (testX>0) {
+                    diff--;
+                    testX = x + diff;
+                }
+                super.x += diff + 1;
+                glissade = false;
+            }
+        }
+    }
+
+    public void objetCollisionX() {
+        int testX = 0;
+        if (this.depX > 0){ //Déplacement droite
+            testX = (int) (x + largeur + depX);
+            if(this.jeu.getMonde().objetDetectionX(testX,y,hauteur)){
+                this.jeu.getMonde().getEntiteX(testX,y,hauteur).action(this);
+            }
+        } else if (this.depY < 0) { //Déplacement gauche
+            testX = (int)(x+depX);
+            if(this.jeu.getMonde().objetDetectionX(testX,y,hauteur)){
+                this.jeu.getMonde().getEntiteX(testX,y,hauteur).action(this);
+            }
+        }
+    }
+
+    public void objetCollisionY(){
+        int testY = 0;
+        if(this.depY>0){ //Déplacement vers le bas
+            testY=(int)(y+hauteur+depY);
+            if(this.jeu.getMonde().objetDetectionY(testY,x,largeur)){
+                this.jeu.getMonde().getEntiteY(testY,x,largeur).action(this);
+            }
+        } else if(this.depY<0){ //Déplacement vers le haut
+            testY=(int)(y+depY);
+            if(this.jeu.getMonde().objetDetectionY(testY,x,largeur)){
+                this.jeu.getMonde().getEntiteY(testY,x,largeur).action(this);
+            }
+        }
+    }
+
+    public void blocCollisionX(){
         int testX=0;
         if(this.depX>0){ //Déplacement droite
             testX = (int) (x+largeur+depX);
@@ -69,10 +164,10 @@ public abstract class Personnage extends Entite {
             } else { //collision
                 this.depX=0;
                 int diff = 0;
-                testX = (int) (x + largeur + diff);
+                testX = x + largeur + diff;
                 while(!this.jeu.getMonde().blocDetectionX(testX,y,hauteur)){
                     diff++;
-                    testX = (int) (x + largeur + diff);
+                    testX = x + largeur + diff;
                 }
                 super.x += diff-1;
                 glissade = false;
@@ -97,10 +192,10 @@ public abstract class Personnage extends Entite {
             } else { //collision
                 this.depX = 0;
                 int diff = 0;
-                testX = (int) (x + diff);
+                testX = x + diff;
                 while (!this.jeu.getMonde().blocDetectionX(testX, y, hauteur)) {
                     diff--;
-                    testX = (int) (x + diff);
+                    testX = x + diff;
                 }
                 super.x += diff + 1;
                 glissade = false;
@@ -143,13 +238,14 @@ public abstract class Personnage extends Entite {
             }
         }
         */
-
     }
-    public void deplacementY(){
 
+    public void blocCollisionY(){
         int testY=0;
-        if(this.depY>0) { //Déplacement vers le bas
-            testY = (int) (y + hauteur + depY);
+        if(depY>0) { //Déplacement vers le bas
+            double dY = depY;
+            if(dY>VMAX) dY=VMAX;
+            testY = (int) (y + hauteur + dY);
             if (!this.jeu.getMonde().blocDetectionY(testY, x, largeur)) { //Pas de collision
                 super.y += (int) this.depY;
                 //falling = true;
@@ -157,10 +253,10 @@ public abstract class Personnage extends Entite {
             } else { //collision --> On avance au max
                 this.depY=0;
                 int diff = 0;
-                testY = (int) (y + hauteur + diff);
+                testY = y + hauteur + diff;
                 while(!this.jeu.getMonde().blocDetectionY(testY,x,largeur)){
                     diff++;
-                    testY = (int) (y + hauteur + diff);
+                    testY = y + hauteur + diff;
                 }
                 super.y += diff-1;
                 jumping=false;
@@ -185,7 +281,9 @@ public abstract class Personnage extends Entite {
                 */
             }
         } else if(this.depY<0){ //Déplacement vers le haut
-            testY = (int) (y + depY);
+            double dY = depY;
+            if(dY<-VMAX) dY=-VMAX;
+            testY = (int) (y + dY);
             if (!this.jeu.getMonde().blocDetectionY(testY, x, largeur)) { //Pas de collision
                 super.y += (int) this.depY;
                 //falling = true;
@@ -193,10 +291,10 @@ public abstract class Personnage extends Entite {
             } else { //collision --> On avance au max
                 this.depY = 0;
                 int diff = 0;
-                testY = (int) (y + diff);
+                testY = y + diff;
                 while (!this.jeu.getMonde().blocDetectionY(testY, x, largeur)) {
                     diff--;
-                    testY = (int) (y + diff);
+                    testY = y + diff;
                 }
                 super.y += diff + 1;
                 //falling = true;

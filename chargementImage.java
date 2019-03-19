@@ -5,18 +5,47 @@ import java.io.File;
 
 public class chargementImage {
 
-    public BufferedImage joueur1, joueur2, joueur3, joueur4, joueur5, joueur6, joueur7, joueur8, backgroundJeu, l10, l9,l8, l7, l6, l5, l4, l3, l2, l1, l0, p_entier, p_gauche, p_droite, p_milieu, healer, monstre_contact;
+    private int choix;
+    public BufferedImage joueur, backgroundJeu, l10, l9,l8, l7, l6, l5, l4, l3, l2, l1, l0, p_entier, p_gauche, p_droite, p_milieu, healer, monstre_contact;
 
     public chargementImage(){
 
-        joueur1=load("./textures/joueur/joueur1.png");
-        joueur2=load("./textures/joueur/joueur2.png");
-        joueur3=load("./textures/joueur/joueur3.png");
-        joueur4=load("./textures/joueur/joueur4.png");
-        joueur5=load("./textures/joueur/joueur5.png");
-        joueur6=load("./textures/joueur/joueur6.png");
-        joueur7=load("./textures/joueur/joueur7.png");
-        joueur8=load("./textures/joueur/joueur8.png");
+        String fichier = chargementFichier.chargement("./sauvegardes/param.txt");
+        String[] separation = fichier.split("\\s+");
+        choix=Integer.parseInt(separation[1]);
+
+        switch(choix){
+            case 1 :
+                joueur=load("./textures/joueur/joueur1.png");
+                break;
+            case 2 :
+                joueur=load("./textures/joueur/joueur2.png");
+                break;
+            case 3 :
+                joueur=load("./textures/joueur/joueur3.png");
+                break;
+            case 4 :
+                joueur=load("./textures/joueur/joueur4.png");
+                break;
+            case 5 :
+                joueur=load("./textures/joueur/joueur5.png");
+                break;
+            case 6 :
+                joueur=load("./textures/joueur/joueur6.png");
+                break;
+            case 7 :
+                joueur=load("./textures/joueur/joueur7.png");
+                break;
+            case 8 :
+                joueur=load("./textures/joueur/joueur8.png");
+                break;
+            default :
+                joueur=load("./textures/joueur/joueur1.png");
+                break;
+
+
+        }
+
         monstre_contact = load("./textures/monstre_contact.png");
         backgroundJeu=load("./textures/background.png");
         //plateforme = load("./textures/plateforme.png");

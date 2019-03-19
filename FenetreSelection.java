@@ -13,13 +13,14 @@ public class FenetreSelection extends JFrame implements ActionListener {
     private JButton boutonCredits;
     private JButton boutonQuitter;
     private Jeu jeu;
+    private boolean jeuIsRunning = false;
     private FenetreParametres parametres;
     private JFrame menu;
     private Color couleur = new Color(166, 39, 86);
 
     public FenetreSelection(){
 
-        this.jeu = new Jeu("Pinformer",1280,720);
+        //this.jeu = new Jeu("Pinformer",1280,720);
         menu = new JFrame();
         menu.setTitle("Menu du jeu");
         menu.setSize(500,500);
@@ -93,7 +94,9 @@ public class FenetreSelection extends JFrame implements ActionListener {
 
     public void actionPerformed (ActionEvent e){
 
-        if (e.getSource()== boutonJouer){
+        if (e.getSource()== boutonJouer && !jeuIsRunning){
+            this.jeu = new Jeu("Pinformer",1280,720);
+            jeuIsRunning = true;
             jeu.start();
         }
         if (e.getSource()== boutonParam){
