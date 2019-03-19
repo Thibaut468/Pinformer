@@ -55,13 +55,13 @@ public class Monde {
                     blocs.add(new PlateformeMobile(x, y, 5, VPLAT, 400));
                     break;
 				case 6:
-                    blocs.add(new PlateformeMobile(x, y, 6, VPLAT, 250));
+                    blocs.add(new PlateformeMobile(x, y, 6, VPLAT, 400));
                     break;
                 case 7:
-                    blocs.add(new PlateformeMobile(x, y, 7, VPLAT, 600));
+                    blocs.add(new PlateformeMobile(x, y, 7, VPLAT, 464));
                     break;
 			    case 8:
-                    blocs.add(new PlateformeMobile(x, y, 8, VPLAT, 350));
+                    blocs.add(new PlateformeMobile(x, y, 8, VPLAT, 528));
                     break;
                 default:
                     break;

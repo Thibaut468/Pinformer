@@ -22,8 +22,9 @@ public class MonstreContact extends Monstre {
 	}
 
     public void aff(Graphics g){
-		g.setColor(this.couleur);
-		g.fillOval(super.x,super.y,super.largeur,super.hauteur);
+		//g.setColor(this.couleur);
+		//g.fillOval(super.x,super.y,super.largeur,super.hauteur);
+		g.drawImage(super.jeu.textures.monstre_contact,x,y,null);
 	}
 		
 		

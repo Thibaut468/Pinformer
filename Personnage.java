@@ -9,6 +9,7 @@ public abstract class Personnage extends Entite {
     protected Jeu jeu;
     protected final double GRAVITE = 2;
     protected final double FROTTEMENTS = 1;
+    protected final int VMAX = 30;
     protected boolean glissade = false;
     protected boolean falling = true;
     protected boolean jumping = true;
@@ -30,7 +31,7 @@ public abstract class Personnage extends Entite {
     }
 
     public void chute(){
-        if(falling){
+        if(falling && (depY+=GRAVITE)<=VMAX){
             this.depY+=GRAVITE;
         }
     }
@@ -166,7 +167,7 @@ public abstract class Personnage extends Entite {
                 //falling=false;
                 int id = this.jeu.getMonde().getBloc(testY,x,largeur).getId();
                 int vit = this.jeu.getMonde().getBloc(testY,x,largeur).getVitesse();
-                if(id==5){
+                if(id==5 || id==6 || id==7 || id==8){
                     super.x+=vit;
                 }
 
