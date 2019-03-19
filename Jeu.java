@@ -1,3 +1,5 @@
+import javafx.scene.input.KeyCode;
+
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -28,6 +30,7 @@ public class Jeu implements Runnable, KeyListener {
     public boolean bas;
     public boolean gauche;
     public boolean droite;
+    private int touche;
 
     //Objets
     LinkedList<Entite> ent;
@@ -51,6 +54,9 @@ public class Jeu implements Runnable, KeyListener {
 
         this.ent = new LinkedList<Entite>();
 
+        String fichier = chargementFichier.chargement("./sauvegardes/param.txt");
+        String[] separation = fichier.split("\\s+");
+        touche=Integer.parseInt(separation[0]);
         /*
         ent.add(new Joueur(10,10,64,64,10,5,this));
         ent.add(new PlateformeMobile(15, 110, 60, 30, 2, 90));
@@ -140,37 +146,71 @@ public class Jeu implements Runnable, KeyListener {
 
     // méthode exécutée à chaque fois qu’une touche est enfoncée
     public void keyPressed(KeyEvent e) {
-        switch(e.getKeyCode()){
-            case KeyEvent.VK_UP:
-                keys[0]=true;
-                break;
-            case KeyEvent.VK_DOWN:
-                keys[1]=true;
-                break;
-            case KeyEvent.VK_LEFT:
-                keys[2]=true;
-                break;
-            case KeyEvent.VK_RIGHT:
-                keys[3]=true;
-                break;
+        if(touche==1){
+            switch(e.getKeyCode()){
+                case KeyEvent.VK_Z:
+                    keys[0]=true;
+                    break;
+                case KeyEvent.VK_S:
+                    keys[1]=true;
+                    break;
+                case KeyEvent.VK_Q:
+                    keys[2]=true;
+                    break;
+                case KeyEvent.VK_D:
+                    keys[3]=true;
+                    break;
+            }
+        } else {
+            switch(e.getKeyCode()){
+                case KeyEvent.VK_UP:
+                    keys[0]=true;
+                    break;
+                case KeyEvent.VK_DOWN:
+                    keys[1]=true;
+                    break;
+                case KeyEvent.VK_LEFT:
+                    keys[2]=true;
+                    break;
+                case KeyEvent.VK_RIGHT:
+                    keys[3]=true;
+                    break;
+            }
         }
     }
 
     // méthode exécutée à chaque fois qu’une touche est relâchée
     public void keyReleased(KeyEvent e) {
-        switch(e.getKeyCode()){
-            case KeyEvent.VK_UP:
-                keys[0]=false;
-                break;
-            case KeyEvent.VK_DOWN:
-                keys[1]=false;
-                break;
-            case KeyEvent.VK_LEFT:
-                keys[2]=false;
-                break;
-            case KeyEvent.VK_RIGHT:
-                keys[3]=false;
-                break;
+        if(touche==1){
+            switch(e.getKeyCode()){
+                case KeyEvent.VK_Z:
+                    keys[0]=false;
+                    break;
+                case KeyEvent.VK_S:
+                    keys[1]=false;
+                    break;
+                case KeyEvent.VK_Q:
+                    keys[2]=false;
+                    break;
+                case KeyEvent.VK_D:
+                    keys[3]=false;
+                    break;
+            }
+        } else {
+            switch(e.getKeyCode()){
+                case KeyEvent.VK_UP:
+                    keys[0]=false;
+                    break;
+                case KeyEvent.VK_DOWN:
+                    keys[1]=false;
+                    break;
+                case KeyEvent.VK_LEFT:
+                    keys[2]=false;
+                    break;
+                case KeyEvent.VK_RIGHT:
+                    keys[3]=false;
+                    break;
+            }
         }
     }
 

@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*; 
 import java.awt.event.*;
+import java.util.ArrayList;
 
 	public class FenetreParametres extends JFrame implements ActionListener{
 		
@@ -17,6 +18,11 @@ import java.awt.event.*;
 		private ButtonGroup choixtouche;
 		
 		private Color couleur = new Color(166, 39, 86);
+
+		private String[] param = new String[2];
+
+		private int choix;
+		private int touche; //1 zqsd 2 fleches
 		
 		public FenetreParametres(){
 			this.setTitle("Parametres"); 
@@ -27,6 +33,19 @@ import java.awt.event.*;
 			this.setVisible(false);	
 			
 			Font police = new Font(" Arial ",Font.BOLD,12);
+
+			String fichier = chargementFichier.chargement("./sauvegardes/param.txt");
+			String[] separation = fichier.split("\\s+");
+			param[0]=separation[0];
+			touche = Integer.parseInt(separation[0]);
+			System.out.println("touche : "+touche);
+			choix = Integer.parseInt(separation[1]);
+			param[1]=separation[1];
+            System.out.println("choix : "+choix);
+			if(touche==1){
+				selected = !selected;
+				unselected = !unselected;
+			}
 			
 			choix1 = new JButton();
 			choix1.setFont(police);
@@ -87,6 +106,8 @@ import java.awt.event.*;
 			fleches.setFocusPainted(false);
 			
 			choixtouche = new ButtonGroup();
+			zqsd.setActionCommand("zqsd");
+			fleches.setActionCommand("fleches");
 			choixtouche.add(zqsd);
 			choixtouche.add(fleches);
 			
@@ -121,27 +142,39 @@ import java.awt.event.*;
 			choix4.addActionListener(this);
 			
 			sauvegarde.addActionListener(this);
-			
 		}
 		
 		public void actionPerformed (ActionEvent e){
 			
-			
-			
+
 			if (e.getSource()== choix1){
 				System.out.println("choix1");
+				param[1]="1";
 			}
 			if (e.getSource()== choix2){
 				System.out.println("choix2");
+                param[1]="2";
 			}
 			if (e.getSource()== choix3){
 				System.out.println("choix3");
+                param[1]="3";
 			}
 			if (e.getSource()== choix4){
 				System.out.println("choix4");
+                param[1]="4";
 			}
 			if (e.getSource()== sauvegarde){
 				System.out.println("choix sauvegardé");
+				if(choixtouche.getSelection().getActionCommand().equals("zqsd")){
+					touche = 1;
+                    param[0]="1";
+				}
+				if(choixtouche.getSelection().getActionCommand().equals("fleches")){
+					touche = 2;
+                    param[0]="2";
+				}
+
+				chargementFichier.ecritureParam("./sauvegardes/param.txt", param);
 				this.setVisible(false);
 			}
 			
