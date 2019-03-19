@@ -31,7 +31,7 @@ public abstract class Personnage extends Entite {
     }
 
     public void chute(){
-        if(falling && (depY+=GRAVITE)<=VMAX){
+        if(falling){
             this.depY+=GRAVITE;
         }
     }

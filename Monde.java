@@ -23,7 +23,7 @@ public class Monde {
     }
 
     private void generation(String chemin){
-        String fichier = chargementMonde.chargement(chemin);
+        String fichier = chargementFichier.chargement(chemin);
         String[] separation = fichier.split("\\s+");
         largeur = Integer.parseInt(separation[0]);
         hauteur = Integer.parseInt(separation[1]);
