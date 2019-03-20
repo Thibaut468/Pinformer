@@ -15,7 +15,6 @@ public class Monde {
     private MonstreDistance Monstred1;
     private MonstreDistance Monstred2;
     private LinkedList<Balle> balles = new LinkedList<Balle>();
-    private final int VPLAT=2;
 
     public Monde(String chemin, Jeu jeu){
         this.jeu = jeu;
@@ -35,11 +34,12 @@ public class Monde {
 
         int update = 0;
 
-        for(int i=4;i<separation.length-(update-1);i+=update){
+        for(int i=4;i<separation.length;i+=update){
             int id = Integer.parseInt(separation[i]);
+            System.out.println(id);
             int x = Integer.parseInt(separation[i + 1]);
             int y = Integer.parseInt(separation[i + 2]);
-            if(id >= 1 && id <= 8) {
+            if(id >= 1 && id <= 4) {
                 update = 3;
                 switch (id) {
                     case 1:
@@ -54,17 +54,25 @@ public class Monde {
                     case 4:
                         blocs.add(new PlateformeFixe(x, y, 4));
                         break;
+                    default:
+                        break;
+                }
+            } else if(id >=5 && id <=8){
+                int VPLAT = Integer.parseInt(separation[i+3]);
+                int positionFinaleX = Integer.parseInt(separation[i+4]);
+                update = 5;
+                switch(id){
                     case 5:
-                        blocs.add(new PlateformeMobile(x, y, 5, VPLAT, 400));
+                        blocs.add(new PlateformeMobile(x, y, 5, VPLAT, positionFinaleX));
                         break;
                     case 6:
-                        blocs.add(new PlateformeMobile(x, y, 6, VPLAT, 400));
+                        blocs.add(new PlateformeMobile(x, y, 6, VPLAT, positionFinaleX));
                         break;
                     case 7:
-                        blocs.add(new PlateformeMobile(x, y, 7, VPLAT, 464));
+                        blocs.add(new PlateformeMobile(x, y, 7, VPLAT, positionFinaleX));
                         break;
                     case 8:
-                        blocs.add(new PlateformeMobile(x, y, 8, VPLAT, 528));
+                        blocs.add(new PlateformeMobile(x, y, 8, VPLAT, positionFinaleX));
                         break;
                     default:
                         break;

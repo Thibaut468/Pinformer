@@ -180,6 +180,10 @@ import java.util.ArrayList;
 			choix2.addActionListener(this);
 			choix3.addActionListener(this);
 			choix4.addActionListener(this);
+			choix5.addActionListener(this);
+			choix6.addActionListener(this);
+			choix7.addActionListener(this);
+			choix8.addActionListener(this);
 			
 			sauvegarde.addActionListener(this);
 		}
@@ -202,6 +206,22 @@ import java.util.ArrayList;
 			if (e.getSource()== choix4){
 				System.out.println("choix4");
                 param[1]="4";
+			}
+			if (e.getSource()== choix5){
+				System.out.println("choix5");
+				param[1]="5";
+			}
+			if (e.getSource()== choix6){
+				System.out.println("choix6");
+				param[1]="6";
+			}
+			if (e.getSource()== choix7){
+				System.out.println("choix7");
+				param[1]="7";
+			}
+			if (e.getSource()== choix8){
+				System.out.println("choix8");
+				param[1]="8";
 			}
 			if (e.getSource()== sauvegarde){
 				System.out.println("choix sauvegardé");
