@@ -51,6 +51,7 @@ import java.util.ArrayList;
 				unselected = !unselected;
 			}
 			
+			
 			choix1 = new JButton();
 			choix1.setFont(police);
 			choix1.setText("Choix 1");
@@ -175,6 +176,15 @@ import java.util.ArrayList;
 			
 			conteneur1.add(imageFondParametre);
 			
+			
+			if(choix==1) choix1.setBackground(Color.green);
+			if(choix==2) choix2.setBackground(Color.green);
+			if(choix==3) choix3.setBackground(Color.green);
+			if(choix==4) choix4.setBackground(Color.green);
+			if(choix==5) choix5.setBackground(Color.green);
+			if(choix==6) choix6.setBackground(Color.green);
+			if(choix==7) choix7.setBackground(Color.green);
+			if(choix==8) choix8.setBackground(Color.green);
 		
 			choix1.addActionListener(this);
 			choix2.addActionListener(this);
@@ -186,6 +196,9 @@ import java.util.ArrayList;
 			choix8.addActionListener(this);
 			
 			sauvegarde.addActionListener(this);
+			
+			
+			
 		}
 		
 		public void actionPerformed (ActionEvent e){
@@ -194,34 +207,51 @@ import java.util.ArrayList;
 			if (e.getSource()== choix1){
 				System.out.println("choix1");
 				param[1]="1";
+				boutonMauve();
+				choix1.setBackground(Color.green);
+				
 			}
 			if (e.getSource()== choix2){
 				System.out.println("choix2");
                 param[1]="2";
+                boutonMauve();
+                choix2.setBackground(Color.green);
 			}
 			if (e.getSource()== choix3){
 				System.out.println("choix3");
                 param[1]="3";
+                boutonMauve();
+                choix3.setBackground(Color.green);
 			}
 			if (e.getSource()== choix4){
 				System.out.println("choix4");
                 param[1]="4";
+                boutonMauve();
+                choix4.setBackground(Color.green);
 			}
 			if (e.getSource()== choix5){
 				System.out.println("choix5");
 				param[1]="5";
+				boutonMauve();
+				choix5.setBackground(Color.green);
 			}
 			if (e.getSource()== choix6){
 				System.out.println("choix6");
 				param[1]="6";
+				boutonMauve();
+				choix6.setBackground(Color.green);
 			}
 			if (e.getSource()== choix7){
 				System.out.println("choix7");
 				param[1]="7";
+				boutonMauve();
+				choix7.setBackground(Color.green);
 			}
 			if (e.getSource()== choix8){
 				System.out.println("choix8");
 				param[1]="8";
+				boutonMauve();
+				choix8.setBackground(Color.green);
 			}
 			if (e.getSource()== sauvegarde){
 				System.out.println("choix sauvegardé");
@@ -239,8 +269,15 @@ import java.util.ArrayList;
 			}
 			
 		}
+		public void boutonMauve(){
+			choix1.setBackground(couleur);
+			choix2.setBackground(couleur);
+			choix3.setBackground(couleur);
+			choix4.setBackground(couleur);
+			choix5.setBackground(couleur);
+			choix6.setBackground(couleur);
+			choix7.setBackground(couleur);
+			choix8.setBackground(couleur);
 		
-		
-		
-		
+	}
 	} 
