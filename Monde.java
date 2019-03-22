@@ -12,17 +12,11 @@ public class Monde {
     public LinkedList<Bloc> blocs = new LinkedList<Bloc>();
     public LinkedList<Entite> entites = new LinkedList<Entite>();
     private Joueur joueur;
-<<<<<<< HEAD
-    public LinkedList<Balle> lesBalles = new LinkedList<Balle>();
 
-=======
-    
 	private Tremplin tremplin1;
    
-    private MonstreDistance Monstred1;
-    private MonstreDistance Monstred2;
-    private LinkedList<Balle> balles = new LinkedList<Balle>();
->>>>>>> 6dbff3ac20675a1877e7fb2cb29c3e67b3ab121f
+    private LinkedList<Balle> lesBalles = new LinkedList<Balle>();
+
 
     public Monde(String chemin, Jeu jeu){
         this.jeu = jeu;
