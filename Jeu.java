@@ -56,7 +56,7 @@ public class Jeu implements Runnable, KeyListener {
 
         this.monde = new Monde("./mondes/monde1.txt", this);
 
-        this.ent = new LinkedList<Entite>();
+        //this.ent = new LinkedList<Entite>();
 
         /*
         ent.add(new Joueur(10,10,64,64,10,5,this));

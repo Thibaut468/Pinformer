@@ -12,8 +12,17 @@ public class Monde {
     public LinkedList<Bloc> blocs = new LinkedList<Bloc>();
     public LinkedList<Entite> entites = new LinkedList<Entite>();
     private Joueur joueur;
+<<<<<<< HEAD
     public LinkedList<Balle> lesBalles = new LinkedList<Balle>();
 
+=======
+    
+	private Tremplin tremplin1;
+   
+    private MonstreDistance Monstred1;
+    private MonstreDistance Monstred2;
+    private LinkedList<Balle> balles = new LinkedList<Balle>();
+>>>>>>> 6dbff3ac20675a1877e7fb2cb29c3e67b3ab121f
 
     public Monde(String chemin, Jeu jeu){
         this.jeu = jeu;
@@ -81,6 +90,10 @@ public class Monde {
                 int vieDonnee = Integer.parseInt(separation[i + 3]);
                 update = 4;
                 entites.add(new Healer(this.jeu, id, x, y, vieDonnee));
+            } else if (id==22){
+                int hauteurSaut = Integer.parseInt(separation[i+3]);
+                update = 4;
+                entites.add(new Tremplin(this.jeu, id, x, y, hauteurSaut));
             }
         }
         
