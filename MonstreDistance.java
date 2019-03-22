@@ -1,6 +1,7 @@
 import java.awt.*;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.util.LinkedList;
 public class MonstreDistance extends Monstre {
 	
     private int compteur = 0;
@@ -14,8 +15,9 @@ public class MonstreDistance extends Monstre {
     private int choixB;
     private int enl;
     private int venl;
+    Monde monde;
 	
-	public MonstreDistance(Jeu jeu, int intervalleTire, int x, int y, int largeur, int hauteur, int vie, int vieE, int vitesse, int vitesseR, Color couleur, int positionFinaleX, int choixB) {
+	public MonstreDistance(Jeu jeu, int intervalleTire, int x, int y, int largeur, int hauteur, int vie, int vieE, int vitesse, int vitesseR, Color couleur, int positionFinaleX, int choixB, Monde monde) {
 		super(jeu, x, y, largeur, hauteur, vieE, vie, vitesseR, couleur);
         this.intervalleTire=intervalleTire;
         this.vitesse=vitesse;
@@ -24,6 +26,7 @@ public class MonstreDistance extends Monstre {
         this.choixB=choixB;
         this.enl = vieE;
         this.venl = vitesseR;
+        this.monde=monde;
         
 	}
 	
@@ -32,6 +35,10 @@ public class MonstreDistance extends Monstre {
         
         this.deplacement();
    
+        if (this.compt()) {
+			Balle balle1 = this.creationBalle();
+            monde.lesBalles.add(balle1);
+        }
         
         
     }
@@ -46,8 +53,9 @@ public class MonstreDistance extends Monstre {
     
 
     public void aff(Graphics g){
-		g.setColor(this.couleur);
-		g.fillOval(super.x,super.y,super.largeur,super.hauteur);
+		//g.setColor(this.couleur);
+		//g.fillOval(super.x,super.y,super.largeur,super.hauteur);
+        g.drawImage(super.jeu.textures.monstre_contact,x,y,null);
 	}
 		
 		

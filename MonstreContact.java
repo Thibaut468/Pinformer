@@ -1,6 +1,7 @@
 import java.awt.*;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.util.LinkedList;
 
 public class MonstreContact extends Monstre {
     
@@ -19,6 +20,7 @@ public class MonstreContact extends Monstre {
 	
     public void tick(){
         this.deplacement();
+    
 	}
 
     public void aff(Graphics g){

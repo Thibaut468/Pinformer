@@ -12,9 +12,8 @@ public class Monde {
     public LinkedList<Bloc> blocs = new LinkedList<Bloc>();
     public LinkedList<Entite> entites = new LinkedList<Entite>();
     private Joueur joueur;
-    private MonstreDistance Monstred1;
-    private MonstreDistance Monstred2;
-    private LinkedList<Balle> balles = new LinkedList<Balle>();
+    public LinkedList<Balle> lesBalles = new LinkedList<Balle>();
+
 
     public Monde(String chemin, Jeu jeu){
         this.jeu = jeu;
@@ -29,6 +28,7 @@ public class Monde {
         spawnX = Integer.parseInt(separation[2]);
         spawnY = Integer.parseInt(separation[3]);
 
+        
         joueur = new Joueur(this.jeu, spawnX,spawnY,48,48,10,8);
         entites.add(joueur);
 
@@ -84,12 +84,10 @@ public class Monde {
             }
         }
         
-        //Monstred1 = new MonstreDistance(this.jeu, 100, 10, 200, 60, 60, 30, 1, 2, 1, Color.blue, 750, 1);
-        //Monstred2 = new MonstreDistance(this.jeu, 100, 10, 500, 60, 60, 30, 1, 1, 1, Color.black, 750, -1);
-        //entites.add(new MonstreContact(this.jeu, 80, 300, 60, 60, 10, 1, 1, 1, Color.pink, 750));
+        entites.add(new MonstreDistance(this.jeu, 100, 10, 200, 60, 60, 30, 1, 2, 1, Color.blue, 750, 1, this));
+        entites.add(new MonstreDistance(this.jeu, 100, 10, 500, 60, 60, 30, 1, 1, 1, Color.black, 750, -1, this));
+        entites.add(new MonstreContact(this.jeu, 80, 300, 60, 60, 10, 1, 1, 1, Color.pink, 750));
         
-        //entites.add(Monstred1);
-        //entites.add(Monstred2);
     }
 
     public void tick(){
@@ -108,31 +106,17 @@ public class Monde {
         for (Entite e : entites) {
             e.tick();
         }
-
-        /*
-        if (Monstred1.compt() == true) {
-			Balle balle1 = Monstred1.creationBalle();
-			balles.add(balle1);
-            entites.add(balle1);
+        
+        for (Balle b : lesBalles) {
+            b.tick();
+			b.aTouche(joueur);
+			if (b.aT()){
+			lesBalles.remove(b);
+			
+			}
         }
-        if (Monstred2.compt() == true) {
-            Balle balle2 = Monstred2.creationBalle();
-			balles.add(balle2);
-            entites.add(balle2);
-		}
-		*/
-		
-		for (int i=0; i<balles.size(); i++) {
-			if (!balles.get(i).aT()){
-			balles.get(i).aTouche(joueur);
-			}
-			
-			if (balles.get(i).aT()){
-			entites.remove(balles.get(i));
-			balles.remove(i);
-			
-			}
-    }
+
+        
 }
     public void aff(Graphics g){
         for (Bloc b: blocs) {
@@ -140,6 +124,11 @@ public class Monde {
         }
         for (Entite e : entites) {
             e.aff(g);
+    
+        }
+        
+        for (Balle b : lesBalles) {
+            b.aff(g);
         }
     }
 
@@ -205,4 +194,6 @@ public class Monde {
         }
         return (new Bloc(0,0,-1,0));
     }
+    
+
 }

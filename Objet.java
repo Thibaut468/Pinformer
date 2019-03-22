@@ -6,6 +6,8 @@ public abstract class Objet extends Entite {
         super(jeu, id, x,y,largeur,hauteur);
         
     }
+    
+    public abstract void aff(Graphics g);
 
 
 }
