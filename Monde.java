@@ -34,9 +34,6 @@ public class Monde {
 
         joueur = new Joueur(this.jeu, spawnX,spawnY,48,48,10,8);
         entites.add(joueur);
-        
-        /**/tremplin1 = new Tremplin(this.jeu, 100, 150,48);
-        /**/entites.add(tremplin1);
 
         int update = 0;
 
@@ -87,6 +84,10 @@ public class Monde {
                 int vieDonnee = Integer.parseInt(separation[i + 3]);
                 update = 4;
                 entites.add(new Healer(this.jeu, id, x, y, vieDonnee));
+            } else if (id==22){
+                int hauteurSaut = Integer.parseInt(separation[i+3]);
+                update = 4;
+                entites.add(new Tremplin(this.jeu, id, x, y, hauteurSaut));
             }
         }
         
