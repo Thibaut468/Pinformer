@@ -12,6 +12,9 @@ public class Monde {
     public LinkedList<Bloc> blocs = new LinkedList<Bloc>();
     public LinkedList<Entite> entites = new LinkedList<Entite>();
     private Joueur joueur;
+    
+	private Tremplin tremplin1;
+   
     private MonstreDistance Monstred1;
     private MonstreDistance Monstred2;
     private LinkedList<Balle> balles = new LinkedList<Balle>();
@@ -31,6 +34,9 @@ public class Monde {
 
         joueur = new Joueur(this.jeu, spawnX,spawnY,48,48,10,8);
         entites.add(joueur);
+        
+        /**/tremplin1 = new Tremplin(this.jeu, 100, 150,48);
+        /**/entites.add(tremplin1);
 
         int update = 0;
 
