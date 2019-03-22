@@ -15,7 +15,7 @@ public class Monde {
 
 	private Tremplin tremplin1;
    
-    private LinkedList<Balle> lesBalles = new LinkedList<Balle>();
+    public LinkedList<Balle> lesBalles = new LinkedList<Balle>();
 
 
     public Monde(String chemin, Jeu jeu){
