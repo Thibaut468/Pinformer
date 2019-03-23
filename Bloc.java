@@ -48,6 +48,18 @@ public class Bloc  {
 			case 8 :
 				g.drawImage(textures.p_droite,x,y,null);
                 break;
+            case 9:
+                g.drawImage(textures.p_entier,x,y,null);
+                break;
+			case 10:
+				g.drawImage(textures.p_gauche,x,y,null);
+                break;
+            case 11 :
+                g.drawImage(textures.p_milieu,x,y,null);
+                break;
+			case 12 :
+				g.drawImage(textures.p_droite,x,y,null);
+                break;
             default :
                 break;
         }

@@ -1,5 +1,4 @@
 import java.awt.*;
-import java.util.LinkedList;
 
 public abstract class Monstre extends Personnage {
 	
@@ -9,7 +8,6 @@ public abstract class Monstre extends Personnage {
     protected double depY;
     protected Color couleur;
     protected boolean apparent;
-
 	
 	public Monstre(Jeu jeu, int x, int y, int largeur, int hauteur, int vieE, int vie, double vitesseR, Color couleur) {
         super(jeu, x, y, largeur, hauteur, vie, 0); // j'ai mis vitesse = 0 car les monstres sont fixes
@@ -20,7 +18,6 @@ public abstract class Monstre extends Personnage {
         this.vitesseRalenti = vitesseR;
         this.apparent = true;
 	}
-    
 
     public abstract void tick();
 
@@ -52,8 +49,6 @@ public abstract class Monstre extends Personnage {
     public boolean monstreEstMort(){
         return this.vie == 0;
     }
-    
-    
 		
 		
 }

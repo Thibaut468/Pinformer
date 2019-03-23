@@ -1,5 +1,4 @@
 import java.awt.*;
-import java.util.LinkedList;
 
 public abstract class Entite {
 
@@ -25,7 +24,6 @@ public abstract class Entite {
     public abstract void tick();
 
     public abstract void aff(Graphics g);
-    
 
     public boolean getInactif(){
         return inactif;

@@ -9,7 +9,7 @@ public abstract class Personnage extends Entite {
     protected Jeu jeu;
     protected final double GRAVITE = 2;
     protected final double FROTTEMENTS = 1;
-    protected final int VMAX = 25;
+    protected final int VMAX = 30;
     protected boolean glissade = false;
     protected boolean falling = true;
     protected boolean jumping = true;
@@ -130,7 +130,7 @@ public abstract class Personnage extends Entite {
             if(this.jeu.getMonde().objetDetectionX(testX,y,hauteur)){
                 this.jeu.getMonde().getEntiteX(testX,y,hauteur).action(this);
             }
-        } else if (this.depX < 0) { //Déplacement gauche
+        } else if (this.depY < 0) { //Déplacement gauche
             testX = (int)(x+depX);
             if(this.jeu.getMonde().objetDetectionX(testX,y,hauteur)){
                 this.jeu.getMonde().getEntiteX(testX,y,hauteur).action(this);
