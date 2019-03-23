@@ -11,11 +11,10 @@ public class Tremplin extends Objet {
         this.hauteurSaut=hauteurSaut;
 	}
 	
-	public void tick(){
-    }
+	public void tick(){}
     
     public void action(Personnage p, String s){
-	    p.saut(hauteurSaut);
+            p.saut(hauteurSaut);
     }
     
 	public void aff(Graphics g){

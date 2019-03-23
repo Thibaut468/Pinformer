@@ -9,7 +9,7 @@ public class MonstreD extends Monstre {
     private int compt = 0;
 
     public MonstreD(Jeu jeu, int id, int x, int y, int vitesse, int degat, int ralenti, int positionFinaleX){
-        super(jeu, id, x, y, 64, 64, vitesse, degat, ralenti, positionFinaleX);
+        super(jeu, id, x, y, 48, 48, vitesse, degat, ralenti, positionFinaleX);
         this.ralenti = ralenti;
         this.id=id;
         falling=false;

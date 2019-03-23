@@ -31,6 +31,7 @@ public abstract class Entite {
         return inactif;
     }
 
+    public int getId(){ return id; }
 
     public void setX(int x){
         this.x=x;

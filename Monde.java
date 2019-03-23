@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.util.Iterator;
 import java.util.LinkedList;
 
 public class Monde {
@@ -12,6 +13,8 @@ public class Monde {
     public LinkedList<Bloc> blocs = new LinkedList<Bloc>();
     public LinkedList<Entite> entites = new LinkedList<Entite>();
     private Joueur joueur;
+    public Bloc c;
+    public Entite c2;
 
 
     public Monde(String chemin, Jeu jeu){
@@ -103,21 +106,19 @@ public class Monde {
 
     public void tick(){
 
-        //Suppresion des inactifs
-        /*
-        for(Entite e : entites){
-            if(e.getInactif())  entites.remove(e);
+        //On supprime les éléments inactifs
+        Iterator<Entite> it = entites.iterator();
+        while(it.hasNext()){
+            if(it.next().getInactif()) it.remove();
         }
-        */
-
 
         //On tick tout
+
 
         for (Bloc b: blocs) {
             b.tick();
         }
         for (Entite e : entites) {
-            if(!e.getInactif())
             e.tick();
         }
 
@@ -140,7 +141,6 @@ public class Monde {
             b.aff(g);
         }
         for (Entite e : entites) {
-            if(!e.getInactif())
             e.aff(g);
         }
 
@@ -153,7 +153,8 @@ public class Monde {
 
     public boolean blocDetectionY(int y, int x, int l){
         for(Bloc b : blocs){
-            if(b.y<y && (b.y+b.HAUTEUR)>y && (x+l)>b.x && x<(b.x+b.LARGEUR) && b.solide()){
+            if(b.y<y && (b.y+b.hauteur)>y && (x+l)>b.x && x<(b.x+b.largeur) && b.solide()){
+                c=b;
                 return true;
             }
         }
@@ -162,58 +163,33 @@ public class Monde {
 
     public boolean blocDetectionX(int x, int y, int h){
         for(Bloc b : blocs){
-             if(b.x<x && (b.x+b.LARGEUR)>x && (y+h)>b.y && y<(b.y+b.HAUTEUR) && b.solide()){
+             if(b.x<x && (b.x+b.largeur)>x && (y+h)>b.y && y<(b.y+b.hauteur) && b.solide()){
+                 c=b;
                  return true;
              }
         }
         return false;
     }
 
-    public boolean objetDetectionX(int x, int y, int h){
+    public boolean objetDetectionX(int x, int y, int h, Personnage p){
         for(Entite e : entites){
-            if(e.x<x && (e.x+e.largeur)>x && (y+h)>e.y && y<(e.y+e.hauteur)){
-                return true;
+            if(e.x<x && (e.x+e.largeur)>x && (y+h)>e.y && y<(e.y+e.hauteur) && !e.getInactif()){
+                    e.action(p, "X");
+                    return true;
             }
         }
         return false;
     }
 
-    public boolean objetDetectionY(int y, int x, int l){
+    public boolean objetDetectionY(int y, int x, int l, Personnage p){
         for(Entite e : entites){
-            if(e.y<y && (e.y+e.hauteur)>y && (x+l)>e.x && x<(e.x+e.largeur)){
-                return true;
+            if(e.y<y && (e.y+e.hauteur)>y && (x+l)>e.x && x<(e.x+e.largeur) && !e.getInactif()){
+                if(e.getId()!=22) {
+                    e.action(p, "Y");
+                    return true;
+                }
             }
         }
         return false;
     }
-
-    public Entite getEntiteX(int x, int y, int h){
-        for(Entite e : entites){
-            if(e.x<x && (e.x+e.largeur)>x && (y+h)>e.y && y<(e.y+e.hauteur)){
-                return e;
-            }
-        }
-        return (new Healer(jeu,-1,0,0,0));
-    }
-
-    public Entite getEntiteY(int y, int x, int l){
-        for(Entite e : entites){
-            if(e.y<y && (e.y+e.hauteur)>y && (x+l)>e.x && x<(e.x+e.largeur)){
-                return e;
-            }
-        }
-        return (new Healer(jeu,-1,0,0,0));
-    }
-
-    public Bloc getBloc(int y, int x, int l){
-        for(Bloc b : blocs){
-            if(b.y<y && (b.y+b.HAUTEUR)>y && (x+l)>b.x && x<(b.x+b.LARGEUR) && b.solide()){
-                return b;
-            }
-        }
-        return (new Bloc(0,0,-1,0));
-    }
-
-    public Joueur getJoueur(){ return this.joueur; }
-
 }

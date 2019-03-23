@@ -4,8 +4,8 @@ import java.awt.image.BufferedImage;
 public class Bloc  {
 
     protected chargementImage textures = new chargementImage();
-    protected final int LARGEUR = 64;
-    protected final int HAUTEUR = 32;
+    protected final int largeur = 64;
+    protected final int hauteur = 32;
     public int x;
     public int y;
     protected int id;

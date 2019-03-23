@@ -6,7 +6,7 @@ import java.io.File;
 public class chargementImage {
 
     private int choix;
-    public BufferedImage joueur, backgroundJeu, l10, l9,l8, l7, l6, l5, l4, l3, l2, l1, l0, p_entier, p_gauche, p_droite, p_milieu, healer, monstre_contact, tremplin;
+    public BufferedImage joueur, backgroundJeu, water, l10, l9,l8, l7, l6, l5, l4, l3, l2, l1, l0, p_entier, p_gauche, p_droite, p_milieu, healer, monstre_contact, tremplin;
 
     public chargementImage(){
 
@@ -48,6 +48,7 @@ public class chargementImage {
 
         monstre_contact = load("./textures/monstre_contact.png");
         backgroundJeu=load("./textures/background.png");
+        water=load("./textures/water.png");
         //plateforme = load("./textures/plateforme.png");
         p_entier = load("./textures/P_entier.png");
         p_gauche = load("./textures/P_gauche.png");

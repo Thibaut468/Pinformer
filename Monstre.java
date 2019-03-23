@@ -17,22 +17,20 @@ public abstract class Monstre extends Personnage {
         super(jeu, id, x, y, largeur, hauteur, 1, vitesse); // j'ai mis vitesse = 0 car les monstres sont fixes
 		this.degats = degats;
 		this.ralenti = ralenti;
-        this.depX=0;
+        this.depX=vitesse;
         this.depY=0;
         this.positionInitialeX=x;
         this.positionFinaleX=positionFinaleX;
 	}
 
 	public void action(Personnage p, String s){
-	    if(cpt>=240){
-	        cpt=0;
-            if(s.equals("X")){ //Monstre touche le joueur
-                touche(p);
-            }
+        if(s.equals("X") && cpt >=240){ //Monstre touche le joueur
+            touche(p);
+            cpt=0;
+        }
 
-            if(s.equals("Y")){ //Joueur touche le monstre
-                estTouche();
-            }
+        if(s.equals("Y")){ //Joueur touche le monstre
+            estTouche();
         }
     }
 
@@ -41,20 +39,41 @@ public abstract class Monstre extends Personnage {
     public abstract void aff(Graphics g);
 
     public void deplacement () {
+
         if(vitesse!=0) {
-            if (!sens) {
-                super.x += vitesse;
-            }
             if (super.x >= positionFinaleX) {
                 sens = true;
-            }
-            if (sens) {
-                super.x -= vitesse;
             }
             if (super.x <= positionInitialeX) {
                 sens = false;
             }
+            if(sens) depX=-vitesse;
+            if(!sens) depX=vitesse;
         }
+
+        if(!blocCollisionX()) super.x+=depX;
+    }
+
+    public boolean blocCollisionX(){
+        int testX=0;
+        if(this.depX>0){ //Déplacement droite
+            testX = (int) (x+largeur+depX);
+            if(!this.jeu.getMonde().blocDetectionX(testX, y, hauteur)){ //pas de collisions
+                return false;
+            } else { //collision
+                sens=!sens;
+                return true;
+            }
+        } else if(this.depX<0){ //Déplacement gauche
+            testX = (int)(x+depX);
+            if(!this.jeu.getMonde().blocDetectionX(testX, y, hauteur)){
+                return false;
+            } else { //collision
+                sens=!sens;
+                return true;
+            }
+        }
+        return false;
     }
 	
 	public void perdVie(Personnage j) {
