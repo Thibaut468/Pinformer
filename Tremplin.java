@@ -14,8 +14,8 @@ public class Tremplin extends Objet {
 	public void tick(){
     }
     
-    public void action(Personnage p){
-		p.saut(hauteurSaut);
+    public void action(Personnage p, String s){
+	    p.saut(hauteurSaut);
     }
     
 	public void aff(Graphics g){

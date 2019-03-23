@@ -13,10 +13,6 @@ public class Monde {
     public LinkedList<Entite> entites = new LinkedList<Entite>();
     private Joueur joueur;
 
-	private Tremplin tremplin1;
-   
-    public LinkedList<Balle> lesBalles = new LinkedList<Balle>();
-
 
     public Monde(String chemin, Jeu jeu){
         this.jeu = jeu;
@@ -80,30 +76,40 @@ public class Monde {
                     default:
                         break;
                 }
-            } else if (id==20 || id==21) {
+            } else if (id==20 || id==21) { //Healer 20 et Drainer 21
                 int vieDonnee = Integer.parseInt(separation[i + 3]);
                 update = 4;
                 entites.add(new Healer(this.jeu, id, x, y, vieDonnee));
-            } else if (id==22){
+            } else if (id==22){ //Tremplin
                 int hauteurSaut = Integer.parseInt(separation[i+3]);
                 update = 4;
                 entites.add(new Tremplin(this.jeu, id, x, y, hauteurSaut));
+            } else if (id==30){ //MonstreContact
+                int vitesse = Integer.parseInt(separation[i + 3]);
+                int degats = Integer.parseInt(separation[i + 4]);
+                int positionFinaleX = Integer.parseInt(separation[i + 5]);
+                update = 6;
+                entites.add(new MonstreC(this.jeu, id, x, y, vitesse, degats, positionFinaleX));
+            } else if (id==31) { //MonstreDistance
+                int vitesse = Integer.parseInt(separation[i + 3]);
+                int degats = Integer.parseInt(separation[i + 4]);
+                int ralenti = Integer.parseInt(separation[i + 5]);
+                int positionFinaleX = Integer.parseInt(separation[i + 6]);
+                update = 7;
+                entites.add(new MonstreD(this.jeu, id, x, y, vitesse, degats, ralenti, positionFinaleX));
             }
         }
-        
-        entites.add(new MonstreDistance(this.jeu, 100, 10, 200, 60, 60, 30, 1, 2, 1, Color.blue, 750, 1, this));
-        entites.add(new MonstreDistance(this.jeu, 100, 10, 500, 60, 60, 30, 1, 1, 1, Color.black, 750, -1, this));
-        entites.add(new MonstreContact(this.jeu, 80, 300, 60, 60, 10, 1, 1, 1, Color.pink, 750));
-        
     }
 
     public void tick(){
 
-        //Suppresion des inactif
-
+        //Suppresion des inactifs
+        /*
         for(Entite e : entites){
             if(e.getInactif())  entites.remove(e);
         }
+        */
+
 
         //On tick tout
 
@@ -111,9 +117,12 @@ public class Monde {
             b.tick();
         }
         for (Entite e : entites) {
+            if(!e.getInactif())
             e.tick();
         }
-        
+
+
+        /*
         for (Balle b : lesBalles) {
             b.tick();
 			b.aTouche(joueur);
@@ -122,6 +131,7 @@ public class Monde {
 			
 			}
         }
+        */
 
         
 }
@@ -130,13 +140,15 @@ public class Monde {
             b.aff(g);
         }
         for (Entite e : entites) {
+            if(!e.getInactif())
             e.aff(g);
-    
         }
-        
+
+        /*
         for (Balle b : lesBalles) {
             b.aff(g);
         }
+        */
     }
 
     public boolean blocDetectionY(int y, int x, int l){
@@ -201,6 +213,7 @@ public class Monde {
         }
         return (new Bloc(0,0,-1,0));
     }
-    
+
+    public Joueur getJoueur(){ return this.joueur; }
 
 }
