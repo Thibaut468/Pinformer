@@ -1,54 +1,112 @@
 import java.awt.*;
 
 public abstract class Monstre extends Personnage {
-	
-	protected int vieEnlevee; // si c'est un montre gentil, on met un vie enlevé négatif comme ca dans la méthode perd vie ca fera - (un nombre négatif) ce qui rajoutera des vies)
-	protected double vitesseRalenti; // pareil comme commentaire pour la vitesse de la ligne d'avant
+
+    protected int ralenti;
+	protected int degats; // si c'est un montre gentil, on met un vie enlevé négatif comme ca dans la méthode perd vie ca fera - (un nombre négatif) ce qui rajoutera des vies)
     protected double depX;
     protected double depY;
+<<<<<<< HEAD
     protected Color couleur;
     protected boolean apparent;
+=======
+    protected int positionInitialeX;
+    protected int positionFinaleX;
+    protected boolean sens = false;
+    protected int cpt;
+
+>>>>>>> 73085e772a1cb294139b7213e500ef9961cc7ce6
 	
-	public Monstre(Jeu jeu, int x, int y, int largeur, int hauteur, int vieE, int vie, double vitesseR, Color couleur) {
-        super(jeu, x, y, largeur, hauteur, vie, 0); // j'ai mis vitesse = 0 car les monstres sont fixes
-		this.vieEnlevee=vieE;
-        this.depX=0;
+	public Monstre(Jeu jeu, int id, int x, int y, int largeur, int hauteur, int vitesse, int degats, int ralenti, int positionFinaleX) {
+        super(jeu, id, x, y, largeur, hauteur, 1, vitesse); // j'ai mis vitesse = 0 car les monstres sont fixes
+		this.degats = degats;
+		this.ralenti = ralenti;
+        this.depX=vitesse;
         this.depY=0;
-        this.couleur = couleur;
-        this.vitesseRalenti = vitesseR;
-        this.apparent = true;
+        this.positionInitialeX=x;
+        this.positionFinaleX=positionFinaleX;
 	}
+<<<<<<< HEAD
+=======
+
+	public void action(Personnage p, String s){
+        if(s.equals("X") && cpt >=240){ //Monstre touche le joueur
+            touche(p);
+            cpt=0;
+        }
+
+        if(s.equals("Y")){ //Joueur touche le monstre
+            estTouche();
+        }
+    }
+>>>>>>> 73085e772a1cb294139b7213e500ef9961cc7ce6
 
     public abstract void tick();
 
     public abstract void aff(Graphics g);
+
+    public void deplacement () {
+
+        if(vitesse!=0) {
+            if (super.x >= positionFinaleX) {
+                sens = true;
+            }
+            if (super.x <= positionInitialeX) {
+                sens = false;
+            }
+            if(sens) depX=-vitesse;
+            if(!sens) depX=vitesse;
+        }
+
+        if(!blocCollisionX()) super.x+=depX;
+    }
+
+    public boolean blocCollisionX(){
+        int testX=0;
+        if(this.depX>0){ //Déplacement droite
+            testX = (int) (x+largeur+depX);
+            if(!this.jeu.getMonde().blocDetectionX(testX, y, hauteur)){ //pas de collisions
+                return false;
+            } else { //collision
+                sens=!sens;
+                return true;
+            }
+        } else if(this.depX<0){ //Déplacement gauche
+            testX = (int)(x+depX);
+            if(!this.jeu.getMonde().blocDetectionX(testX, y, hauteur)){
+                return false;
+            } else { //collision
+                sens=!sens;
+                return true;
+            }
+        }
+        return false;
+    }
 	
-	public void perdVie(Joueur j) {
-		int nouvelleVie = j.getVie() - this.vieEnlevee;
+	public void perdVie(Personnage j) {
+		int nouvelleVie = j.getVie() - this.degats;
 		j.setVie(nouvelleVie);
 		
 	}
 	
-	public void perdVitesse(Joueur j) {
-		double nouvelleVitesse = j.getVitesse() - this.vitesseRalenti;
+	public void perdVitesse(Personnage j) {
+		double nouvelleVitesse = j.getVitesse() - this.ralenti;
 		j.setVitesse(nouvelleVitesse);
 		
 	}
-    
-    public void monstrePerdvie(){
-        if (this.vie>0) {
-        this.vie = this.vie-1;
-    } else {
-        this.apparent = false;
-        // il faut faire disparaitre le monstre de l'écran
-    }
-}
 
-    //méthode qui retourne vrai si le monstre est mort, si on recoit vrai, il faut l'effacer de l'affichage graphique
-    
-    public boolean monstreEstMort(){
-        return this.vie == 0;
+    private void touche(Personnage j){
+        perdVie(j);
+        perdVitesse(j);
     }
+
+    private void estTouche(){
+        vie=0;
+        inactif=true;
+    }
+<<<<<<< HEAD
 		
 		
+=======
+>>>>>>> 73085e772a1cb294139b7213e500ef9961cc7ce6
 }

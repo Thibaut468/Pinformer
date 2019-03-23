@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.util.Iterator;
 import java.util.LinkedList;
 
 public class Monde {
@@ -12,10 +13,16 @@ public class Monde {
     public LinkedList<Bloc> blocs = new LinkedList<Bloc>();
     public LinkedList<Entite> entites = new LinkedList<Entite>();
     private Joueur joueur;
+<<<<<<< HEAD
     private MonstreDistance Monstred1;
     private MonstreDistance Monstred2;
     private LinkedList<Balle> balles = new LinkedList<Balle>();
     private final int VPLAT=2;
+=======
+    public Bloc c;
+    public Entite c2;
+
+>>>>>>> 73085e772a1cb294139b7213e500ef9961cc7ce6
 
     public Monde(String chemin, Jeu jeu){
         this.jeu = jeu;
@@ -66,25 +73,15 @@ public class Monde {
                     case 8:
                         blocs.add(new PlateformeMobile(x, y, 8, VPLAT, 528));
                         break;
-                    case 9:
-                        blocs.add(new PlateformeMobile(x, y, 9, VPLAT, 400));
-                        break;
-                    case 10:
-                        blocs.add(new PlateformeMobile(x, y, 10, VPLAT, 400));
-                        break;
-                    case 11:
-                        blocs.add(new PlateformeMobile(x, y, 11, VPLAT, 464));
-                        break;
-                    case 12:
-                        blocs.add(new PlateformeMobile(x, y, 12, VPLAT, 528));
-                        break;
+           
                     default:
                         break;
                 }
-            } else if (id==20 || id==21) {
+            } else if (id==20 || id==21) { //Healer 20 et Drainer 21
                 int vieDonnee = Integer.parseInt(separation[i + 3]);
                 update = 4;
                 entites.add(new Healer(this.jeu, id, x, y, vieDonnee));
+<<<<<<< HEAD
             }
         }
         
@@ -94,17 +91,39 @@ public class Monde {
         
         //entites.add(Monstred1);
         //entites.add(Monstred2);
+=======
+            } else if (id==22){ //Tremplin
+                int hauteurSaut = Integer.parseInt(separation[i+3]);
+                update = 4;
+                entites.add(new Tremplin(this.jeu, id, x, y, hauteurSaut));
+            } else if (id==30){ //MonstreContact
+                int vitesse = Integer.parseInt(separation[i + 3]);
+                int degats = Integer.parseInt(separation[i + 4]);
+                int positionFinaleX = Integer.parseInt(separation[i + 5]);
+                update = 6;
+                entites.add(new MonstreC(this.jeu, id, x, y, vitesse, degats, positionFinaleX));
+            } else if (id==31) { //MonstreDistance
+                int vitesse = Integer.parseInt(separation[i + 3]);
+                int degats = Integer.parseInt(separation[i + 4]);
+                int ralenti = Integer.parseInt(separation[i + 5]);
+                int positionFinaleX = Integer.parseInt(separation[i + 6]);
+                update = 7;
+                entites.add(new MonstreD(this.jeu, id, x, y, vitesse, degats, ralenti, positionFinaleX));
+            }
+        }
+>>>>>>> 73085e772a1cb294139b7213e500ef9961cc7ce6
     }
 
     public void tick(){
 
-        //Suppresion des inactif
-
-        for(Entite e : entites){
-            if(e.getInactif())  entites.remove(e);
+        //On supprime les éléments inactifs
+        Iterator<Entite> it = entites.iterator();
+        while(it.hasNext()){
+            if(it.next().getInactif()) it.remove();
         }
 
         //On tick tout
+
 
         for (Bloc b: blocs) {
             b.tick();
@@ -113,6 +132,7 @@ public class Monde {
             e.tick();
         }
 
+<<<<<<< HEAD
         /*
         if (Monstred1.compt() == true) {
 			Balle balle1 = Monstred1.creationBalle();
@@ -137,6 +157,21 @@ public class Monde {
 			
 			}
     }
+=======
+
+        /*
+        for (Balle b : lesBalles) {
+            b.tick();
+			b.aTouche(joueur);
+			if (b.aT()){
+			lesBalles.remove(b);
+			
+			}
+        }
+        */
+
+        
+>>>>>>> 73085e772a1cb294139b7213e500ef9961cc7ce6
 }
     public void aff(Graphics g){
         for (Bloc b: blocs) {
@@ -144,12 +179,22 @@ public class Monde {
         }
         for (Entite e : entites) {
             e.aff(g);
+<<<<<<< HEAD
+=======
         }
+
+        /*
+        for (Balle b : lesBalles) {
+            b.aff(g);
+>>>>>>> 73085e772a1cb294139b7213e500ef9961cc7ce6
+        }
+        */
     }
 
     public boolean blocDetectionY(int y, int x, int l){
         for(Bloc b : blocs){
-            if(b.y<y && (b.y+b.HAUTEUR)>y && (x+l)>b.x && x<(b.x+b.LARGEUR) && b.solide()){
+            if(b.y<y && (b.y+b.hauteur)>y && (x+l)>b.x && x<(b.x+b.largeur) && b.solide()){
+                c=b;
                 return true;
             }
         }
@@ -158,30 +203,36 @@ public class Monde {
 
     public boolean blocDetectionX(int x, int y, int h){
         for(Bloc b : blocs){
-             if(b.x<x && (b.x+b.LARGEUR)>x && (y+h)>b.y && y<(b.y+b.HAUTEUR) && b.solide()){
+             if(b.x<x && (b.x+b.largeur)>x && (y+h)>b.y && y<(b.y+b.hauteur) && b.solide()){
+                 c=b;
                  return true;
              }
         }
         return false;
     }
 
-    public boolean objetDetectionX(int x, int y, int h){
+    public boolean objetDetectionX(int x, int y, int h, Personnage p){
         for(Entite e : entites){
-            if(e.x<x && (e.x+e.largeur)>x && (y+h)>e.y && y<(e.y+e.hauteur)){
-                return true;
+            if(e.x<x && (e.x+e.largeur)>x && (y+h)>e.y && y<(e.y+e.hauteur) && !e.getInactif()){
+                    e.action(p, "X");
+                    return true;
             }
         }
         return false;
     }
 
-    public boolean objetDetectionY(int y, int x, int l){
+    public boolean objetDetectionY(int y, int x, int l, Personnage p){
         for(Entite e : entites){
-            if(e.y<y && (e.y+e.hauteur)>y && (x+l)>e.x && x<(e.x+e.largeur)){
-                return true;
+            if(e.y<y && (e.y+e.hauteur)>y && (x+l)>e.x && x<(e.x+e.largeur) && !e.getInactif()){
+                if(e.getId()!=22) {
+                    e.action(p, "Y");
+                    return true;
+                }
             }
         }
         return false;
     }
+<<<<<<< HEAD
 
     public Entite getEntiteX(int x, int y, int h){
         for(Entite e : entites){
@@ -209,4 +260,6 @@ public class Monde {
         }
         return (new Bloc(0,0,-1,0));
     }
+=======
+>>>>>>> 73085e772a1cb294139b7213e500ef9961cc7ce6
 }

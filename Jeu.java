@@ -15,10 +15,13 @@ public class Jeu implements Runnable, KeyListener {
 
     //Ticks
     private int x = 0;
+    private boolean sensDefil = false;
+    private int waterX = 0;
 
     //Thread
     private boolean running = false;
     private Thread t;
+    private boolean dead = false;
 
     //Affichage
     private BufferStrategy buff;
@@ -77,7 +80,7 @@ public class Jeu implements Runnable, KeyListener {
         x += 1;
 
         //Timer
-        this.affichage.tickTimer();
+        if(!dead) this.affichage.tickTimer();
 
         //On regarde les touches au début
         haut=keys[0];
@@ -87,24 +90,39 @@ public class Jeu implements Runnable, KeyListener {
 		
         //On update le monde
         monde.tick();
-
     }
 
     private void aff(){
         buff = affichage.getPanel().getBufferStrategy();
-        if(buff == null){
+        if (buff == null) {
             affichage.getPanel().createBufferStrategy(3);
             return;
         }
         g = buff.getDrawGraphics();
         g.clearRect(0, 0, largeur, hauteur);
+        if(!dead) {
+            //Dessin
+            g.drawImage(textures.backgroundJeu, 0, 0, null);
+            if (!sensDefil) {
+                waterX -= 2;
+            } else {
+                waterX += 2;
+            }
+            if (waterX <= -1280) sensDefil = !sensDefil;
+            if (waterX >= 0) sensDefil = !sensDefil;
+            g.drawImage(textures.water, waterX, 656, null);
 
-        //Dessin
-        g.drawImage(textures.backgroundJeu,0,0,null);
-        monde.aff(g);
-        //Gère les buffeurs d'affichage
-        buff.show();
-        g.dispose();
+            monde.aff(g);
+            //Gère les buffeurs d'affichage
+            buff.show();
+            g.dispose();
+        } else {
+            g.setFont(new Font("Courier", Font.BOLD,70));
+            g.setColor(new Color(65, 15, 34));
+            g.drawString("GAME OVER",400,720/2);
+            buff.show();
+            g.dispose();
+        }
     }
 
     public void run(){
@@ -249,4 +267,8 @@ public class Jeu implements Runnable, KeyListener {
     }
 
     public Monde getMonde(){ return this.monde; }
+
+    public void finish(){
+        dead=true;
+    }
 }

@@ -19,7 +19,7 @@ public abstract class Entite {
         this.id = id;
     }
 
-    public abstract void action(Personnage p);
+    public abstract void action(Personnage p, String s);
 
     public abstract void tick();
 
@@ -29,6 +29,7 @@ public abstract class Entite {
         return inactif;
     }
 
+    public int getId(){ return id; }
 
     public void setX(int x){
         this.x=x;
