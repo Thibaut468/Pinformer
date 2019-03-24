@@ -11,7 +11,7 @@ public class Healer extends Objet {
         this.vieDonnee = vieDonnee;
     }
 
-    public void action(Personnage p){
+    public void action(Personnage p, String s){
         heal(p,vieDonnee);
         inactif = true;
     }

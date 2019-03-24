@@ -20,7 +20,7 @@ public abstract class Entite {
         this.id = id;
     }
 
-    public abstract void action(Personnage p);
+    public abstract void action(Personnage p, String s);
 
     public abstract void tick();
 

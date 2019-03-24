@@ -90,7 +90,6 @@ public class Jeu implements Runnable, KeyListener {
 		
         //On update le monde
         monde.tick();
-
     }
 
     private void aff(){

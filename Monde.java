@@ -74,14 +74,8 @@ public class Monde {
                         blocs.add(new PlateformeMobile(x, y, 7, VPLAT, positionFinaleX));
                         break;
                     case 8:
-<<<<<<< HEAD
                         blocs.add(new PlateformeMobile(x, y, 8, VPLAT, positionFinaleX));
                         break;
-=======
-                        blocs.add(new PlateformeMobile(x, y, 8, VPLAT, 528));
-                        break;
-           
->>>>>>> parent of d0ceb78... .
                     default:
                         break;
                 }
