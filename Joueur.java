@@ -5,7 +5,7 @@ public class Joueur extends Personnage {
     private int compt = 0;
 
     public Joueur(Jeu jeu, int x, int y, int largeur, int hauteur, int vie, int vitesse){
-        super(jeu,0, x, y, largeur, hauteur, vie, vitesse);
+        super(jeu, x, y, largeur, hauteur, vie, vitesse);
     }
     public void tick() {
 
