@@ -45,9 +45,13 @@ public class Bloc  {
             case 7 :
                 g.drawImage(textures.p_milieu,x,y,null);
                 break;
+<<<<<<< HEAD
 			case 8 :
 				g.drawImage(textures.p_droite,x,y,null);
                 break;
+=======
+		
+>>>>>>> parent of d0ceb78... .
             default :
                 break;
         }
