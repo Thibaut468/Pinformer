@@ -29,11 +29,19 @@ public class PlateformeMobile extends Bloc{
     public void deplacement () {
        //à faire en boucle
        
+<<<<<<< HEAD
         if(!sens){
             super.x+=vitesse;
         }
         
         if(super.x>=positionFinaleX){
+=======
+        if(!sens ){
+            super.x+=vitesse;
+        }
+        
+        if(super.x>=positionFinaleX ){
+>>>>>>> parent of d0ceb78... .
 			sens=true;
 		}
 
@@ -41,10 +49,17 @@ public class PlateformeMobile extends Bloc{
             super.x-=vitesse;
         }
         
+<<<<<<< HEAD
         if(super.x<=positionInitialeX){
 			sens=false;
 		}
 		
+=======
+        if(super.x<=positionInitialeX ){
+			sens=false;
+		}
+	
+>>>>>>> parent of d0ceb78... .
     }
 
     public boolean solide(){
