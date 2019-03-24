@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.util.LinkedList;
 
 public abstract class Monstre extends Personnage {
 
@@ -6,16 +7,11 @@ public abstract class Monstre extends Personnage {
 	protected int degats; // si c'est un montre gentil, on met un vie enlevé négatif comme ca dans la méthode perd vie ca fera - (un nombre négatif) ce qui rajoutera des vies)
     protected double depX;
     protected double depY;
-<<<<<<< HEAD
-    protected Color couleur;
-    protected boolean apparent;
-=======
     protected int positionInitialeX;
     protected int positionFinaleX;
     protected boolean sens = false;
     protected int cpt;
 
->>>>>>> 73085e772a1cb294139b7213e500ef9961cc7ce6
 	
 	public Monstre(Jeu jeu, int id, int x, int y, int largeur, int hauteur, int vitesse, int degats, int ralenti, int positionFinaleX) {
         super(jeu, id, x, y, largeur, hauteur, 1, vitesse); // j'ai mis vitesse = 0 car les monstres sont fixes
@@ -26,8 +22,6 @@ public abstract class Monstre extends Personnage {
         this.positionInitialeX=x;
         this.positionFinaleX=positionFinaleX;
 	}
-<<<<<<< HEAD
-=======
 
 	public void action(Personnage p, String s){
         if(s.equals("X") && cpt >=240){ //Monstre touche le joueur
@@ -39,7 +33,6 @@ public abstract class Monstre extends Personnage {
             estTouche();
         }
     }
->>>>>>> 73085e772a1cb294139b7213e500ef9961cc7ce6
 
     public abstract void tick();
 
@@ -104,9 +97,4 @@ public abstract class Monstre extends Personnage {
         vie=0;
         inactif=true;
     }
-<<<<<<< HEAD
-		
-		
-=======
->>>>>>> 73085e772a1cb294139b7213e500ef9961cc7ce6
 }
