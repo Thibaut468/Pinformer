@@ -6,7 +6,7 @@ public class Balle extends Entite {
 
     private int id = 100;
     private int yinit;
-    private double dt;
+    private int dt;
     private boolean sens;
     private int ymax;
     private int vitesse;
@@ -20,19 +20,20 @@ public class Balle extends Entite {
 
 
     public Balle(Jeu jeu, int x, int y, boolean sensMonstre, int degats, int ralenti) {
-        super(jeu,100, x, y, 5, 5);
+        super(jeu,100, x, y, 20, 20);
         this.yinit = y+1;
         this.xinit= x;
         this.sens = sensMonstre;
         this.ymax = y-100;
-        this.vitesse = 10;
-        this.dt = 0.1;
-        this.direction = 30;
+        this.vitesse = 2;
+        this.dt = 1;
+        this.direction = 1;
         this.degats = degats;
         this.ralenti = ralenti;
     }
 
     public void action(Personnage p, String s){
+        p.vie=p.vie-1;
 
     }
 
@@ -44,7 +45,7 @@ public class Balle extends Entite {
 
     public void aff(Graphics g) {
         g.setColor(Color.black);
-		g.fillOval(super.x,super.y,super.largeur,super.hauteur);
+		g.fillRect(super.x,super.y,super.largeur,super.hauteur);
 
     }
     
@@ -57,7 +58,7 @@ public class Balle extends Entite {
                 super.x=(int) (super.x - dt*vitesse);
                 diff = Math.abs(super.x-xinit);
                 //System.out.println("x1=   "+ super.x);
-            } else if ((sens)) {
+            } else  {
                 super.x= (int)(super.x + dt*vitesse);
                 diff = Math.abs(xinit - super.x);
                 //System.out.println("x2=   "+ super.x);
@@ -69,7 +70,7 @@ public class Balle extends Entite {
         }
 
 
-    public void aTouche(Joueur j){
+   /* public void aTouche(Joueur j){
 		if (((j.getX()-j.getLargeur()+10) <= this.x) && (this.x < (j.getX()+j.getLargeur()-10))&&((j.getY()-j.getHauteur()+10) <= this.y)&& (this.y < (j.getY()+j.getHauteur()-10))){
 			System.out.println(j.getX()-j.getLargeur());
 			System.out.println(j.getX()+j.getLargeur());
@@ -78,7 +79,8 @@ public class Balle extends Entite {
 			aDejat = true;
 			
 		}
-	}
+	}*/
+    
 	
 	public boolean aT() {
 		return aDejat;

@@ -76,6 +76,18 @@ public class Monde {
                     case 8:
                         blocs.add(new PlateformeMobile(x, y, 8, VPLAT, positionFinaleX));
                         break;
+                    case 9:
+                        blocs.add(new PlateformeMobile(x, y, 9, VPLAT, positionFinaleX));
+                        break;
+                    case 10:
+                        blocs.add(new PlateformeMobile(x, y, 10, VPLAT, positionFinaleX));
+                        break;
+                    case 11:
+                        blocs.add(new PlateformeMobile(x, y, 11, VPLAT, positionFinaleX));
+                        break;
+                    case 12:
+                        blocs.add(new PlateformeMobile(x, y, 12, VPLAT, positionFinaleX));
+                        break;  
                     default:
                         break;
                 }
@@ -99,7 +111,7 @@ public class Monde {
                 int ralenti = Integer.parseInt(separation[i + 5]);
                 int positionFinaleX = Integer.parseInt(separation[i + 6]);
                 update = 7;
-                entites.add(new MonstreD(this.jeu, id, x, y, vitesse, degats, ralenti, positionFinaleX));
+                entites.add(new MonstreD(this.jeu, id, x, y, vitesse, degats, ralenti, positionFinaleX, this));
             }
         }
     }
@@ -191,5 +203,9 @@ public class Monde {
             }
         }
         return false;
+    }
+    
+    public Joueur getJoueur() {
+        return this.joueur;
     }
 }

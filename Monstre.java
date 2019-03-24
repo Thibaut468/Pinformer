@@ -9,7 +9,7 @@ public abstract class Monstre extends Personnage {
     protected double depY;
     protected int positionInitialeX;
     protected int positionFinaleX;
-    protected boolean sens = false;
+    protected boolean sens;
     protected int cpt;
 
 	
@@ -96,5 +96,13 @@ public abstract class Monstre extends Personnage {
     private void estTouche(){
         vie=0;
         inactif=true;
+    }
+    
+    public int getRalenti() {
+        return ralenti;
+    }
+    
+    public int getDegats() {
+        return degats;
     }
 }
