@@ -54,6 +54,7 @@ public class chargementImage {
         p_gauche = load("./textures/P_gauche.png");
         p_droite = load("./textures/P_droite.png");
         p_milieu = load("./textures/P_milieu.png");
+        p_arrivee = load("./textures/P_arrivee.png");
 
         healer = load("./textures/coeur.png");
         tremplin = load("./textures/tremplin.png");
