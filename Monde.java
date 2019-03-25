@@ -14,7 +14,6 @@ public class Monde {
     public LinkedList<Entite> entites = new LinkedList<Entite>();
     private Joueur joueur;
     public Bloc c;
-    public Entite c2;
 
 
     public Monde(String chemin, Jeu jeu){
@@ -59,7 +58,7 @@ public class Monde {
                     default:
                         break;
                 }
-            } else if(id >=5 && id <=8){
+            } else if(id >=5 && id <=12){
                 int VPLAT = Integer.parseInt(separation[i+3]);
                 int positionFinaleX = Integer.parseInt(separation[i+4]);
                 update = 5;
@@ -133,20 +132,6 @@ public class Monde {
         for (Entite e : entites) {
             e.tick();
         }
-
-
-        /*
-        for (Balle b : lesBalles) {
-            b.tick();
-			b.aTouche(joueur);
-			if (b.aT()){
-			lesBalles.remove(b);
-			
-			}
-        }
-        */
-
-        
 }
     public void aff(Graphics g){
         for (Bloc b: blocs) {
@@ -155,12 +140,6 @@ public class Monde {
         for (Entite e : entites) {
             e.aff(g);
         }
-
-        /*
-        for (Balle b : lesBalles) {
-            b.aff(g);
-        }
-        */
     }
 
     public boolean blocDetectionY(int y, int x, int l){

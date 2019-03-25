@@ -211,7 +211,13 @@ public abstract class Personnage extends Entite {
     }
 
     public void setVie(int v){
-        this.vie=v;
+        {
+            if(v<0){
+                this.vie=0;
+                jeu.finish();
+            }
+            this.vie=v;
+        }
     }
 
     public int getVie(){

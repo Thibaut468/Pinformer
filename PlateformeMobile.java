@@ -44,25 +44,23 @@ public class PlateformeMobile extends Bloc{
         // Plateforme mobile vertiale
         if(super.x<=positionInitialeX && (id==5 || id==6 || id==7 || id==8)){
                         sens=false;
-                }
-                
-                if(!sens && (id==9 || id==10 || id==11 || id==12)){
+        }
+
+        if(!sens && (id==9 || id==10 || id==11 || id==12)){
             super.y+=vitesse;
         }
         
         if(super.y>=positionFinaleX && (id==9 || id==10 || id==11 || id==12)){
-                        sens=true;
-                }
+            sens=true;
+        }
 
         if(sens && (id==9 || id==10 || id==11 || id==12)){
             super.y-=vitesse;
         }
         
         if(super.y<=positionInitialeY && (id==9 || id==10 || id==11 || id==12)){
-                        sens=false;
-                }
-
-		
+            sens=false;
+        }
     }
 
     public boolean solide(){
