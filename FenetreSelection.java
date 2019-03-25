@@ -1,9 +1,8 @@
-import javax.imageio.ImageIO;
-import java.io.File;
+import javax.sound.sampled.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.io.IOException;
+import java.io.File;
 
 
 public class FenetreSelection extends JFrame implements ActionListener {
@@ -90,6 +89,7 @@ public class FenetreSelection extends JFrame implements ActionListener {
 
         menu.setVisible(true);
 
+        playSound("musique_3.wav");
     }
 
     public void actionPerformed (ActionEvent e){
@@ -107,6 +107,34 @@ public class FenetreSelection extends JFrame implements ActionListener {
         }
         if (e.getSource()==boutonQuitter){
             System.exit(0);
+        }
+    }
+
+    public void playSound(String str){
+        try{
+            String s = "./musiques/"+str;
+            File fichier = new File(s) ;
+            AudioInputStream AudioInput = AudioSystem.getAudioInputStream(fichier);
+
+
+            int bytesPerFrame = AudioInput.getFormat().getFrameSize();
+            int numBytes = 1024 * bytesPerFrame;
+            byte[] tableau = new byte[numBytes];
+
+
+            AudioFormat audioFormat = AudioInput.getFormat();
+            DataLine.Info Info = new DataLine.Info(SourceDataLine.class,audioFormat);
+
+            SourceDataLine line=(SourceDataLine)AudioSystem.getLine(Info);
+            line.open(audioFormat);
+            line.start();
+
+            int nb;
+            while ( (nb = AudioInput.read(tableau,0,numBytes )) != -1 ){
+                line.write(tableau,0,nb);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
     }
 }
