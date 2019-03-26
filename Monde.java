@@ -97,10 +97,17 @@ public class Monde {
                 int vieDonnee = Integer.parseInt(separation[i + 3]);
                 update = 4;
                 entites.add(new Healer(this.jeu, id, x, y, vieDonnee));
-            } else if (id==22){ //Tremplin
-                int hauteurSaut = Integer.parseInt(separation[i+3]);
+            } else if (id==22) { //Tremplin
+                int hauteurSaut = Integer.parseInt(separation[i + 3]);
                 update = 4;
                 entites.add(new Tremplin(this.jeu, id, x, y, hauteurSaut));
+            } else if(id == 23) { //Portail
+                update = 3;
+                entites.add(new Portail(this.jeu, id, x, y));
+            } else if(id == 24 || id == 25){
+                int degats = Integer.parseInt(separation[i+3]);
+                update = 4;
+                entites.add(new Pic(this.jeu, id, x, y, degats));
             } else if (id==30){ //MonstreContact
                 int vitesse = Integer.parseInt(separation[i + 3]);
                 int degats = Integer.parseInt(separation[i + 4]);
@@ -128,7 +135,6 @@ public class Monde {
 
         Iterator<Bloc> it2 = blocs.iterator();
         while(it2.hasNext()){
-            if(it2.next().getId()==16) System.out.println(it2.next().getInactif());
             if(it2.next().getInactif()) it2.remove();
         }
 
@@ -171,20 +177,38 @@ public class Monde {
         return false;
     }
 
-    public boolean objetDetectionX(int x, int y, int h, Personnage p){
+    public boolean objetDetectionX(int x, int y, int h, int l, Personnage p){
         for(Entite e : entites){
             if(e.x<x && (e.x+e.largeur)>x && (y+h)>e.y && y<(e.y+e.hauteur) && !e.getInactif()){
-                    e.action(p, "X");
+                if(e.getId()==24 || e.getId() == 25) { //PIC --> Collision point dans un carré
+                    Pic pic = (Pic) e;
+                    if (testPic(pic, x, y, h, l)) {
+                        pic.action(p, "X");
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+                e.action(p, "X");
                     return true;
             }
         }
         return false;
     }
 
-    public boolean objetDetectionY(int y, int x, int l, Personnage p){
+    public boolean objetDetectionY(int y, int x, int l, int h, Personnage p){
         for(Entite e : entites){
             if(e.y<y && (e.y+e.hauteur)>y && (x+l)>e.x && x<(e.x+e.largeur) && !e.getInactif()){
-                if(e.getId()!=22) {
+                if(e.getId()==24 || e.getId() == 25){ //PIC --> Collision point dans un carré
+                    Pic pic = (Pic)e;
+                    if(testPic(pic,x,y,h,l)){
+                        pic.action(p,"Y");
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+                if(e.getId()!=22) { //Tremplin
                     e.action(p, "Y");
                     return true;
                 }
@@ -192,8 +216,27 @@ public class Monde {
         }
         return false;
     }
+
+    public boolean testPic(Pic pic, int x, int y, int h, int l){
+        if(pic.getPointeX() >= x
+                && pic.getPointeX() < x + l
+                && pic.getPointeY() >= y
+                && pic.getPointeY() < y + h){
+            return true;
+        } else {
+            return false;
+        }
+    }
     
     public Joueur getJoueur() {
         return this.joueur;
+    }
+
+    public int getLargeur() {
+        return largeur;
+    }
+
+    public int getHauteur(){
+        return hauteur;
     }
 }

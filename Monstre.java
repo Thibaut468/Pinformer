@@ -21,6 +21,7 @@ public abstract class Monstre extends Personnage {
         this.depY=0;
         this.positionInitialeX=x;
         this.positionFinaleX=positionFinaleX;
+        this.cpt = 240;
 	}
 
 	public void action(Personnage p, String s){

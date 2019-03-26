@@ -4,7 +4,7 @@ public class PlateformeEphemere extends Bloc {
     private PlateformeFixe p;
     private boolean activated = false;
     private int compt;
-    private final int DELAY = 30;
+    private final int DELAY = 10;
     protected boolean inactif = false;
 
     public PlateformeEphemere(int x, int y, int id) {
@@ -21,7 +21,6 @@ public class PlateformeEphemere extends Bloc {
             inactif = true;
             activated = false;
             compt = 0;
-            System.out.println("INACTIVE");
         }
         p.tick();
     }

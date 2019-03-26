@@ -111,12 +111,12 @@ public abstract class Personnage extends Entite {
         int testX = 0;
         if (this.depX > 0){ //Déplacement droite
             testX = (int) (x + largeur + depX);
-            if(this.jeu.getMonde().objetDetectionX(testX,y,hauteur, this)){
+            if(this.jeu.getMonde().objetDetectionX(testX,y,hauteur, largeur,this)){
                 return true;
             }
         } else if (this.depX < 0) { //Déplacement gauche
             testX = (int)(x+depX);
-            if(this.jeu.getMonde().objetDetectionX(testX,y,hauteur,this)){
+            if(this.jeu.getMonde().objetDetectionX(testX,y,hauteur, largeur,this)){
                 return true;
             }
         }
@@ -129,13 +129,13 @@ public abstract class Personnage extends Entite {
         if(this.depY>0){ //Déplacement vers le bas
             if(dY>VMAX) dY=VMAX;
             testY=(int)(y+hauteur+dY);
-            if(this.jeu.getMonde().objetDetectionY(testY,x,largeur,this)){
+            if(this.jeu.getMonde().objetDetectionY(testY,x,largeur, hauteur,this)){
                 return true;
             }
         } else if(this.depY<0){ //Déplacement vers le haut
             if(dY<-VMAX) dY=-VMAX;
             testY=(int)(y+dY);
-            if(this.jeu.getMonde().objetDetectionY(testY,x,largeur,this)){
+            if(this.jeu.getMonde().objetDetectionY(testY,x,largeur, hauteur,this)){
                 return true;
             }
         }
@@ -202,7 +202,7 @@ public abstract class Personnage extends Entite {
             double dY = depY;
             if(dY<-VMAX) dY=-VMAX;
             testY = (int) (y + dY);
-            if (!this.jeu.getMonde().blocDetectionY(testY, x, largeur)) { //Pas de collision
+            if (!this.jeu.getMonde().blocDetectionY(testY, x, largeur)){ //Pas de collision
                 super.y += (int) this.depY;
                 return false;
             } else { //collision --> On avance au max
@@ -216,7 +216,7 @@ public abstract class Personnage extends Entite {
 
     public void setVie(int v){
         {
-            if(v<0){
+            if(v<=0){
                 this.vie=0;
                 jeu.finish();
             }
