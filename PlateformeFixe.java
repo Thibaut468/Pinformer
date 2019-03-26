@@ -8,4 +8,8 @@ public class PlateformeFixe extends Bloc {
         super(x, y, id, 0);
         this.id=id;
     }
+
+    public void tick() {
+
+    }
 }

@@ -192,6 +192,10 @@ public abstract class Personnage extends Entite {
                     super.x+=vit;
                 }
 
+                if(this.jeu.getMonde().c.getId()==16){ //Plateforme ephemere
+                    this.jeu.getMonde().c.action();
+                }
+
                 return true;
             }
         } else if(this.depY<0){ //Déplacement vers le haut

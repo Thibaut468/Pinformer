@@ -90,6 +90,9 @@ public class Monde {
                     default:
                         break;
                 }
+            } else if(id == 16){
+                update = 3;
+                blocs.add(new PlateformeEphemere(x,y,16));
             } else if (id==20 || id==21) { //Healer 20 et Drainer 21
                 int vieDonnee = Integer.parseInt(separation[i + 3]);
                 update = 4;
@@ -121,6 +124,12 @@ public class Monde {
         Iterator<Entite> it = entites.iterator();
         while(it.hasNext()){
             if(it.next().getInactif()) it.remove();
+        }
+
+        Iterator<Bloc> it2 = blocs.iterator();
+        while(it2.hasNext()){
+            if(it2.next().getId()==16) System.out.println(it2.next().getInactif());
+            if(it2.next().getInactif()) it2.remove();
         }
 
         //On tick tout

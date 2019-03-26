@@ -1,7 +1,7 @@
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class Bloc  {
+public abstract class Bloc  {
 
     protected chargementImage textures = new chargementImage();
     protected final int largeur = 64;
@@ -10,6 +10,7 @@ public class Bloc  {
     public int y;
     protected int id;
     protected int vitesse;
+    protected boolean inactif = false;
 
     public Bloc(int x, int y, int id, int vitesse){
         this.x=x;
@@ -18,9 +19,7 @@ public class Bloc  {
         this.vitesse = vitesse;
     }
 
-    public void tick(){
-
-    }
+    public abstract void tick();
 
     public void aff(Graphics g){
         switch(id){
@@ -52,18 +51,22 @@ public class Bloc  {
                 g.drawImage(textures.p_entier,x,y,null);
                 break;
             case 10:
-                                g.drawImage(textures.p_gauche,x,y,null);
+                g.drawImage(textures.p_gauche,x,y,null);
                 break;
             case 11 :
                 g.drawImage(textures.p_milieu,x,y,null);
                 break;
-                        case 12 :
-                                g.drawImage(textures.p_droite,x,y,null);
+            case 12 :
+                g.drawImage(textures.p_droite,x,y,null);
                 break;
+            case 16 :
+                g.drawImage(textures.p_ephemere,x,y,null);
             default :
                 break;
         }
     }
+
+    public void action(){}
 
     public boolean solide(){
         return true;
@@ -72,4 +75,6 @@ public class Bloc  {
     public int getId() { return this.id; }
 
     public int getVitesse(){ return this.vitesse; }
+
+    public boolean getInactif() { return this.inactif; }
 }

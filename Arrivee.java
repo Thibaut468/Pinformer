@@ -19,6 +19,8 @@ public class Arrivee extends Bloc {
 		this.id=id;
 		
 	}
-	
-	
+
+	public void tick() {
+
+	}
 }
