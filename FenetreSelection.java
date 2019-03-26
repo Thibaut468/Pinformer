@@ -14,6 +14,7 @@ public class FenetreSelection extends JFrame implements ActionListener {
     private Jeu jeu;
     private boolean jeuIsRunning = false;
     private FenetreParametres parametres;
+    private FenetreMonde fenetreMonde;
     private JFrame menu;
     private Color couleur = new Color(166, 39, 86);
 
@@ -86,6 +87,7 @@ public class FenetreSelection extends JFrame implements ActionListener {
         boutonQuitter.addActionListener(this);
 
         parametres = new FenetreParametres();
+        fenetreMonde = new FenetreMonde();
 
         menu.setVisible(true);
 
@@ -95,9 +97,7 @@ public class FenetreSelection extends JFrame implements ActionListener {
     public void actionPerformed (ActionEvent e){
 
         if (e.getSource()== boutonJouer && !jeuIsRunning){
-            this.jeu = new Jeu("Pinformer",1280,720);
-            jeuIsRunning = true;
-            jeu.start();
+			fenetreMonde.setVisible(true);
         }
         if (e.getSource()== boutonParam){
             parametres.setVisible(true);
