@@ -40,7 +40,7 @@ public class Monde {
             System.out.println(id);
             int x = Integer.parseInt(separation[i + 1]);
             int y = Integer.parseInt(separation[i + 2]);
-            if(id >= 1 && id <= 4) {
+            if(id >= 1 && id <= 4 || id==13) {
                 update = 3;
                 switch (id) {
                     case 1:
@@ -55,10 +55,13 @@ public class Monde {
                     case 4:
                         blocs.add(new PlateformeFixe(x, y, 4));
                         break;
+                    case 13 :
+						blocs.add(new PlateformeFixe(x, y, 13));
+						break;
                     default:
                         break;
                 }
-            } else if(id >=5 && id <=12){
+            } else if(id >=5 && id <=15 && id!=13){
                 int VPLAT = Integer.parseInt(separation[i+3]);
                 int positionFinaleX = Integer.parseInt(separation[i+4]);
                 update = 5;
@@ -87,6 +90,12 @@ public class Monde {
                     case 12:
                         blocs.add(new PlateformeMobile(x, y, 12, VPLAT, positionFinaleX));
                         break;  
+                    case 14:                        
+						blocs.add(new PlateformeMobile(x, y, 14, VPLAT, positionFinaleX));
+						break;
+					case 15:                        
+						blocs.add(new PlateformeMobile(x, y, 15, VPLAT, positionFinaleX));
+						break;
                     default:
                         break;
                 }

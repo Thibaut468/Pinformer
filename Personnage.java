@@ -154,8 +154,10 @@ public abstract class Personnage extends Entite {
                 this.depX=0;
                 super.x += this.jeu.getMonde().c.x-x-largeur;
                 glissade = false;
+                 
+				}
                 return true;
-            }
+            
         } else if(this.depX<0){ //Déplacement gauche
             testX = (int)(x+depX);
             if(!this.jeu.getMonde().blocDetectionX(testX, y, hauteur)){
@@ -166,9 +168,10 @@ public abstract class Personnage extends Entite {
                 this.depX = 0;
                 super.x += (this.jeu.getMonde().c.x+this.jeu.getMonde().c.largeur)-x;
                 glissade = false;
+				}
                 return true;
             }
-        }
+        
         return false;
     }
 
@@ -195,7 +198,10 @@ public abstract class Personnage extends Entite {
                 if(this.jeu.getMonde().c.getId()==16){ //Plateforme ephemere
                     this.jeu.getMonde().c.action();
                 }
-
+                //Plateforme arrivee :
+             if(this.jeu.getMonde().c.getId()==13 || this.jeu.getMonde().c.getId()==14 || this.jeu.getMonde().c.getId()==15){ 
+                    jeu.platFin();
+                }
                 return true;
             }
         } else if(this.depY<0){ //Déplacement vers le haut
@@ -208,9 +214,11 @@ public abstract class Personnage extends Entite {
             } else { //collision --> On avance au max
                 this.depY = 0;
                 super.y += (this.jeu.getMonde().c.y+this.jeu.getMonde().c.hauteur)-y;
+                 
                 return true;
             }
         }
+         
         return false;
     }
 

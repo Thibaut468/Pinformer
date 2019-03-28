@@ -30,35 +30,35 @@ public class PlateformeMobile extends Bloc{
     
     public void deplacement () {
               // Plateforme mobile horizontale
-        if(!sens && (id==5 || id==6 || id==7 || id==8)){
+        if(!sens && (id==5 || id==6 || id==7 || id==8 || id==14)){
             super.x+=vitesse;
         }
         
-        if(super.x>=positionFinaleX && (id==5 || id==6 || id==7 || id==8)){
+        if(super.x>=positionFinaleX && (id==5 || id==6 || id==7 || id==8 || id==14)){
                         sens=true;
                 }
 
-        if(sens && (id==5 || id==6 || id==7 || id==8)){
+        if(sens && (id==5 || id==6 || id==7 || id==8 || id==14)){
             super.x-=vitesse;
         }
-        // Plateforme mobile vertiale
-        if(super.x<=positionInitialeX && (id==5 || id==6 || id==7 || id==8)){
+        
+        if(super.x<=positionInitialeX && (id==5 || id==6 || id==7 || id==8 || id==14)){
                         sens=false;
         }
-
-        if(!sens && (id==9 || id==10 || id==11 || id==12)){
+			// Plateforme mobile vertiale
+        if(!sens && (id==9 || id==10 || id==11 || id==12  || id==15)){
             super.y+=vitesse;
         }
         
-        if(super.y>=positionFinaleX && (id==9 || id==10 || id==11 || id==12)){
+        if(super.y>=positionFinaleX && (id==9 || id==10 || id==11 || id==12 || id==15)){
             sens=true;
         }
 
-        if(sens && (id==9 || id==10 || id==11 || id==12)){
+        if(sens && (id==9 || id==10 || id==11 || id==12 || id==15)){
             super.y-=vitesse;
         }
         
-        if(super.y<=positionInitialeY && (id==9 || id==10 || id==11 || id==12)){
+        if(super.y<=positionInitialeY && (id==9 || id==10 || id==11 || id==12 || id==15)){
             sens=false;
         }
     }
