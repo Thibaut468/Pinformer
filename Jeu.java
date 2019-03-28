@@ -19,6 +19,7 @@ public class Jeu implements Runnable, KeyListener {
     private boolean running = false;
     private Thread t;
     private boolean dead = false;
+    private boolean finish = false;
 
     //Affichage
     private BufferStrategy buff;
@@ -89,7 +90,7 @@ public class Jeu implements Runnable, KeyListener {
         }
         g = buff.getDrawGraphics();
         g.clearRect(0, 0, largeur, hauteur);
-        if(!dead) {
+        if(!dead && !finish) {
             //Dessin
             g.drawImage(textures.backgroundJeu, 0, 0, null);
             if (!sensDefil) {
@@ -105,13 +106,19 @@ public class Jeu implements Runnable, KeyListener {
             //Gère les buffeurs d'affichage
             buff.show();
             g.dispose();
-        } else {
+        } if(dead && !finish){
             g.setFont(new Font("Courier", Font.BOLD,70));
             g.setColor(new Color(65, 15, 34));
             g.drawString("GAME OVER",400,720/2);
             buff.show();
             g.dispose();
-        }
+        } if (finish && !dead){
+			g.setFont(new Font("Courier", Font.BOLD,70));
+            g.setColor(new Color(65, 15, 34));
+            g.drawString("VICTOIRE",400,720/2);
+            buff.show();
+            g.dispose();
+		}
     }
 
     public void run(){
@@ -260,5 +267,8 @@ public class Jeu implements Runnable, KeyListener {
     public void finish(){
         dead=true;
     }
-
+	
+	public void platFin(){
+        finish=true;
+    }
 }

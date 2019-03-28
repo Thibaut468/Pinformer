@@ -59,6 +59,15 @@ public abstract class Bloc  {
             case 12 :
                 g.drawImage(textures.p_droite,x,y,null);
                 break;
+            case 13 :
+                g.drawImage(textures.p_arrivee,x,y,null);
+                break;
+            case 14 :
+                g.drawImage(textures.p_arrivee,x,y,null);
+                break;
+            case 15 :
+                g.drawImage(textures.p_arrivee,x,y,null);
+                break;
             case 16 :
                 g.drawImage(textures.p_ephemere,x,y,null);
             default :
