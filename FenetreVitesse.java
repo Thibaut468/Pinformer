@@ -8,27 +8,31 @@ public class FenetreVitesse extends JFrame implements ActionListener {
     public JButton clique;
     public JLabel afficheT;
     private JPanel conteneur1;
-    public int time = 10;
+    public int time = 5;
     public int  timesClicked = 0;
     public boolean aMisVitesse = false;
     private boolean timerLance = false;
-    private FenetreMonde fenetreMonde;
+    private Jeu jeu;
 
-    public FenetreVitesse(FenetreMonde fm) {
-        this.fenetreMonde = fm;
+    public FenetreVitesse(Jeu jeu) {
+        this.jeu = jeu;
 
-        this.setTitle("Cliquer pour donner vitesse initiale");
-        this.setSize(500,500);
-        this.setLocationRelativeTo(null);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        Dimension dimension = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+        int fheight = (int)dimension.getHeight();
+        int fwidth  = (int)dimension.getWidth();
+
+        this.setTitle("");
+        this.setSize(200,200);
+        this.setLocation(fwidth/2+350,fheight/2-250);
+        this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         this.setResizable(false);
 
         Font police = new Font(" Arial ", Font.BOLD, 18);
 
         clique = new JButton();
         clique.setFont(police);
-        clique.setText("Cliquer");
-        clique.setBounds(125, 350, 250, 50);
+        clique.setText("Cliquer Espace");
+        clique.setBounds(8, 100, 170, 50);
         clique.setBackground(Color.black);
         clique.setForeground(Color.white);
         clique.setFocusPainted(false);
@@ -36,14 +40,14 @@ public class FenetreVitesse extends JFrame implements ActionListener {
 
         afficheT = new JLabel();
         afficheT.setFont(police);
-        afficheT.setBounds(125, 150, 250, 50);
+        afficheT.setBounds(15, 25, 150, 50);
         afficheT.setBackground(Color.PINK);
 
         afficheT.setText("Temps restant : " + time);
 
-        JPanel conteneur1 = new JPanel();
+        conteneur1 = new JPanel();
         conteneur1.setLayout(null);
-        conteneur1.setBounds(100, 125, 400, 475);
+        conteneur1.setBounds(0, 0, 200, 200);
         conteneur1.add(afficheT);
         conteneur1.add(clique);
 
@@ -62,7 +66,7 @@ public class FenetreVitesse extends JFrame implements ActionListener {
              ou si le thread a pas encore été lancé donc c'est le premier clique
               */
             if (!timerLance) {
-                ThreadTimer threadTimer = new ThreadTimer(this, fenetreMonde);
+                ThreadTimer threadTimer = new ThreadTimer(this, jeu);
                 threadTimer.start();
                 timerLance = true;
             } else {

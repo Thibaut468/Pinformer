@@ -78,7 +78,7 @@ public abstract class Personnage extends Entite {
                 depY=0;
                 super.y += 720-y-hauteur;
                 jumping=false;
-                jeu.finish();
+                jeu.dead();
                 return true;
             }
         }
@@ -200,7 +200,7 @@ public abstract class Personnage extends Entite {
                 }
                 //Plateforme arrivee :
              if(this.jeu.getMonde().c.getId()==13 || this.jeu.getMonde().c.getId()==14 || this.jeu.getMonde().c.getId()==15){ 
-                    jeu.platFin();
+                    jeu.finish();
                 }
                 return true;
             }
@@ -226,7 +226,7 @@ public abstract class Personnage extends Entite {
         {
             if(v<=0){
                 this.vie=0;
-                jeu.finish();
+                jeu.dead();
             }
             this.vie=v;
         }

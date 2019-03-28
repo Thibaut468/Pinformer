@@ -17,7 +17,7 @@ public class Affichage {
     private int secs = 0;
     private int minutes = 0;
 
-    private final double interval = 16.67;
+    private final double interval = 1000;
 
     public Affichage(String titre, int largeur, int hauteur) {
         this.titre = titre;
@@ -38,8 +38,11 @@ public class Affichage {
         panel.setMinimumSize(new Dimension(largeur, hauteur));
         panel.setFocusable(false);
 
-        temps=new JLabel("");
-        temps.setBounds(largeur-100,10,80,20);
+        Font police = new Font(" Arial ", Font.BOLD, 19);
+
+        temps=new JLabel("     Lancement");
+        temps.setFont(police);
+        temps.setBounds(largeur-170,10,150,30);
 
         this.frame.add(temps);
         this.frame.add(panel);
@@ -64,7 +67,7 @@ public class Affichage {
             this.secs-=60;
         }
 
-        String s = "Temps : ";
+        String s = "  Temps : ";
         if(this.minutes<10) s+="0";
         s+=this.minutes+":";
         if(this.secs<10) s+="0";

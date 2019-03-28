@@ -11,25 +11,26 @@ public class Joueur extends Personnage {
 
         //depX=0;
         //depY=0;
+        if(jeu.getInit()) {
+            if (!(compt == 0)) compt--;
 
-        if (!(compt==0)) compt --;
+            ///if(super.jeu.haut && vie<10) vie++;
+            //if(super.jeu.bas && vie>0) vie--;
 
-        ///if(super.jeu.haut && vie<10) vie++;
-        //if(super.jeu.bas && vie>0) vie--;
+            if (super.jeu.gauche) super.depX = -vitesse;
+            if (super.jeu.droite) super.depX = vitesse;
+            if (!super.jeu.gauche && !super.jeu.droite) super.glissade = true;
 
-        if(super.jeu.gauche) super.depX=-vitesse;
-        if(super.jeu.droite) super.depX=vitesse;
-        if(!super.jeu.gauche && !super.jeu.droite) super.glissade=true;
-
-        super.chute();
-        super.frottements();
-        if(super.jeu.haut && !jumping && compt==0){
-            super.saut(25);
-            compt+=15;
+            super.chute();
+            super.frottements();
+            if (super.jeu.haut && !jumping && compt == 0) {
+                super.saut(25);
+                compt += 15;
+            }
+            //if(super.enTrainDeSauter) super.saut(60,8);
+            //if(super.jeu.haut && !enTrainDeSauter) super.saut(60,8);
+            super.deplacement();
         }
-        //if(super.enTrainDeSauter) super.saut(60,8);
-        //if(super.jeu.haut && !enTrainDeSauter) super.saut(60,8);
-        super.deplacement();
     }
 
     public void aff(Graphics g) {

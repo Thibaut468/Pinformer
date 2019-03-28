@@ -15,6 +15,9 @@ public class Jeu implements Runnable, KeyListener {
     private boolean sensDefil = false;
     private int waterX = 0;
 
+    //Start et Timer
+    private FenetreVitesse fenetreVitesse;
+
     //Thread
     private boolean running = false;
     private Thread t;
@@ -24,6 +27,7 @@ public class Jeu implements Runnable, KeyListener {
     //Affichage
     private BufferStrategy buff;
     private Graphics g;
+    private boolean initialiser = false;
 
     //Gestion des touches
     private boolean[] keys; //0 HAUT, 1 BAS, 2 GAUCHE, 3 DROITE
@@ -58,6 +62,7 @@ public class Jeu implements Runnable, KeyListener {
         this.textures=new chargementImage();
 
         this.monde = new Monde("./mondes/monde1.txt", this);
+
     }
 
     private void init(){
@@ -69,9 +74,6 @@ public class Jeu implements Runnable, KeyListener {
         //Gestion des fps
         x += 1;
 
-        //Timer
-        if(!dead) this.affichage.tickTimer();
-
         //On regarde les touches au début
         haut=keys[0];
         bas=keys[1];
@@ -79,7 +81,7 @@ public class Jeu implements Runnable, KeyListener {
         droite=keys[3];
 		
         //On update le monde
-        monde.tick();
+        if(initialiser) monde.tick();
     }
 
     private void aff(){
@@ -124,6 +126,8 @@ public class Jeu implements Runnable, KeyListener {
     public void run(){
 
         init();
+
+        fenetreVitesse = new FenetreVitesse(this);
 
         //Gère l'affichage a une fréquence fixe de 60 FPS
         int fps = 60;
@@ -264,11 +268,21 @@ public class Jeu implements Runnable, KeyListener {
 
     public Monde getMonde(){ return this.monde; }
 
-    public void finish(){
+    public void dead(){
         dead=true;
     }
 	
-	public void platFin(){
+	public void finish(){
         finish=true;
     }
+
+    public boolean getDead(){ return dead; }
+
+    public boolean getFinish(){ return finish; }
+
+    public Affichage getAffichage(){ return affichage; }
+
+    public boolean getInit() { return initialiser;}
+
+    public void setInit(boolean init) { this.initialiser = init; }
 }

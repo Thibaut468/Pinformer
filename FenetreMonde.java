@@ -51,7 +51,11 @@ public class FenetreMonde extends JFrame implements ActionListener {
 		     passe en parametres FenetreMonde pour qu'apres avoir compte le nombre
 		     de cliques en 20 secondes, on lance le jeu
 		      */
-            FenetreVitesse fenetreVitesse = new FenetreVitesse(this);
+            jeu = new Jeu("Pinformer",1280,720);
+            jeuIsRunning = true;
+            jeu.start();
+            this.setVisible(false);
+            //FenetreVitesse fenetreVitesse = new FenetreVitesse(this);
         }
 
     }

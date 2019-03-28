@@ -2,19 +2,20 @@ import javax.swing.*;
 
 public class ThreadTimer extends Thread {
 
+    private Jeu jeu;
     private FenetreVitesse fenetreVitesse;
-    private FenetreMonde fenetreMonde;
+    private boolean play = false;
 
-    public ThreadTimer(FenetreVitesse fv, FenetreMonde fm) {
+    public ThreadTimer(FenetreVitesse fv, Jeu jeu) {
+        this.jeu = jeu;
         this.fenetreVitesse = fv;
-        this.fenetreMonde = fm;
     }
 
     @Override
     public void run() {
         try {
             // pour 20 secondes
-            for (int i = 0; i < 10; i++) {
+            for (int i = 0; i < 5; i++) {
                 /*
                 on decompte
                 la valeur de la variable time et le texte du label afficheT A MODIFIER QUE ICI !!! SINON PROBLEME DACCES DE THREAD EN MEME TEMPS :(
@@ -30,13 +31,22 @@ public class ThreadTimer extends Thread {
                     fenetreVitesse.clique.setEnabled(false);
 
                     // si on est arrive a 0, on indique le nombre de fois que l utilisateur a clique puis on lance le jeu
-                    JOptionPane.showMessageDialog(null, "L utilisateur a clique " + fenetreVitesse.timesClicked + " fois en 100 secondes !");
-
-                    fenetreMonde.jeu = new Jeu("Pinformer",1280,720);
-                    fenetreMonde.jeuIsRunning = true;
-                    fenetreMonde.jeu.start();
+                    JOptionPane.showMessageDialog(null, "L utilisateur a clique " + fenetreVitesse.timesClicked + " fois en 5 secondes !");
                 }
             }
+
+            jeu.setInit(true);
+            fenetreVitesse.setVisible(false);
+
+            while(!jeu.getInit()){
+                //attente
+            }
+
+            while(!jeu.getDead() && !jeu.getFinish()){
+                jeu.getAffichage().tickTimer();
+                sleep(1000);
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
