@@ -73,4 +73,29 @@ public class Joueur extends Personnage {
                 break;
         }
     }
+    
+    /* il faut récupérér nombre de fois cliqué : c'est dans fenetre vitesse, et c'est timesclicked je ne sais pas comment faire déplacer le personnage initialement déso je vous laisse faire, mais toute la méthode est écrite ici il suffit de faire l'affichage graphique!
+     * en gros j'arrive pas a faire en sorte qu'il apparaisse pas directement sur une des plateformes
+     * de plus des conditions de collisions avec les plateformes
+     public void deplacementInit(int vitesse, int x0, int y0, Monde monde) {
+     * 
+     * il faut que le x0 et le y0 mis en paramètre soit une plateforme en bas et qu'elle soit de x0 = 700 et y0=750, choisi toujours comme point de départ initial du joueur !
+     * il faut trouver un moyen d'arêter le saut lorsque la y du joueur soit égal à l'un des y d'une plateforme qu'il rencontre
+     * vraiment les collision idk :/
+        int v0 = vitesse;
+        double alphar= Math.PI/4;
+        
+        int xmax = (int) (x0-(v0*v0)/(10*Math.sin(2*alphar)));
+        
+        int pas = 1;
+        int a=x0
+        
+        While a>xmax et   il faut rajouteur ici une condition sur le x et y du joueur, arrêter la boucle lorsque le x et y du joueur soit égal à celui d'une plateforme + que ce soit une plateforme assez haute, style : y = 50
+            joueur.setX()=a;
+            joueur.setY()= (int)  (y0-(+10/(2*(v0*v0)*Math.pow((Math.cos(alphar)),2))*x*x+x*Math.tan(alphar))); le signe est changé par rapport au word car le repère en fenetre java est inversé (y vers le bas)
+            a=a-pas
+        }
+    }*/
+        
+        
 }

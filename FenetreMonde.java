@@ -7,8 +7,8 @@ public class FenetreMonde extends JFrame implements ActionListener {
     
     private JButton boutonNiveau1;
     private Color couleur = new Color(166, 39, 86);
-    private Jeu jeu;
-    private boolean jeuIsRunning = false;
+    public Jeu jeu;
+    public boolean jeuIsRunning = false;
     
     public FenetreMonde(){
 		
@@ -42,11 +42,16 @@ public class FenetreMonde extends JFrame implements ActionListener {
 		
     }
 
-    public void actionPerformed(ActionEvent e) {
+
+        public void actionPerformed(ActionEvent e) {
 		if (e.getSource()== boutonNiveau1 && !jeuIsRunning){
-            this.jeu = new Jeu("Pinformer",1280,720);
-            jeuIsRunning = true;
-            jeu.start();
+
+		    /*
+		     avant de lancer le jeu, il faut lancer la fenetre calcul de vitesse
+		     passe en parametres FenetreMonde pour qu'apres avoir compte le nombre
+		     de cliques en 20 secondes, on lance le jeu
+		      */
+            FenetreVitesse fenetreVitesse = new FenetreVitesse(this);
         }
 
     }
