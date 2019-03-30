@@ -9,7 +9,7 @@ public class FenetreVitesse extends JFrame implements ActionListener {
     public JLabel afficheT;
     private JPanel conteneur1;
     public int time = 5;
-    public int  timesClicked = 0;
+    private int  timesClicked = 0;
     public boolean aMisVitesse = false;
     private boolean timerLance = false;
     private Jeu jeu;
@@ -68,13 +68,15 @@ public class FenetreVitesse extends JFrame implements ActionListener {
             if (!timerLance) {
                 ThreadTimer threadTimer = new ThreadTimer(this, jeu);
                 threadTimer.start();
+                timesClicked++;
                 timerLance = true;
             } else {
                 if (time > 0) {
                     timesClicked++;
-                    System.out.println("nombre de cliques : " + timesClicked);
                 }
             }
         }
     }
+
+    public int getTimesClicked(){ return timesClicked; }
 }

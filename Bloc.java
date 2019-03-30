@@ -4,8 +4,8 @@ import java.awt.image.BufferedImage;
 public abstract class Bloc  {
 
     protected chargementImage textures = new chargementImage();
-    protected final int largeur = 64;
-    protected final int hauteur = 32;
+    protected int largeur = 64;
+    protected int hauteur = 32;
     public int x;
     public int y;
     protected int id;
@@ -13,6 +13,14 @@ public abstract class Bloc  {
     protected boolean inactif = false;
 
     public Bloc(int x, int y, int id, int vitesse){
+
+        if(id==24 || id == 25){ //Si le bloc est un pic
+            largeur = 30;
+            hauteur = 25;
+        } else if(id == 26){ //Si le bloc est le starter de départ
+            hauteur = 23;
+        }
+
         this.x=x;
         this.y=y;
         this.id=id;
@@ -47,7 +55,7 @@ public abstract class Bloc  {
 			case 8 :
 				g.drawImage(textures.p_droite,x,y,null);
                 break;
-                case 9:
+            case 9 :
                 g.drawImage(textures.p_entier,x,y,null);
                 break;
             case 10:

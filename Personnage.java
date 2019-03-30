@@ -151,13 +151,18 @@ public abstract class Personnage extends Entite {
                 glissade = true;
                 return false;
             } else { //collision
-                this.depX=0;
-                super.x += this.jeu.getMonde().c.x-x-largeur;
+                this.depX = 0;
+                Bloc c = this.jeu.getMonde().c;
+                super.x += c.x - x - largeur;
                 glissade = false;
-                 
-				}
+
+                if(c.getId()==24 || c.getId() == 25) { //PIC --> Collision pointe --> Degats
+                    Pic pic = (Pic) c;
+                    pic.action(this, "X");
+                }
+
                 return true;
-            
+            }
         } else if(this.depX<0){ //Déplacement gauche
             testX = (int)(x+depX);
             if(!this.jeu.getMonde().blocDetectionX(testX, y, hauteur)){
@@ -165,13 +170,19 @@ public abstract class Personnage extends Entite {
                 glissade=true;
                 return false;
             } else { //collision
+                Bloc c = this.jeu.getMonde().c;
                 this.depX = 0;
-                super.x += (this.jeu.getMonde().c.x+this.jeu.getMonde().c.largeur)-x;
+                super.x += (c.x + c.largeur) - x;
                 glissade = false;
-				}
+
+                if(c.getId()==24 || c.getId() == 25) { //PIC --> Collision pointe --> Degats
+                    Pic pic = (Pic) c;
+                    pic.action(this, "X");
+                }
+
                 return true;
             }
-        
+        }
         return false;
     }
 
@@ -186,22 +197,29 @@ public abstract class Personnage extends Entite {
                 return false;
             } else { //collision --> On avance au max
                 this.depY=0;
-                super.y += this.jeu.getMonde().c.y-y-hauteur;
+                Bloc c = this.jeu.getMonde().c;
+                super.y += c.y-y-hauteur;
                 jumping=false;
 
-                int id = this.jeu.getMonde().c.getId();
-                int vit = this.jeu.getMonde().c.getVitesse();
+                int id = c.getId();
+                int vit = c.getVitesse();
                 if(id==5 || id==6 || id==7 || id==8){
                     super.x+=vit;
                 }
 
-                if(this.jeu.getMonde().c.getId()==16){ //Plateforme ephemere
-                    this.jeu.getMonde().c.action();
+                if(c.getId()==24 || c.getId() == 25) { //PIC --> Collision pointe --> Degats
+                    Pic pic = (Pic) c;
+                    pic.action(this, "Y");
                 }
-                //Plateforme arrivee :
-             if(this.jeu.getMonde().c.getId()==13 || this.jeu.getMonde().c.getId()==14 || this.jeu.getMonde().c.getId()==15){ 
+
+                if(c.getId()==16){ //Plateforme ephemere
+                   c.action();
+                }
+
+                if(c.getId()==13 ||c.getId()==14 || c.getId()==15){ //Plateforme arrivee
                     jeu.finish();
                 }
+
                 return true;
             }
         } else if(this.depY<0){ //Déplacement vers le haut
@@ -213,7 +231,13 @@ public abstract class Personnage extends Entite {
                 return false;
             } else { //collision --> On avance au max
                 this.depY = 0;
-                super.y += (this.jeu.getMonde().c.y+this.jeu.getMonde().c.hauteur)-y;
+                Bloc c = this.jeu.getMonde().c;
+                super.y += (c.y+c.hauteur)-y;
+
+                if(c.getId()==24 || c.getId() == 25) { //PIC --> Collision pointe --> Degats
+                    Pic pic = (Pic) c;
+                    pic.action(this, "Y");
+                }
                  
                 return true;
             }

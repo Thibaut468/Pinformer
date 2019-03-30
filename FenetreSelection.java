@@ -98,6 +98,7 @@ public class FenetreSelection extends JFrame implements ActionListener {
 
         if (e.getSource()== boutonJouer && !jeuIsRunning){
 			fenetreMonde.setVisible(true);
+			this.setVisible(false);
         }
         if (e.getSource()== boutonParam){
             parametres.setVisible(true);

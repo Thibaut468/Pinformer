@@ -17,6 +17,7 @@ public class Jeu implements Runnable, KeyListener {
 
     //Start et Timer
     private FenetreVitesse fenetreVitesse;
+    private boolean propulsion = true;
 
     //Thread
     private boolean running = false;
@@ -285,4 +286,9 @@ public class Jeu implements Runnable, KeyListener {
     public boolean getInit() { return initialiser;}
 
     public void setInit(boolean init) { this.initialiser = init; }
+
+    public boolean getPropulsion(){ return this.propulsion; }
+
+    public void setPropulsion(boolean p){ this.propulsion = p; }
+
 }
