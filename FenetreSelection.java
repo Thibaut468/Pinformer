@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
 
+/** FENETRE PRINCIPALE DU JEU **/
 
 public class FenetreSelection extends JFrame implements ActionListener {
 
@@ -62,7 +63,6 @@ public class FenetreSelection extends JFrame implements ActionListener {
         boutonQuitter.setForeground(Color.white);
         boutonQuitter.setFocusPainted(false);
 
-
         JPanel conteneur1 = new JPanel();
         conteneur1.setLayout(null);
         conteneur1.setBounds(100,125,400,475);
@@ -71,13 +71,11 @@ public class FenetreSelection extends JFrame implements ActionListener {
         conteneur1.add(boutonCredits);
         conteneur1.add(boutonQuitter);
 		
-		/**/
 		JLabel imageFond;
 		imageFond = new JLabel(new ImageIcon("./textures/fond_menu.png"));
 		imageFond.setLocation(0,0);
 		imageFond.setSize(500,500);
 		conteneur1.add(imageFond);
-		/**/
 		
         menu.add(conteneur1);
 

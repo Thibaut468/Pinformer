@@ -1,11 +1,13 @@
 import javax.swing.*;
 import java.awt.*; 
 import java.awt.event.*;
-import java.util.ArrayList;  
+//import java.util.ArrayList;  
+
+/** FENETRE DE GESTION DES PARAMETRES **/
 
 	public class FenetreParametres extends JFrame implements ActionListener{
 		
-		private JButton choix1;
+		private JButton choix1;  
 		private JButton choix2;
 		private JButton choix3;
 		private JButton choix4;
@@ -29,13 +31,16 @@ import java.util.ArrayList;
 		private int touche; //1 zqsd 2 fleches
 		
 		public FenetreParametres(){
+			
+			/** Paramétrages de la fenêtre **/
 			this.setTitle("Parametres"); 
 			this.setLayout(null); 
 			this.setSize(500,500); 
 			this.setLocationRelativeTo(null);
 			this.setResizable(false); 
-			this.setVisible(false);	
+			this.setVisible(false);	 // Fenêtre non visible au lancement du jeu
 			
+		    /** Polices utilisées pour l'écriture des boutons **/
 			Font police1 = new Font(" Arial ",Font.BOLD,9);
 			Font police2 = new Font(" Arial ",Font.BOLD,8);
 
@@ -52,13 +57,13 @@ import java.util.ArrayList;
 				unselected = !unselected;
 			}
 			
-			
+			/** Création des boutons pour le choix du personnage **/
 			choix1 = new JButton();
 			choix1.setFont(police1);
 			choix1.setText("Tchatcheur");
-			choix1.setBounds(34,186,100,40);
-			choix1.setBackground(couleur);
-			choix1.setForeground(Color.white);
+			choix1.setBounds(34,186,100,40);    //taille
+			choix1.setBackground(couleur);      //couleur du fond
+			choix1.setForeground(Color.white);  //couleur de la police
 			choix1.setFocusPainted(false);
 			
 			choix2 = new JButton();
@@ -117,6 +122,7 @@ import java.util.ArrayList;
 			choix8.setForeground(Color.white);
 			choix8.setFocusPainted(false);
 			
+			/** Création du bouton de sauvegarde du choix (permet ausside retourner sur la fenêtre principale **/
 			sauvegarde = new JButton();
 			sauvegarde.setFont(police1);
 			sauvegarde.setText("Sauvegarder");
@@ -125,8 +131,9 @@ import java.util.ArrayList;
 			sauvegarde.setForeground(Color.white);
 			sauvegarde.setFocusPainted(false);
 			
+			/** Création des JRadioButton pour jouer avec les flèches ou les touches zqsd **/
 			String text1 = "ZQSD";
-			zqsd = new JRadioButton(text1, unselected);
+			zqsd = new JRadioButton(text1, unselected); //unselected : la première fois, le JRadioButton pour zqsd est désactivé (initialisation à false)
 			zqsd.setLocation(100,125);
 			zqsd.setSize(100,40);
 			zqsd.setFont(police1);
@@ -135,7 +142,7 @@ import java.util.ArrayList;
 			zqsd.setFocusPainted(false);
 			
 			String text2 = "FLECHES";
-			fleches = new JRadioButton(text2,selected);
+			fleches = new JRadioButton(text2,selected); //selected : la première fois, le JRadioButton pour les flèches est activé (initialisation à true)
 			fleches.setLocation(300,125);
 			fleches.setSize(100,40);
 			fleches.setFont(police1);
@@ -143,19 +150,20 @@ import java.util.ArrayList;
 			fleches.setForeground(Color.white);
 			fleches.setFocusPainted(false);
 			
+			/** Regroupement des JRadioButton dans un ButtonGroup **/
 			choixtouche = new ButtonGroup();
 			zqsd.setActionCommand("zqsd");
 			fleches.setActionCommand("fleches");
 			choixtouche.add(zqsd);
 			choixtouche.add(fleches);
 			
-			
+			/** Création du conteneur **/
 			JPanel conteneur1 = new JPanel();
 			conteneur1.setLayout(null);
 			conteneur1.setBounds(0,0,500,500);
 			
-			
-			conteneur1.add(choix1);
+			/** Ajout des différents boutons et JRadioButton dans le conteur **/
+			conteneur1.add(choix1); 
 			conteneur1.add(choix2);
 			conteneur1.add(choix3);
 			conteneur1.add(choix4);
@@ -164,20 +172,21 @@ import java.util.ArrayList;
 			conteneur1.add(choix7);
 			conteneur1.add(choix8);
 			conteneur1.add(sauvegarde);
-			
 			conteneur1.add(zqsd);
 			conteneur1.add(fleches);
 			
-			this.add(conteneur1);
+			/** Création et ajout de l'image de fond au conteneur **/
 			JLabel imageFondParametre;
-			imageFondParametre = new JLabel(new ImageIcon("./textures/fond_parametres.png"));
+			imageFondParametre = new JLabel(new ImageIcon("./textures/fond_parametres.png"));  //image dans un dossier textures et de non fond_parametres
 			imageFondParametre.setLocation(0,0);
 			imageFondParametre.setSize(500,500);
-			
-			
 			conteneur1.add(imageFondParametre);
 			
+			/** Ajout du conteneur à la fenêtre **/
+			this.add(conteneur1);
 			
+			/** A la fermeture totale du jeu, le choix effectué précedemment est stocké dans la varible choix,
+			ces lignes permettent de mettre le bouton choisi précédemment de couleur verte lors de l'ouverture de la fenêtre**/
 			if(choix==1) choix1.setBackground(Color.green);
 			if(choix==2) choix2.setBackground(Color.green);
 			if(choix==3) choix3.setBackground(Color.green);
@@ -186,8 +195,9 @@ import java.util.ArrayList;
 			if(choix==6) choix6.setBackground(Color.green);
 			if(choix==7) choix7.setBackground(Color.green);
 			if(choix==8) choix8.setBackground(Color.green);
-		
-			choix1.addActionListener(this);
+			
+			/** Création des interfaces d'écoute **/
+			choix1.addActionListener(this); 
 			choix2.addActionListener(this);
 			choix3.addActionListener(this);
 			choix4.addActionListener(this);
@@ -195,22 +205,16 @@ import java.util.ArrayList;
 			choix6.addActionListener(this);
 			choix7.addActionListener(this);
 			choix8.addActionListener(this);
-			
 			sauvegarde.addActionListener(this);
-			
-			
-			
+		
 		}
 		
 		public void actionPerformed (ActionEvent e){
-			
-
 			if (e.getSource()== choix1){
 				System.out.println("choix1");
 				param[1]="1";
-				boutonMauve();
-				choix1.setBackground(Color.green);
-				
+				boutonMauve();   //Remet tous les boutons en mauve (voir méthode après le actionPerformed)
+				choix1.setBackground(Color.green);	//Le bouton choisi devient vert (les autres sont déja mauves)
 			}
 			if (e.getSource()== choix2){
 				System.out.println("choix2");
@@ -266,11 +270,12 @@ import java.util.ArrayList;
 				}
 
 				chargementFichier.ecritureParam("./sauvegardes/param.txt", param);
-				this.setVisible(false);
+				this.setVisible(false);  // Appui sur sauvegarde rend la fenêtre invisible
 			}
 			
 		}
-		public void boutonMauve(){
+		/** Méthode permettant de mettre tous les boutons de couleur mauve **/
+		public void boutonMauve(){ 
 			choix1.setBackground(couleur);
 			choix2.setBackground(couleur);
 			choix3.setBackground(couleur);
