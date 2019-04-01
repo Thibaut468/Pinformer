@@ -1,5 +1,3 @@
-import java.awt.*;
-
 public abstract class Personnage extends Entite {
 
     protected int vie;

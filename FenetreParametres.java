@@ -44,14 +44,16 @@ import java.awt.event.*;
 			Font police1 = new Font(" Arial ",Font.BOLD,9);
 			Font police2 = new Font(" Arial ",Font.BOLD,8);
 
+
+			/** Lecture du fichier texte contenant les parametres **/
 			String fichier = chargementFichier.chargement("./sauvegardes/param.txt");
 			String[] separation = fichier.split("\\s+");
 			param[0]=separation[0];
 			touche = Integer.parseInt(separation[0]);
-			System.out.println("touche : "+touche);
+			//System.out.println("touche : "+touche);
 			choix = Integer.parseInt(separation[1]);
 			param[1]=separation[1];
-            System.out.println("choix : "+choix);
+            //System.out.println("choix : "+choix);
 			if(touche==1){
 				selected = !selected;
 				unselected = !unselected;
@@ -211,55 +213,55 @@ import java.awt.event.*;
 		
 		public void actionPerformed (ActionEvent e){
 			if (e.getSource()== choix1){
-				System.out.println("choix1");
+				//System.out.println("choix1");
 				param[1]="1";
 				boutonMauve();   //Remet tous les boutons en mauve (voir méthode après le actionPerformed)
 				choix1.setBackground(Color.green);	//Le bouton choisi devient vert (les autres sont déja mauves)
 			}
 			if (e.getSource()== choix2){
-				System.out.println("choix2");
+				//System.out.println("choix2");
                 param[1]="2";
                 boutonMauve();
                 choix2.setBackground(Color.green);
 			}
 			if (e.getSource()== choix3){
-				System.out.println("choix3");
+				//System.out.println("choix3");
                 param[1]="3";
                 boutonMauve();
                 choix3.setBackground(Color.green);
 			}
 			if (e.getSource()== choix4){
-				System.out.println("choix4");
+				//System.out.println("choix4");
                 param[1]="4";
                 boutonMauve();
                 choix4.setBackground(Color.green);
 			}
 			if (e.getSource()== choix5){
-				System.out.println("choix5");
+				//System.out.println("choix5");
 				param[1]="5";
 				boutonMauve();
 				choix5.setBackground(Color.green);
 			}
 			if (e.getSource()== choix6){
-				System.out.println("choix6");
+				//System.out.println("choix6");
 				param[1]="6";
 				boutonMauve();
 				choix6.setBackground(Color.green);
 			}
 			if (e.getSource()== choix7){
-				System.out.println("choix7");
+				//System.out.println("choix7");
 				param[1]="7";
 				boutonMauve();
 				choix7.setBackground(Color.green);
 			}
 			if (e.getSource()== choix8){
-				System.out.println("choix8");
+				//System.out.println("choix8");
 				param[1]="8";
 				boutonMauve();
 				choix8.setBackground(Color.green);
 			}
 			if (e.getSource()== sauvegarde){
-				System.out.println("choix sauvegardé");
+				//System.out.println("choix sauvegardé");
 				if(choixtouche.getSelection().getActionCommand().equals("zqsd")){
 					touche = 1;
                     param[0]="1";

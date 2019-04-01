@@ -8,6 +8,8 @@ public class Joueur extends Personnage {
     private int y0;
     private int v0;
     private int a;
+    private int starterVitesse;
+    private int yBuff;
     
     private boolean starterStarted = false;
 
@@ -15,6 +17,7 @@ public class Joueur extends Personnage {
         super(jeu,0, x, y, largeur, hauteur, vie, vitesse);
         this.x0=x;
         this.y0=y;
+        this.yBuff = y;
         a=x0;
     }
     public void tick() {
@@ -23,7 +26,7 @@ public class Joueur extends Personnage {
         //depY=0;
 
         if(jeu.getPropulsion()){
-            deplacementInit(1);
+            deplacementInit(starterVitesse);
             //System.out.println("Propulseee");
         }
         if(jeu.getInit() && !jeu.getPropulsion()) {
@@ -103,7 +106,7 @@ public class Joueur extends Personnage {
      * vraiment les collision idk :
       */
 		if(!starterStarted){
-			v0 = vitesse*10;
+			v0 = vitesse*9;
 			System.out.println("Times Clicked Perso : "+vitesse);
 			starterStarted = true;
 		}
@@ -111,22 +114,32 @@ public class Joueur extends Personnage {
         double alphar= Math.PI/2.5;
         
         int xmax = (int) (x0-(v0*v0)/(10*Math.sin(2*alphar)));
-        System.out.println(xmax);
+        //System.out.println(xmax);
         
                 
         int pas = 1;
         for (int i=0; i<3; i++) {
-        if(a>xmax && y<720){    ///il faut rajouteur ici une condition sur le x et y du joueur, arrêter la boucle lorsque le x et y du joueur soit égal à celui d'une plateforme + que ce soit une plateforme assez haute, style : y = 50
-            //System.out.println("Tick Propulsion");
-            this.setX(a);
-            this.setY((int)(y0+(+9.8/(2*(v0*v0)*Math.pow((Math.cos(alphar)),2))*(x-x0)*(x-x0)+(x-x0)*Math.tan(alphar)))); //le signe est changé par rapport au word car le repère en fenetre java est inversé (y vers le bas)
-            a-=pas;
-            //System.out.println("y="+y);
-            //System.out.println("a="+a);
-        } else {
-            //System.out.println("Fin propulsion");
-            jeu.setPropulsion(false);
+            if(a>xmax && y<720){    ///il faut rajouter ici une condition sur le x et y du joueur, arrêter la boucle lorsque le x et y du joueur soit égal à celui d'une plateforme + que ce soit une plateforme assez haute, style : y = 50
+                //System.out.println("Tick Propulsion");
+                int y = (int)(y0+(+9.8/(2*(v0*v0)*Math.pow((Math.cos(alphar)),2))*(x-x0)*(x-x0)+(x-x0)*Math.tan(alphar)));
+                //System.out.println(yBuff-y);
+                this.setX(a);
+                this.setY(y); //le signe est changé par rapport au word car le repère en fenetre java est inversé (y vers le bas)
+                a-=pas;
+                //System.out.println("y="+y);
+                //System.out.println("a="+a);
+            } else {
+                //System.out.println("Fin propulsion");
+                jeu.setPropulsion(false);
+            }
+            if(yBuff-y<0){
+                jeu.setPropulsion(false);
+                depX=-15;
+            }
+            yBuff=y;
+
         }
     }
-    }
+
+    public void setStarterVitesse(int v){ this.starterVitesse = v;}
 }

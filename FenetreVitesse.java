@@ -10,7 +10,6 @@ public class FenetreVitesse extends JFrame implements ActionListener {
     private JPanel conteneur1;
     public int time = 5;
     private int  timesClicked = 0;
-    public boolean aMisVitesse = false;
     private boolean timerLance = false;
     private Jeu jeu;
     
@@ -30,7 +29,7 @@ public class FenetreVitesse extends JFrame implements ActionListener {
         this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         this.setResizable(false);
 
-        Font police = new Font(" Arial ", Font.BOLD, 18);
+        Font police = new Font(" Arial ", Font.BOLD, 16);
 
         clique = new JButton();
         clique.setFont(police);
@@ -91,8 +90,8 @@ public class FenetreVitesse extends JFrame implements ActionListener {
 	
 	public void affHauteur(){
 		System.out.println("Times Clicked Vitesse : "+timesClicked);
-		jeu.setStarterX((int) ((((-2*Math.sin(2*Math.PI/2.5)*Math.pow(timesClicked*10,2))/(2*9.8))+x0)+40));
-		jeu.setStarterY((int) (y0-((Math.pow(timesClicked*10,2)*Math.sin(Math.PI/2.5)*Math.sin(2*Math.PI/2.5))/(2*9.8))));
+		jeu.setStarterX((int) ((((-2*Math.sin(2*Math.PI/2.5)*Math.pow(timesClicked*9,2))/(2*9.8))+x0)));
+		jeu.setStarterY((int) (y0-((Math.pow(timesClicked*9,2)*Math.sin(Math.PI/2.5)*Math.sin(2*Math.PI/2.5))/(2*9.8))));
 	}
 
     public int getTimesClicked(){ return timesClicked; }

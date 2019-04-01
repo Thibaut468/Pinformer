@@ -21,7 +21,6 @@ public class FenetreSelection extends JFrame implements ActionListener {
 
     public FenetreSelection(){
 
-        //this.jeu = new Jeu("Pinformer",1280,720);
         menu = new JFrame();
         menu.setTitle("Menu du jeu");
         menu.setSize(500,500);

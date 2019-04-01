@@ -13,6 +13,7 @@ public class Affichage {
     private int hauteur;
 
     //Timer
+    private double totalms = 0;
     private double millisecs = 0;
     private int secs = 0;
     private int minutes = 0;
@@ -58,6 +59,7 @@ public class Affichage {
 
     public void tickTimer (){
         this.millisecs+=this.interval;
+        this.totalms+=this.interval;
         if(this.millisecs>=1000){
             this.secs++;
             this.millisecs-=1000;
@@ -75,4 +77,6 @@ public class Affichage {
 
         this.temps.setText(s);
     }
+
+    public double getTotalms(){ return totalms; }
 }

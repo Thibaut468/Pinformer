@@ -2,7 +2,6 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
-import java.util.LinkedList;
 
 public class Jeu implements Runnable, KeyListener {
     private Affichage affichage;
@@ -43,21 +42,21 @@ public class Jeu implements Runnable, KeyListener {
     public boolean droite;
     private int touche;
 
-    //Objets
-    LinkedList<Entite> ent;
-
     //Textures
     public chargementImage textures;
 
     //Monde
     private Monde monde;
+    private String[] dataMonde;
+    private int niveau;
+    private boolean saved = false;
 
-    //Musique
-
-    public Jeu(String titre, int largeur, int hauteur){
+    public Jeu(String titre, int largeur, int hauteur, int niveau, String[] dataMonde){
         this.largeur = largeur;
         this.hauteur = hauteur;
         this.titre = titre;
+        this.dataMonde = dataMonde;
+        this.niveau = niveau;
 
         this.keys = new boolean[4];
 
@@ -66,9 +65,23 @@ public class Jeu implements Runnable, KeyListener {
         touche=Integer.parseInt(separation[0]);
 
         this.textures=new chargementImage();
-
-        this.monde = new Monde("./mondes/monde1.txt", this);
-
+        switch (niveau) {
+            case 1:
+                this.monde = new Monde("./mondes/monde1.txt", this);
+                break;
+            case 2:
+                this.monde = new Monde("./mondes/monde2.txt", this);
+                break;
+            case 3:
+                this.monde = new Monde("./mondes/monde3.txt", this);
+                break;
+            case 4:
+                this.monde = new Monde("./mondes/monde4.txt", this);
+                break;
+            default:
+                this.monde = new Monde("./mondes/monde1.txt", this);
+                break;
+        }
     }
 
     private void init(){
@@ -113,8 +126,8 @@ public class Jeu implements Runnable, KeyListener {
             monde.aff(g);
             //Affichage hauteur du starter
             if(starterEnCours){
-				g.setColor(Color.red);
-				g.fillRect(starterX,starterY,10,5);
+				g.setColor(new Color(255, 84, 91));
+				g.fillRect(starterX,starterY,15,5);
 			}
             //Gère les buffeurs d'affichage
             buff.show();
@@ -126,12 +139,26 @@ public class Jeu implements Runnable, KeyListener {
             buff.show();
             g.dispose();
         } if (finish && !dead){
+            if(!saved) saveTime();
 			g.setFont(new Font("Courier", Font.BOLD,70));
             g.setColor(new Color(65, 15, 34));
             g.drawString("VICTOIRE",400,720/2);
             buff.show();
             g.dispose();
 		}
+    }
+
+    public void saveTime(){
+        saved=true;
+        double totalms = affichage.getTotalms();
+        String[] lignes = new String[4];
+        for(int i=0;i<lignes.length;i++){
+            lignes[i]=dataMonde[i];
+        }
+
+        if(totalms<Integer.parseInt(lignes[niveau-1]) || Integer.parseInt(lignes[niveau-1])==0) lignes[niveau-1]=Integer.toString((int)totalms);
+
+        chargementFichier.ecritureParam("./sauvegardes/mondes.txt", lignes);
     }
 
     public void run(){
