@@ -13,6 +13,9 @@ public class FenetreVitesse extends JFrame implements ActionListener {
     public boolean aMisVitesse = false;
     private boolean timerLance = false;
     private Jeu jeu;
+    
+    private int y0;
+    private int x0;
 
     public FenetreVitesse(Jeu jeu) {
         this.jeu = jeu;
@@ -69,14 +72,28 @@ public class FenetreVitesse extends JFrame implements ActionListener {
                 ThreadTimer threadTimer = new ThreadTimer(this, jeu);
                 threadTimer.start();
                 timesClicked++;
+                initAffHauteur();
+                affHauteur();
                 timerLance = true;
             } else {
                 if (time > 0) {
                     timesClicked++;
+                    affHauteur();
                 }
             }
         }
     }
+    
+    public void initAffHauteur(){
+		y0 = jeu.getMonde().getSpawnY()-48+24;
+		x0 = jeu.getMonde().getSpawnX()+8+24;
+	}
+	
+	public void affHauteur(){
+		System.out.println("Times Clicked Vitesse : "+timesClicked);
+		jeu.setStarterX((int) ((((-2*Math.sin(2*Math.PI/2.5)*Math.pow(timesClicked*10,2))/(2*9.8))+x0)+40));
+		jeu.setStarterY((int) (y0-((Math.pow(timesClicked*10,2)*Math.sin(Math.PI/2.5)*Math.sin(2*Math.PI/2.5))/(2*9.8))));
+	}
 
     public int getTimesClicked(){ return timesClicked; }
 }

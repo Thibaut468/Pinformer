@@ -6,7 +6,10 @@ public class Joueur extends Personnage {
     private boolean pulse = false;
     private int x0;
     private int y0;
+    private int v0;
     private int a;
+    
+    private boolean starterStarted = false;
 
     public Joueur(Jeu jeu, int x, int y, int largeur, int hauteur, int vie, int vitesse){
         super(jeu,0, x, y, largeur, hauteur, vie, vitesse);
@@ -99,8 +102,11 @@ public class Joueur extends Personnage {
      * il faut trouver un moyen d'arêter le saut lorsque la y du joueur soit égal à l'un des y d'une plateforme qu'il rencontre
      * vraiment les collision idk :
       */
-
-        int v0 = 100;
+		if(!starterStarted){
+			v0 = vitesse*10;
+			System.out.println("Times Clicked Perso : "+vitesse);
+			starterStarted = true;
+		}
         
         double alphar= Math.PI/2.5;
         

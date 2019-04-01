@@ -24,6 +24,11 @@ public class Jeu implements Runnable, KeyListener {
     private Thread t;
     private boolean dead = false;
     private boolean finish = false;
+    
+    //Starter
+    private boolean starterEnCours = true;
+    private int starterX = 0;
+    private int starterY = 0;
 
     //Affichage
     private BufferStrategy buff;
@@ -106,6 +111,11 @@ public class Jeu implements Runnable, KeyListener {
             g.drawImage(textures.water, waterX, 656, null);
 
             monde.aff(g);
+            //Affichage hauteur du starter
+            if(starterEnCours){
+				g.setColor(Color.red);
+				g.fillRect(starterX,starterY,10,5);
+			}
             //Gère les buffeurs d'affichage
             buff.show();
             g.dispose();
@@ -290,5 +300,11 @@ public class Jeu implements Runnable, KeyListener {
     public boolean getPropulsion(){ return this.propulsion; }
 
     public void setPropulsion(boolean p){ this.propulsion = p; }
+    
+    public void setStarterEnCours(boolean a) { this.starterEnCours = a; }
+    
+    public void setStarterX(int starterX){ this.starterX = starterX; }
+    
+    public void setStarterY(int starterY){ this.starterY = starterY; }
 
 }

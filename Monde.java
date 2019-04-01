@@ -225,4 +225,12 @@ public class Monde {
     public int getHauteur(){
         return hauteur;
     }
+    
+    public int getSpawnX(){
+		return this.spawnX;
+	}
+	
+    public int getSpawnY(){
+		return this.spawnY;
+	}
 }

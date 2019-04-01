@@ -39,6 +39,7 @@ public class ThreadTimer extends Thread {
             fenetreVitesse.setVisible(false);
             //ON DONNE LE PULSE
             jeu.getMonde().getStarter().action(jeu.getMonde().getJoueur(), fenetreVitesse.getTimesClicked());
+            jeu.setStarterEnCours(false);
 
             while(!jeu.getInit()){
                 //attente
