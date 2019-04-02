@@ -11,11 +11,11 @@ public class Starter extends Bloc {
     public void tick() {
     }
 
-    public void action(Joueur j, int clicks){
+    public void action(Joueur j){
         if(!extended){
             //Quand extend : h=47
             //Avant extend : h = 23
-            j.deplacementInit(clicks);
+            j.deplacementInit();
             id=27;
             hauteur=47;
             y=y-24;

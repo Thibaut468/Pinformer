@@ -15,11 +15,10 @@ public class Balle extends Entite {
     private int compta = 0;
     private int direction;
     private int degats;
-    private int ralenti;
     private boolean inactif = false;
 
 
-    public Balle(Jeu jeu, int x, int y, boolean sensMonstre, int degats, int ralenti) {
+    public Balle(Jeu jeu, int x, int y, boolean sensMonstre, int degats) {
         super(jeu, 100, x, y, 20, 20);
         this.yinit = y + 1;
         this.xinit = x;
@@ -29,7 +28,6 @@ public class Balle extends Entite {
         this.dt = 1;
         this.direction = 1;
         this.degats = degats;
-        this.ralenti = ralenti;
     }
 
     public void action(Personnage p, String s) {

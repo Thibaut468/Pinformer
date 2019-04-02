@@ -190,7 +190,7 @@ public class Jeu implements Runnable, KeyListener {
             }
 
             if(timer >= 1000000000){
-                System.out.println("FPS : " + ticks);
+                //System.out.println("FPS : " + ticks);
                 ticks = 0;
                 timer = 0;
             }

@@ -34,7 +34,7 @@ public class FenetreMonde extends JFrame implements ActionListener {
 		lastNivDebloque = 1;
 		for(int i=0; i<separation.length;i++){
 			dataMonde[i]=separation[i];
-			if(!(Integer.parseInt(dataMonde[i])==0)) lastNivDebloque = i+1;
+			if(!(Integer.parseInt(dataMonde[i])==0)) lastNivDebloque++;
 		}
 		
 		Font police = new Font(" Arial ",Font.BOLD,12);

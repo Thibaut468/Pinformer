@@ -3,7 +3,6 @@ import java.util.LinkedList;
 
 public abstract class Monstre extends Personnage {
 
-    protected int ralenti;
 	protected int degats; // si c'est un montre gentil, on met un vie enlevé négatif comme ca dans la méthode perd vie ca fera - (un nombre négatif) ce qui rajoutera des vies)
     protected double depX;
     protected double depY;
@@ -13,10 +12,9 @@ public abstract class Monstre extends Personnage {
     protected int cpt;
 
 	
-	public Monstre(Jeu jeu, int id, int x, int y, int largeur, int hauteur, int vitesse, int degats, int ralenti, int positionFinaleX) {
+	public Monstre(Jeu jeu, int id, int x, int y, int largeur, int hauteur, int vitesse, int degats, int positionFinaleX) {
         super(jeu, id, x, y, largeur, hauteur, 1, vitesse); // j'ai mis vitesse = 0 car les monstres sont fixes
 		this.degats = degats;
-		this.ralenti = ralenti;
         this.depX=vitesse;
         this.depY=0;
         this.positionInitialeX=x;
@@ -82,28 +80,13 @@ public abstract class Monstre extends Personnage {
 		j.setVie(nouvelleVie);
 		
 	}
-	
-	public void perdVitesse(Personnage j) {
-		double nouvelleVitesse = j.getVitesse() - this.ralenti;
-		j.setVitesse(nouvelleVitesse);
-		
-	}
 
     private void touche(Personnage j){
         perdVie(j);
-        perdVitesse(j);
     }
 
     private void estTouche(){
         vie=0;
         inactif=true;
-    }
-    
-    public int getRalenti() {
-        return ralenti;
-    }
-    
-    public int getDegats() {
-        return degats;
     }
 }

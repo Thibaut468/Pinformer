@@ -3,7 +3,6 @@ import java.awt.*;
 public class Joueur extends Personnage {
 
     private int compt = 0;
-    private boolean pulse = false;
     private int x0;
     private int y0;
     private int v0;
@@ -26,7 +25,7 @@ public class Joueur extends Personnage {
         //depY=0;
 
         if(jeu.getPropulsion()){
-            deplacementInit(starterVitesse);
+            deplacementInit();
             //System.out.println("Propulseee");
         }
         if(jeu.getInit() && !jeu.getPropulsion()) {
@@ -99,15 +98,15 @@ public class Joueur extends Personnage {
      * de plus des conditions de collisions avec les plateformes
      */
 
-     public void deplacementInit(int vitesse) {
+     public void deplacementInit() {
      /*
      * il faut que le x0 et le y0 mis en paramètre soit une plateforme en bas et qu'elle soit de x0 = 700 et y0=750, choisi toujours comme point de départ initial du joueur !
      * il faut trouver un moyen d'arêter le saut lorsque la y du joueur soit égal à l'un des y d'une plateforme qu'il rencontre
      * vraiment les collision idk :
       */
 		if(!starterStarted){
-			v0 = vitesse*9;
-			System.out.println("Times Clicked Perso : "+vitesse);
+			v0 = starterVitesse*9;
+			//System.out.println("Times Clicked Perso : "+starterVitesse);
 			starterStarted = true;
 		}
         
@@ -142,4 +141,6 @@ public class Joueur extends Personnage {
     }
 
     public void setStarterVitesse(int v){ this.starterVitesse = v;}
+
+    public int getStarterVitesse(){ return this.starterVitesse; }
 }

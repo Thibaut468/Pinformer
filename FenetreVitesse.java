@@ -9,7 +9,7 @@ public class FenetreVitesse extends JFrame implements ActionListener {
     public JLabel afficheT;
     private JPanel conteneur1;
     public int time = 5;
-    private int  timesClicked = 0;
+    private int  timesClicked;
     private boolean timerLance = false;
     private Jeu jeu;
     
@@ -18,6 +18,8 @@ public class FenetreVitesse extends JFrame implements ActionListener {
 
     public FenetreVitesse(Jeu jeu) {
         this.jeu = jeu;
+
+        this.timesClicked=0;
 
         Dimension dimension = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
         int fheight = (int)dimension.getHeight();
@@ -71,12 +73,14 @@ public class FenetreVitesse extends JFrame implements ActionListener {
                 ThreadTimer threadTimer = new ThreadTimer(this, jeu);
                 threadTimer.start();
                 timesClicked++;
+                jeu.getMonde().getJoueur().setStarterVitesse(jeu.getMonde().getJoueur().getStarterVitesse()+1);
                 initAffHauteur();
                 affHauteur();
                 timerLance = true;
             } else {
                 if (time > 0) {
                     timesClicked++;
+                    jeu.getMonde().getJoueur().setStarterVitesse(jeu.getMonde().getJoueur().getStarterVitesse()+1);
                     affHauteur();
                 }
             }
@@ -89,7 +93,7 @@ public class FenetreVitesse extends JFrame implements ActionListener {
 	}
 	
 	public void affHauteur(){
-		System.out.println("Times Clicked Vitesse : "+timesClicked);
+		//System.out.println("Times Clicked Vitesse : "+timesClicked);
 		jeu.setStarterX((int) ((((-2*Math.sin(2*Math.PI/2.5)*Math.pow(timesClicked*9,2))/(2*9.8))+x0)));
 		jeu.setStarterY((int) (y0-((Math.pow(timesClicked*9,2)*Math.sin(Math.PI/2.5)*Math.sin(2*Math.PI/2.5))/(2*9.8))));
 	}

@@ -40,7 +40,7 @@ public class Monde {
 
         for(int i=4;i<separation.length;i+=update){
             int id = Integer.parseInt(separation[i]);
-            System.out.println(id);
+            //System.out.println(id);
             int x = Integer.parseInt(separation[i + 1]);
             int y = Integer.parseInt(separation[i + 2]);
             if(id >= 1 && id <= 4 || id==13) {
@@ -129,10 +129,9 @@ public class Monde {
             } else if (id==31) { //MonstreDistance
                 int vitesse = Integer.parseInt(separation[i + 3]);
                 int degats = Integer.parseInt(separation[i + 4]);
-                int ralenti = Integer.parseInt(separation[i + 5]);
-                int positionFinaleX = Integer.parseInt(separation[i + 6]);
-                update = 7;
-                entites.add(new MonstreD(this.jeu, id, x, y, vitesse, degats, ralenti, positionFinaleX, this));
+                int positionFinaleX = Integer.parseInt(separation[i + 5]);
+                update = 6;
+                entites.add(new MonstreD(this.jeu, id, x, y, vitesse, degats, positionFinaleX));
             }
         }
     }

@@ -8,14 +8,11 @@ public class MonstreD extends Monstre {
     private final int intervalTir = 50;
     private LinkedList<Balle> balles = new LinkedList<Balle>();
     private int compt = 0;
-    private Monde monde;
 
-    public MonstreD(Jeu jeu, int id, int x, int y, int vitesse, int degat, int ralenti, int positionFinaleX, Monde monde){
-        super(jeu, id, x, y, 48, 48, vitesse, degat, ralenti, positionFinaleX);
-        this.ralenti = ralenti;
+    public MonstreD(Jeu jeu, int id, int x, int y, int vitesse, int degat, int positionFinaleX){
+        super(jeu, id, x, y, 48, 48, vitesse, degat, positionFinaleX);
         this.id=id;
         falling=false;
-        this.monde = monde;
     }
 
     public void tick() {
@@ -24,7 +21,7 @@ public class MonstreD extends Monstre {
         cpt++;
         if(this.compt>=intervalTir){
             this.compt=0;
-            balles.add(new Balle(jeu, x, y, sens, degats, ralenti));
+            balles.add(new Balle(jeu, x, y, sens, degats));
         }
 
         //Update des balles
