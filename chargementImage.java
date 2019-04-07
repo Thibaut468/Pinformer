@@ -6,7 +6,7 @@ import java.io.File;
 public class chargementImage {
 
     private int choix;
-    public BufferedImage joueur, backgroundJeu, water, l10, l9,l8, l7, l6, l5, l4, l3, l2, l1, l0, starter_ferme, starter_ouvert, p_arrivee, p_entier, p_gauche, p_droite, p_milieu, p_ephemere, healer, monstre_contact, tremplin, portail, pic_bas, pic_haut;
+    public BufferedImage joueur, backgroundJeu, water, l10, l9,l8, l7, l6, l5, l4, l3, l2, l1, l0, canonD, canonG, missileD, missileG, starter_ferme, starter_ouvert, p_arrivee, p_entier, p_gauche, p_droite, p_milieu, p_ephemere, healer, monstre_contact, tremplin, portail, pic_bas, pic_haut;
 
     public chargementImage(){
 
@@ -62,6 +62,10 @@ public class chargementImage {
         portail = load("./textures/portail48.png");
         pic_bas = load("./textures/pic_bas.png");
         pic_haut = load("./textures/pic_haut.png");
+        canonD = load("./textures/canonD.png");
+        canonG = load("./textures/canonG.png");
+        missileD = load ("./textures/missileD.png");
+        missileG = load ("./textures/missileG.png");
 
         starter_ferme = load("./textures/jumper1.png");
         starter_ouvert = load("./textures/jumper2.png");

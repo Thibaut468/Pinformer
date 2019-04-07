@@ -18,6 +18,9 @@ public abstract class Bloc  {
             hauteur = 25;
         } else if(id == 26){ //Si le bloc est le starter de départ
             hauteur = 23;
+        } else if(id == 27){ //Si le bloc est un canon
+            largeur = 62;
+            hauteur = 43;
         }
 
         this.x=x;

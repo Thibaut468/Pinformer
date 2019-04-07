@@ -120,6 +120,12 @@ public class Monde {
                 int degats = Integer.parseInt(separation[i + 3]);
                 update = 4;
                 blocs.add(new Pic(id, x, y, degats));
+            } else if(id == 27) { //Canon
+                int direction = Integer.parseInt(separation[i+3]);
+                int degats = Integer.parseInt(separation[i+4]);
+                int interval = Integer.parseInt(separation[i+5]);
+                update = 6;
+                blocs.add(new Canon(this.jeu,id,x,y,direction,degats,interval));
             } else if (id==30){ //MonstreContact
                 int vitesse = Integer.parseInt(separation[i + 3]);
                 int degats = Integer.parseInt(separation[i + 4]);
