@@ -1,5 +1,6 @@
 import java.awt.*;
 
+@SuppressWarnings("ALL")
 public class Missile extends Objet {
 
     private int id;

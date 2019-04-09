@@ -10,8 +10,8 @@ public class Monde {
     private int hauteur;
     private int spawnX;
     private int spawnY;
-    public LinkedList<Bloc> blocs = new LinkedList<Bloc>();
-    public LinkedList<Entite> entites = new LinkedList<Entite>();
+    private LinkedList<Bloc> blocs = new LinkedList<Bloc>();
+    private LinkedList<Entite> entites = new LinkedList<Entite>();
     private Joueur joueur;
     private Starter starter;
     public Bloc c;
@@ -43,7 +43,7 @@ public class Monde {
             //System.out.println(id);
             int x = Integer.parseInt(separation[i + 1]);
             int y = Integer.parseInt(separation[i + 2]);
-            if(id >= 1 && id <= 4 || id==13) {
+            if(id >= 1 && id <= 4) {
                 update = 3;
                 switch (id) {
                     case 1:
@@ -58,13 +58,10 @@ public class Monde {
                     case 4:
                         blocs.add(new PlateformeFixe(x, y, 4));
                         break;
-                    case 13 :
-						blocs.add(new PlateformeFixe(x, y, 13));
-						break;
                     default:
                         break;
                 }
-            } else if(id >=5 && id <=15 && id!=13){
+            } else if(id >=5 && id <=12){
                 int VPLAT = Integer.parseInt(separation[i+3]);
                 int positionFinaleX = Integer.parseInt(separation[i+4]);
                 update = 5;
@@ -92,17 +89,24 @@ public class Monde {
                         break;
                     case 12:
                         blocs.add(new PlateformeMobile(x, y, 12, VPLAT, positionFinaleX));
-                        break;  
-                    case 14:                        
-						blocs.add(new PlateformeMobile(x, y, 14, VPLAT, positionFinaleX));
-						break;
-					case 15:                        
-						blocs.add(new PlateformeMobile(x, y, 15, VPLAT, positionFinaleX));
-						break;
+                        break;
                     default:
                         break;
                 }
-            } else if(id == 16){
+            } else if(id == 13){ //Arrivée fixe
+                update = 3;
+                blocs.add(new Arrivee(x,y,id));
+            } else if (id == 14){ //Arrivée mobile X
+                int vit = Integer.parseInt(separation[i+3]);
+                int positionFinale = Integer.parseInt(separation[i+4]);
+                update = 5;
+                blocs.add(new Arrivee(x, y, 14, vit, positionFinale));
+            } else if (id == 15){ //Arrivée mobile Y
+                int vit = Integer.parseInt(separation[i+3]);
+                int positionFinale = Integer.parseInt(separation[i+4]);
+                update = 5;
+                blocs.add(new PlateformeMobile(x, y, 15, vit, positionFinale));
+            } else if(id == 16){ // Plateforme ephemere
                 update = 3;
                 blocs.add(new PlateformeEphemere(x,y,16));
             } else if (id==20 || id==21) { //Healer 20 et Drainer 21
@@ -176,7 +180,7 @@ public class Monde {
 
     public boolean blocDetectionY(int y, int x, int l){
         for(Bloc b : blocs){
-            if(b.y<y && (b.y+b.hauteur)>y && (x+l)>b.x && x<(b.x+b.largeur) && b.solide()){
+            if(b.getY()<y && (b.getY()+b.hauteur)>y && (x+l)>b.getX() && x<(b.getX()+b.largeur)){
                 c=b;
                 return true;
             }
@@ -186,7 +190,7 @@ public class Monde {
 
     public boolean blocDetectionX(int x, int y, int h){
         for(Bloc b : blocs){
-             if(b.x<x && (b.x+b.largeur)>x && (y+h)>b.y && y<(b.y+b.hauteur) && b.solide()){
+             if(b.getX()<x && (b.getX()+b.largeur)>x && (y+h)>b.getY() && y<(b.getY()+b.hauteur)){
                  c=b;
                  return true;
              }
@@ -194,9 +198,9 @@ public class Monde {
         return false;
     }
 
-    public boolean objetDetectionX(int x, int y, int h, int l, Personnage p){
+    public boolean objetDetectionX(int x, int y, int h, Personnage p){
         for(Entite e : entites){
-            if(e.x<x && (e.x+e.largeur)>x && (y+h)>e.y && y<(e.y+e.hauteur) && !e.getInactif()){
+            if(e.getX()<x && (e.getX()+e.largeur)>x && (y+h)>e.getY() && y<(e.getY()+e.hauteur) && !e.getInactif()){
                 e.action(p, "X");
                     return true;
             }
@@ -204,9 +208,9 @@ public class Monde {
         return false;
     }
 
-    public boolean objetDetectionY(int y, int x, int l, int h, Personnage p){
+    public boolean objetDetectionY(int y, int x, int l, Personnage p){
         for(Entite e : entites){
-            if(e.y<y && (e.y+e.hauteur)>y && (x+l)>e.x && x<(e.x+e.largeur) && !e.getInactif()){
+            if(e.getY()<y && (e.getY()+e.hauteur)>y && (x+l)>e.getX() && x<(e.getX()+e.largeur) && !e.getInactif()){
                 if(e.getId()!=22) { //Tremplin
                     e.action(p, "Y");
                     return true;

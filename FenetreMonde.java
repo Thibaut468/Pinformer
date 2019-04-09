@@ -12,9 +12,15 @@ public class FenetreMonde extends JFrame implements ActionListener {
     private JButton boutonNiveau3;
     private JButton boutonNiveau4;
     private JButton boutonRetour;
-    private Color couleur = new Color(166, 39, 86);
-    public Jeu jeu;
-    public boolean jeuIsRunning = false;
+
+    private JLabel timerN1;
+	private JLabel timerN2;
+	private JLabel timerN3;
+	private JLabel timerN4;
+
+	private Jeu jeu;
+    private boolean jeuIsRunning = false;
+
 
 	private String[] dataMonde = new String[4]; //4 lignes = 4 niveaux, temps pour chaque niveau en ms, 0 si non fini
 	private int lastNivDebloque;
@@ -36,13 +42,36 @@ public class FenetreMonde extends JFrame implements ActionListener {
 			dataMonde[i]=separation[i];
 			if(!(Integer.parseInt(dataMonde[i])==0)) lastNivDebloque++;
 		}
-		
+
 		Font police = new Font(" Arial ",Font.BOLD,12);
-		
+		Font police2 = new Font(" Arial ",Font.BOLD,15);
+		Color couleur = new Color(166, 39, 86);
+
+		timerN1 = new JLabel("Score : "+(Integer.parseInt(dataMonde[1])/1000)+" secondes", SwingConstants.CENTER);
+		timerN1.setFont(police);
+		timerN1.setForeground(Color.white);
+		timerN1.setBounds(75,110, 150, 50);
+
+		timerN2 = new JLabel("Score : "+(Integer.parseInt(dataMonde[1])/1000)+" secondes", SwingConstants.CENTER);
+		timerN2.setFont(police);
+		timerN2.setForeground(Color.white);
+		timerN2.setBounds(275,110, 150, 50);
+
+		timerN3 = new JLabel("Score : "+(Integer.parseInt(dataMonde[2])/1000)+" secondes", SwingConstants.CENTER);
+		timerN3.setFont(police);
+		timerN3.setForeground(Color.white);
+		timerN3.setBounds(75,210, 150, 50);
+
+		timerN4 = new JLabel("Score : "+(Integer.parseInt(dataMonde[3])/1000)+" secondes", SwingConstants.CENTER);
+		timerN4.setFont(police);
+		timerN4.setForeground(Color.white);
+		timerN4.setBounds(275,210, 150, 50);
+
 		boutonNiveau1 = new JButton();
 		boutonNiveau1.setFont(police);
 		boutonNiveau1.setText("Niveau 1");
 		boutonNiveau1.setBounds(75,150,150,50);
+
 		boutonNiveau1.setBackground(couleur);
 		boutonNiveau1.setForeground(Color.white);
 		boutonNiveau1.setFocusPainted(false);
@@ -85,12 +114,16 @@ public class FenetreMonde extends JFrame implements ActionListener {
         JPanel conteneur1 = new JPanel();
         conteneur1.setLayout(null);
         conteneur1.setBounds(0,0,500,500);
+		conteneur1.add(timerN1);
+		conteneur1.add(timerN2);
+		conteneur1.add(timerN3);
+		conteneur1.add(timerN4);
         conteneur1.add(boutonNiveau1);
         conteneur1.add(boutonNiveau2);
         conteneur1.add(boutonNiveau3);
         conteneur1.add(boutonNiveau4);
         conteneur1.add(boutonRetour);
-        
+
         JLabel imageFondMonde;
 		imageFondMonde = new JLabel(new ImageIcon("./textures/fond_menu.png"));
 		imageFondMonde.setLocation(0,0);

@@ -2,12 +2,10 @@ import java.awt.*;
 
 public class Tremplin extends Objet {
 
-	private int id = 22;
 	private int hauteurSaut;
 	
 	public Tremplin(Jeu jeu, int id, int x, int y, int hauteurSaut){
         super(jeu,id,x,y,36,48);
-        this.id=id;
         this.hauteurSaut=hauteurSaut;
 	}
 	

@@ -1,7 +1,3 @@
-import java.awt.*;
-import java.awt.Graphics;
-import java.awt.image.BufferedImage;
-
 public class PlateformeMobile extends Bloc{
 
     private int vitesse;
@@ -9,7 +5,7 @@ public class PlateformeMobile extends Bloc{
     private int positionInitialeY;
     private int positionFinaleX;
     private int id;
-    boolean sens = false;
+    private boolean sens = false;
 
     
      public PlateformeMobile(int x, int y, int id, int vitesse, int positionFinaleX){
@@ -28,7 +24,7 @@ public class PlateformeMobile extends Bloc{
     }
 
     
-    public void deplacement () {
+    private void deplacement() {
               // Plateforme mobile horizontale
         if(!sens && (id==5 || id==6 || id==7 || id==8 || id==14)){
             super.x+=vitesse;
@@ -63,13 +59,9 @@ public class PlateformeMobile extends Bloc{
         }
     }
 
-    public boolean solide(){
-        return true;
-    }
-
     public int getVitesse(){
-         if(sens==false) return vitesse;
-         if(sens==true) return -vitesse;
+         if(!sens) return vitesse;
+         if(sens) return -vitesse;
          return 0;
     }
 

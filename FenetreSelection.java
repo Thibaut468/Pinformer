@@ -12,12 +12,10 @@ public class FenetreSelection extends JFrame implements ActionListener {
     private JButton boutonParam;
     private JButton boutonCredits;
     private JButton boutonQuitter;
-    private Jeu jeu;
     private boolean jeuIsRunning = false;
     private FenetreParametres parametres;
     private FenetreMonde fenetreMonde;
     private JFrame menu;
-    private Color couleur = new Color(166, 39, 86);
 
     public FenetreSelection(){
 
@@ -30,10 +28,13 @@ public class FenetreSelection extends JFrame implements ActionListener {
 
         Font police = new Font(" Arial ",Font.BOLD,18);
 
+        Color couleur = new Color(166, 39, 86);
+
         boutonJouer = new JButton();
         boutonJouer.setFont(police);
         boutonJouer.setText("JOUER");
         boutonJouer.setBounds(125,150,250,50);
+
         boutonJouer.setBackground(couleur);
         boutonJouer.setForeground(Color.white);
         boutonJouer.setFocusPainted(false);
@@ -108,7 +109,7 @@ public class FenetreSelection extends JFrame implements ActionListener {
         }
     }
 
-    public void playSound(String str){
+    private void playSound(String str){
         try{
             String s = "./musiques/"+str;
             File fichier = new File(s) ;

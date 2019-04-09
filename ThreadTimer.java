@@ -1,10 +1,7 @@
-import javax.swing.*;
-
 public class ThreadTimer extends Thread {
 
     private Jeu jeu;
     private FenetreVitesse fenetreVitesse;
-    private boolean play = false;
 
     public ThreadTimer(FenetreVitesse fv, Jeu jeu) {
         this.jeu = jeu;

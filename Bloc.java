@@ -5,11 +5,11 @@ public abstract class Bloc  {
     protected chargementImage textures = new chargementImage();
     protected int largeur = 64;
     protected int hauteur = 32;
-    public int x;
-    public int y;
+    protected int x;
+    protected int y;
     protected int id;
-    protected int vitesse;
-    protected boolean inactif = false;
+    private int vitesse;
+    private boolean inactif = false;
 
     public Bloc(int x, int y, int id, int vitesse){
 
@@ -87,13 +87,13 @@ public abstract class Bloc  {
 
     public void action(){}
 
-    public boolean solide(){
-        return true;
-    }
-
     public int getId() { return this.id; }
 
     public int getVitesse(){ return this.vitesse; }
 
     public boolean getInactif() { return this.inactif; }
+
+    public int getX(){ return this.x; }
+
+    public int getY(){ return this.y; }
 }

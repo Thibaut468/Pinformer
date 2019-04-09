@@ -23,7 +23,7 @@ public class Healer extends Objet {
         g.drawImage(jeu.textures.healer,x,y,null);
     }
     
-    public void heal(Personnage p, int vieDonnee){
+    private void heal(Personnage p, int vieDonnee){
         if(id==20){
             if((p.getVie()+vieDonnee)>10){
                 p.setVie(10);

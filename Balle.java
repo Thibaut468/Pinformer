@@ -1,18 +1,12 @@
 import java.awt.*;
-import java.awt.Graphics;
-import java.awt.image.BufferedImage;
 
 public class Balle extends Entite {
 
-    private int id = 100;
     private int yinit;
     private int dt;
     private boolean sens;
-    private int ymax;
     private int vitesse;
     private int xinit;
-    private int diff;
-    private int compta = 0;
     private int direction;
     private int degats;
     private boolean inactif = false;
@@ -23,7 +17,6 @@ public class Balle extends Entite {
         this.yinit = y + 1;
         this.xinit = x;
         this.sens = sensMonstre;
-        this.ymax = y - 100;
         this.vitesse = 1;
         this.dt = 1;
         this.direction = 1;
@@ -45,11 +38,12 @@ public class Balle extends Entite {
         g.fillRect(super.x, super.y, super.largeur, super.hauteur);
     }
 
-    public void deplacement() {
+    private void deplacement() {
         //il faut calculer diff pour trouver une equation ou le projectile est lancé à x=0
         // g= 9.81
         // cos(alpha) = racine2/2 donc cos carré = 1/2
 
+        int diff;
         if (!sens) {
             super.x = (int) (super.x - dt * vitesse);
             diff = Math.abs(super.x - xinit);

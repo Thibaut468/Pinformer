@@ -9,13 +9,9 @@ public class Jeu implements Runnable, KeyListener {
     private int hauteur;
     private String titre;
 
-    //Ticks
-    private int x = 0;
     private boolean sensDefil = false;
     private int waterX = 0;
 
-    //Start et Timer
-    private FenetreVitesse fenetreVitesse;
     private boolean propulsion = true;
 
     //Thread
@@ -29,15 +25,11 @@ public class Jeu implements Runnable, KeyListener {
     private int starterX = 0;
     private int starterY = 0;
 
-    //Affichage
-    private BufferStrategy buff;
-    private Graphics g;
     private boolean initialiser = false;
 
     //Gestion des touches
     private boolean[] keys; //0 HAUT, 1 BAS, 2 GAUCHE, 3 DROITE
     public boolean haut;
-    public boolean bas;
     public boolean gauche;
     public boolean droite;
     private int touche;
@@ -91,11 +83,9 @@ public class Jeu implements Runnable, KeyListener {
 
     private void tick(){
         //Gestion des fps
-        x += 1;
 
         //On regarde les touches au début
         haut=keys[0];
-        bas=keys[1];
         gauche=keys[2];
         droite=keys[3];
 		
@@ -104,12 +94,13 @@ public class Jeu implements Runnable, KeyListener {
     }
 
     private void aff(){
-        buff = affichage.getPanel().getBufferStrategy();
+        //Affichage
+        BufferStrategy buff = affichage.getPanel().getBufferStrategy();
         if (buff == null) {
             affichage.getPanel().createBufferStrategy(3);
             return;
         }
-        g = buff.getDrawGraphics();
+        Graphics g = buff.getDrawGraphics();
         g.clearRect(0, 0, largeur, hauteur);
         if(!dead && !finish) {
             //Dessin
@@ -148,13 +139,11 @@ public class Jeu implements Runnable, KeyListener {
 		}
     }
 
-    public void saveTime(){
+    private void saveTime(){
         saved=true;
         double totalms = affichage.getTotalms();
         String[] lignes = new String[4];
-        for(int i=0;i<lignes.length;i++){
-            lignes[i]=dataMonde[i];
-        }
+        System.arraycopy(dataMonde, 0, lignes, 0, lignes.length);
 
         if(totalms<Integer.parseInt(lignes[niveau-1]) || Integer.parseInt(lignes[niveau-1])==0) lignes[niveau-1]=Integer.toString((int)totalms);
 
@@ -165,7 +154,8 @@ public class Jeu implements Runnable, KeyListener {
 
         init();
 
-        fenetreVitesse = new FenetreVitesse(this);
+        //Start et Timer
+        FenetreVitesse fenetreVitesse = new FenetreVitesse(this);
 
         //Gère l'affichage a une fréquence fixe de 60 FPS
         int fps = 60;
@@ -284,7 +274,7 @@ public class Jeu implements Runnable, KeyListener {
         t.start();
     }
 
-    public synchronized void stop(){
+    private synchronized void stop(){
         if(!running) {
             return;
         }
@@ -294,14 +284,6 @@ public class Jeu implements Runnable, KeyListener {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-    }
-
-    public int getLargeur(){
-        return this.largeur;
-    }
-
-    public int getHauteur(){
-        return this.hauteur;
     }
 
     public Monde getMonde(){ return this.monde; }

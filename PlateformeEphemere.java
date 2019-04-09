@@ -1,22 +1,20 @@
 public class PlateformeEphemere extends Bloc {
 
-    private int id;
     private PlateformeFixe p;
     private boolean activated = false;
     private int compt;
-    private final int DELAY = 10;
-    protected boolean inactif = false;
+    private boolean inactif = false;
 
     public PlateformeEphemere(int x, int y, int id) {
         super(x, y, id, 0);
         p = new PlateformeFixe(x,y,id);
-        this.id=id;
     }
 
     public void tick() {
 
         if(activated) compt++;
 
+        int DELAY = 10;
         if(compt >= DELAY){
             inactif = true;
             activated = false;

@@ -5,14 +5,13 @@ import java.io.File;
 
 public class chargementImage {
 
-    private int choix;
     public BufferedImage joueur, backgroundJeu, water, l10, l9,l8, l7, l6, l5, l4, l3, l2, l1, l0, canonD, canonG, missileD, missileG, starter_ferme, starter_ouvert, p_arrivee, p_entier, p_gauche, p_droite, p_milieu, p_ephemere, healer, monstre_contact, tremplin, portail, pic_bas, pic_haut;
 
     public chargementImage(){
 
         String fichier = chargementFichier.chargement("./sauvegardes/param.txt");
         String[] separation = fichier.split("\\s+");
-        choix=Integer.parseInt(separation[1]);
+        int choix = Integer.parseInt(separation[1]);
 
         switch(choix){
             case 1 :
@@ -83,7 +82,7 @@ public class chargementImage {
         l0=load("./textures/lifebar/00.png");
     }
 
-    public BufferedImage load(String acces){
+    private BufferedImage load(String acces){
         try {
             return ImageIO.read(new File(acces));
         } catch (IOException e) {

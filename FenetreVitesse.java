@@ -87,16 +87,15 @@ public class FenetreVitesse extends JFrame implements ActionListener {
         }
     }
     
-    public void initAffHauteur(){
+    private void initAffHauteur(){
 		y0 = jeu.getMonde().getSpawnY()-48+24;
 		x0 = jeu.getMonde().getSpawnX()+8+24;
 	}
 	
-	public void affHauteur(){
+	private void affHauteur(){
 		//System.out.println("Times Clicked Vitesse : "+timesClicked);
 		jeu.setStarterX((int) ((((-2*Math.sin(2*Math.PI/2.5)*Math.pow(timesClicked*9,2))/(2*9.8))+x0)));
 		jeu.setStarterY((int) (y0-((Math.pow(timesClicked*9,2)*Math.sin(Math.PI/2.5)*Math.sin(2*Math.PI/2.5))/(2*9.8))));
 	}
 
-    public int getTimesClicked(){ return timesClicked; }
 }

@@ -1,13 +1,12 @@
 import java.awt.*;
-import java.util.LinkedList;
 
 public abstract class Monstre extends Personnage {
 
 	protected int degats; // si c'est un montre gentil, on met un vie enlevé négatif comme ca dans la méthode perd vie ca fera - (un nombre négatif) ce qui rajoutera des vies)
-    protected double depX;
-    protected double depY;
-    protected int positionInitialeX;
-    protected int positionFinaleX;
+    private double depX;
+    private double depY;
+    private int positionInitialeX;
+    private int positionFinaleX;
     protected boolean sens;
     protected int cpt;
 
@@ -54,7 +53,7 @@ public abstract class Monstre extends Personnage {
     }
 
     public boolean blocCollisionX(){
-        int testX=0;
+        int testX;
         if(this.depX>0){ //Déplacement droite
             testX = (int) (x+largeur+depX);
             if(!this.jeu.getMonde().blocDetectionX(testX, y, hauteur)){ //pas de collisions
@@ -75,7 +74,7 @@ public abstract class Monstre extends Personnage {
         return false;
     }
 	
-	public void perdVie(Personnage j) {
+	private void perdVie(Personnage j) {
 		int nouvelleVie = j.getVie() - this.degats;
 		j.setVie(nouvelleVie);
 		

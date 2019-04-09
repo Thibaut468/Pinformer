@@ -4,7 +4,6 @@ import java.util.LinkedList;
 
 public class Canon extends Bloc {
 
-    private int id;
     private int direction; //1 regard droite, -1 regard gauche
     private LinkedList<Missile> missiles = new LinkedList<Missile>();
     private int degats;
@@ -38,8 +37,8 @@ public class Canon extends Bloc {
         }
 
         //Collision joueur
-        missileDetectionX(x, y, 20,this.jeu.getMonde().getJoueur());
-        missileDetectionY(y, x,20,this.jeu.getMonde().getJoueur());
+        missileDetectionX(20,this.jeu.getMonde().getJoueur());
+        missileDetectionY(20,this.jeu.getMonde().getJoueur());
 
         //Suppresion
         Iterator<Missile> it = missiles.iterator();
@@ -57,23 +56,21 @@ public class Canon extends Bloc {
         }
     }
 
-    public boolean missileDetectionX(int x, int y, int h, Personnage p){
+    private void missileDetectionX(int h, Personnage p){
         for(Missile m : missiles){
             if(m.x<p.x && (m.x+m.largeur)>p.x && (p.y+h)>m.y && p.y<(m.y+m.hauteur) && !m.getInactif()){
-                m.action(p, "X");
-                return true;
+                m.action(p, "Xm");
+                return;
             }
         }
-        return false;
     }
 
-    public boolean missileDetectionY(int y, int x, int l, Personnage p){
+    private void missileDetectionY(int l, Personnage p){
         for(Missile m : missiles){
             if(m.y<p.y && (m.y+m.hauteur)>p.y && (p.x+l)>m.x && p.x<(m.x+m.largeur) && !m.getInactif()){
-                m.action(p,"Y");
-                return true;
+                m.action(p,"Ym");
+                return;
             }
         }
-        return false;
     }
 }

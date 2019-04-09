@@ -16,19 +16,16 @@ import java.awt.event.*;
 		private JButton choix7;
 		private JButton choix8;
 		private JButton sauvegarde;
-		
-		private JRadioButton zqsd;
-		private JRadioButton fleches;
-		boolean unselected = false;
-		boolean selected = true;
+
+	private boolean unselected = false;
+		private boolean selected = true;
 		private ButtonGroup choixtouche;
 		
 		private Color couleur = new Color(166, 39, 86);
 
 		private String[] param = new String[2];
 
-		private int choix;
-		private int touche; //1 zqsd 2 fleches
+	private int touche; //1 zqsd 2 fleches
 		
 		public FenetreParametres(){
 			
@@ -51,7 +48,7 @@ import java.awt.event.*;
 			param[0]=separation[0];
 			touche = Integer.parseInt(separation[0]);
 			//System.out.println("touche : "+touche);
-			choix = Integer.parseInt(separation[1]);
+			int choix = Integer.parseInt(separation[1]);
 			param[1]=separation[1];
             //System.out.println("choix : "+choix);
 			if(touche==1){
@@ -135,7 +132,7 @@ import java.awt.event.*;
 			
 			/** Création des JRadioButton pour jouer avec les flèches ou les touches zqsd **/
 			String text1 = "ZQSD";
-			zqsd = new JRadioButton(text1, unselected); //unselected : la première fois, le JRadioButton pour zqsd est désactivé (initialisation à false)
+			JRadioButton zqsd = new JRadioButton(text1, unselected); //unselected : la première fois, le JRadioButton pour zqsd est désactivé (initialisation à false)
 			zqsd.setLocation(100,125);
 			zqsd.setSize(100,40);
 			zqsd.setFont(police1);
@@ -144,7 +141,7 @@ import java.awt.event.*;
 			zqsd.setFocusPainted(false);
 			
 			String text2 = "FLECHES";
-			fleches = new JRadioButton(text2,selected); //selected : la première fois, le JRadioButton pour les flèches est activé (initialisation à true)
+			JRadioButton fleches = new JRadioButton(text2, selected); //selected : la première fois, le JRadioButton pour les flèches est activé (initialisation à true)
 			fleches.setLocation(300,125);
 			fleches.setSize(100,40);
 			fleches.setFont(police1);
@@ -189,14 +186,14 @@ import java.awt.event.*;
 			
 			/** A la fermeture totale du jeu, le choix effectué précedemment est stocké dans la varible choix,
 			ces lignes permettent de mettre le bouton choisi précédemment de couleur verte lors de l'ouverture de la fenêtre**/
-			if(choix==1) choix1.setBackground(Color.green);
-			if(choix==2) choix2.setBackground(Color.green);
-			if(choix==3) choix3.setBackground(Color.green);
-			if(choix==4) choix4.setBackground(Color.green);
-			if(choix==5) choix5.setBackground(Color.green);
-			if(choix==6) choix6.setBackground(Color.green);
-			if(choix==7) choix7.setBackground(Color.green);
-			if(choix==8) choix8.setBackground(Color.green);
+			if(choix ==1) choix1.setBackground(Color.green);
+			if(choix ==2) choix2.setBackground(Color.green);
+			if(choix ==3) choix3.setBackground(Color.green);
+			if(choix ==4) choix4.setBackground(Color.green);
+			if(choix ==5) choix5.setBackground(Color.green);
+			if(choix ==6) choix6.setBackground(Color.green);
+			if(choix ==7) choix7.setBackground(Color.green);
+			if(choix ==8) choix8.setBackground(Color.green);
 			
 			/** Création des interfaces d'écoute **/
 			choix1.addActionListener(this); 
@@ -277,7 +274,7 @@ import java.awt.event.*;
 			
 		}
 		/** Méthode permettant de mettre tous les boutons de couleur mauve **/
-		public void boutonMauve(){ 
+		private void boutonMauve(){
 			choix1.setBackground(couleur);
 			choix2.setBackground(couleur);
 			choix3.setBackground(couleur);

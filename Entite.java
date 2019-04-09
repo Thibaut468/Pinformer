@@ -1,5 +1,4 @@
 import java.awt.*;
-import java.util.LinkedList;
 
 public abstract class Entite {
 
@@ -8,7 +7,7 @@ public abstract class Entite {
     protected int largeur;
     protected int hauteur;
     protected Jeu jeu;
-    protected int id;
+    private int id;
     protected boolean inactif = false;
 
     public Entite(Jeu jeu, int id, int x, int y, int largeur, int hauteur){
@@ -41,12 +40,7 @@ public abstract class Entite {
         this.y=y;
     }
 
-    public int getX(){
-        return this.x;
-    }
+    public int getX(){ return this.x; }
 
-    public int getY(){
-        return this.y;
-    }
-
+    public int getY(){ return this.y; }
 }

@@ -1,6 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 
 public class Affichage {
 
@@ -8,22 +7,13 @@ public class Affichage {
     private Canvas panel;
     private JLabel temps;
 
-    private String titre;
-    private int largeur;
-    private int hauteur;
-
     //Timer
     private double totalms = 0;
     private double millisecs = 0;
     private int secs = 0;
     private int minutes = 0;
 
-    private final double interval = 1000;
-
     public Affichage(String titre, int largeur, int hauteur) {
-        this.titre = titre;
-        this.largeur = largeur;
-        this.hauteur = hauteur;
 
         frame = new JFrame(titre);
         frame.setSize(largeur, hauteur);
@@ -58,8 +48,9 @@ public class Affichage {
     }
 
     public void tickTimer (){
-        this.millisecs+=this.interval;
-        this.totalms+=this.interval;
+        double interval = 1000;
+        this.millisecs+= interval;
+        this.totalms+= interval;
         if(this.millisecs>=1000){
             this.secs++;
             this.millisecs-=1000;

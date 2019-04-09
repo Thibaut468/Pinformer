@@ -10,7 +10,7 @@ public class chargementFichier {
             String ligne;
             ligne=br.readLine();
             while(ligne != null){
-                builder.append(ligne + "\n");
+                builder.append(ligne).append("\n");
                 ligne = br.readLine();
             }
             br.close();
