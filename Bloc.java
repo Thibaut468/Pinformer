@@ -29,9 +29,9 @@ public abstract class Bloc  {
         this.vitesse = vitesse;
     }
 
-    public abstract void tick();
+    public abstract void tick(); //Méthode abstraite car différente en fonction de la plateforme
 
-    public void aff(Graphics g){
+    public void aff(Graphics g){ //Affichage de la plateforme en fonction de son ID
         switch(id){
             case 1:
                 g.drawImage(textures.p_entier,x,y,null);
@@ -85,7 +85,9 @@ public abstract class Bloc  {
         }
     }
 
-    public void action(){}
+    public void action(){} //Aucune action, cette méthode est très souvent surchargé par les classes filles
+
+    /** GETTERS AND SETTERS **/
 
     public int getId() { return this.id; }
 

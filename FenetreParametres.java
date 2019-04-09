@@ -208,7 +208,7 @@ import java.awt.event.*;
 		
 		}
 		
-		public void actionPerformed (ActionEvent e){
+		public void actionPerformed (ActionEvent e){ //Gestion des évenements en fonction du bouton sélectionné
 			if (e.getSource()== choix1){
 				//System.out.println("choix1");
 				param[1]="1";

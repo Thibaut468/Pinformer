@@ -1,8 +1,10 @@
 import java.awt.*;
 
+//Classe général représentant les monstres (contact ou distance)
+
 public abstract class Monstre extends Personnage {
 
-	protected int degats; // si c'est un montre gentil, on met un vie enlevé négatif comme ca dans la méthode perd vie ca fera - (un nombre négatif) ce qui rajoutera des vies)
+	protected int degats;
     private double depX;
     private double depY;
     private int positionInitialeX;
@@ -12,7 +14,7 @@ public abstract class Monstre extends Personnage {
 
 	
 	public Monstre(Jeu jeu, int id, int x, int y, int largeur, int hauteur, int vitesse, int degats, int positionFinaleX) {
-        super(jeu, id, x, y, largeur, hauteur, 1, vitesse); // j'ai mis vitesse = 0 car les monstres sont fixes
+        super(jeu, id, x, y, largeur, hauteur, 1, vitesse);
 		this.degats = degats;
         this.depX=vitesse;
         this.depY=0;
@@ -21,14 +23,17 @@ public abstract class Monstre extends Personnage {
         this.cpt = 240;
 	}
 
-	public void action(Personnage p, String s){
-        if(s.equals("X") && cpt >=240){ //Monstre touche le joueur
-            touche(p);
-            cpt=0;
+	public void action(Personnage p, String s){ //Méthode importante pour les collisions avec un joueur
+        //Ici, on doit être capable de vérifier si le joueur est touché par la gauche ou la droite (Le monstre le touche)
+        //Ou alors le joueur est touché par le haut ou le bas (le joueur élimine alors le monstre)
+
+        if(s.equals("X") && cpt >=240){ //Monstre touche le joueur et un intervalle de temps est vérifié pour éviter des multitouch avec une seule collision
+            touche(p); //On va mettre des degats au joueur
+            cpt=0; //On réinitialise le compteur
         }
 
         if(s.equals("Y")){ //Joueur touche le monstre
-            estTouche();
+            estTouche(); //On élimine le joueur
         }
     }
 
@@ -36,7 +41,7 @@ public abstract class Monstre extends Personnage {
 
     public abstract void aff(Graphics g);
 
-    public void deplacement () {
+    public void deplacement () { //On déplace le monstre
 
         if(vitesse!=0) {
             if (super.x >= positionFinaleX) {
@@ -52,7 +57,7 @@ public abstract class Monstre extends Personnage {
         if(!blocCollisionX()) super.x+=depX;
     }
 
-    public boolean blocCollisionX(){
+    public boolean blocCollisionX(){ //On vérifie si le monstre touche ou non un bloc
         int testX;
         if(this.depX>0){ //Déplacement droite
             testX = (int) (x+largeur+depX);
@@ -64,7 +69,7 @@ public abstract class Monstre extends Personnage {
             }
         } else if(this.depX<0){ //Déplacement gauche
             testX = (int)(x+depX);
-            if(!this.jeu.getMonde().blocDetectionX(testX, y, hauteur)){
+            if(!this.jeu.getMonde().blocDetectionX(testX, y, hauteur)){ //pas de collisions
                 return false;
             } else { //collision
                 sens=!sens;
@@ -74,7 +79,7 @@ public abstract class Monstre extends Personnage {
         return false;
     }
 	
-	private void perdVie(Personnage j) {
+	private void perdVie(Personnage j) { //On enleve de la vie au joueur
 		int nouvelleVie = j.getVie() - this.degats;
 		j.setVie(nouvelleVie);
 		
@@ -84,7 +89,7 @@ public abstract class Monstre extends Personnage {
         perdVie(j);
     }
 
-    private void estTouche(){
+    private void estTouche(){ //On élimine le monstre et on le rend inactif pour le supprimer de l'arraylist, qui sera donc supp par la garbage collector
         vie=0;
         inactif=true;
     }

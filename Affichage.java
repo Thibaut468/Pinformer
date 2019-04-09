@@ -15,14 +15,15 @@ public class Affichage {
 
     public Affichage(String titre, int largeur, int hauteur) {
 
+        //On instancie et paramètre la JFrame qui affiche le jeu
         frame = new JFrame(titre);
         frame.setSize(largeur, hauteur);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
-        //frame.setIgnoreRepaint(true);
         frame.setResizable(false);
         frame.setVisible(true);
 
+        //On utilise un panel de façon à pouvoir utiliser des buffer d'images (propre à la gestion des FPS)
         panel = new Canvas();
         panel.setPreferredSize(new Dimension(largeur, hauteur));
         panel.setMaximumSize(new Dimension(largeur, hauteur));
@@ -31,6 +32,7 @@ public class Affichage {
 
         Font police = new Font(" Arial ", Font.BOLD, 19);
 
+        //On instancie le timer
         temps=new JLabel("     Lancement");
         temps.setFont(police);
         temps.setBounds(largeur-170,10,150,30);
@@ -40,14 +42,7 @@ public class Affichage {
         this.frame.pack();
     }
 
-    public JFrame getFrame(){
-        return frame;
-    }
-    public Canvas getPanel() {
-        return this.panel;
-    }
-
-    public void tickTimer (){
+    public void tickTimer (){ //AFFICHAGE DU TIMER
         double interval = 1000;
         this.millisecs+= interval;
         this.totalms+= interval;
@@ -69,5 +64,15 @@ public class Affichage {
         this.temps.setText(s);
     }
 
+    /** GETTER AND SETTER **/
+
     public double getTotalms(){ return totalms; }
+
+    public JFrame getFrame(){
+        return frame;
+    }
+
+    public Canvas getPanel() {
+        return this.panel;
+    }
 }

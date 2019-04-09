@@ -286,15 +286,18 @@ public class Jeu implements Runnable, KeyListener {
         }
     }
 
-    public Monde getMonde(){ return this.monde; }
 
     public void dead(){
         dead=true;
-    }
+    } //GAME OVER
 	
 	public void finish(){
         finish=true;
-    }
+    } //VICTOIRE
+
+    /** GETTERS AND SETTERS **/
+
+    public Monde getMonde(){ return this.monde; }
 
     public boolean getDead(){ return dead; }
 

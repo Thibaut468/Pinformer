@@ -221,6 +221,7 @@ public class Monde {
         return false;
     }
 
+    /** GETTERS AND SETTERS **/
     
     public Joueur getJoueur() {
         return this.joueur;

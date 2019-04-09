@@ -1,5 +1,6 @@
 import java.awt.*;
 
+//Classe abstraite générale englobant approximativement toutes les entités de notre jeu, dont les blocs et les objets, mais aussi le personnage et les monstres
 public abstract class Entite {
 
     protected int x;
@@ -19,18 +20,24 @@ public abstract class Entite {
         this.id = id;
     }
 
-    public abstract void action(Personnage p, String s);
+    public abstract void action(Personnage p, String s); //Va permettre à chaque entité d'effectué une action sur le joueur
 
-    public abstract void tick();
+    public abstract void tick(); //Update de chaque entité
 
-    public abstract void aff(Graphics g);
-    
+    public abstract void aff(Graphics g); //Affichage de chaque entité
+
+
+    /** GETTERS AND SETTERS **/
 
     public boolean getInactif(){
         return inactif;
     }
 
     public int getId(){ return id; }
+
+    public int getX(){ return this.x; }
+
+    public int getY(){ return this.y; }
 
     public void setX(int x){
         this.x=x;
@@ -39,8 +46,4 @@ public abstract class Entite {
     public void setY(int y){
         this.y=y;
     }
-
-    public int getX(){ return this.x; }
-
-    public int getY(){ return this.y; }
 }

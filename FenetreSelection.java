@@ -4,7 +4,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
 
-/** FENETRE PRINCIPALE DU JEU **/
+/** FENETRE PRINCIPALE AVANT JEU **/
 
 public class FenetreSelection extends JFrame implements ActionListener {
 
@@ -19,6 +19,7 @@ public class FenetreSelection extends JFrame implements ActionListener {
 
     public FenetreSelection(){
 
+        /** Création frame principale du menu **/
         menu = new JFrame();
         menu.setTitle("Menu du jeu");
         menu.setSize(500,500);
@@ -30,6 +31,7 @@ public class FenetreSelection extends JFrame implements ActionListener {
 
         Color couleur = new Color(166, 39, 86);
 
+        /** Création des boutons **/
         boutonJouer = new JButton();
         boutonJouer.setFont(police);
         boutonJouer.setText("JOUER");
@@ -84,15 +86,16 @@ public class FenetreSelection extends JFrame implements ActionListener {
         boutonCredits.addActionListener(this);
         boutonQuitter.addActionListener(this);
 
+        /** Création des fenetres ouvrables avec les boutons, mises en non visibles au départ **/
         parametres = new FenetreParametres();
         fenetreMonde = new FenetreMonde();
 
         menu.setVisible(true);
 
-        playSound("musique_3.wav");
+        playSound("musique_3.wav"); //On lance la musique
     }
 
-    public void actionPerformed (ActionEvent e){
+    public void actionPerformed (ActionEvent e){ //Gestion des évenements avec l'appui sur les différents boutons
 
         if (e.getSource()== boutonJouer && !jeuIsRunning){
 			fenetreMonde.setVisible(true);
@@ -109,7 +112,7 @@ public class FenetreSelection extends JFrame implements ActionListener {
         }
     }
 
-    private void playSound(String str){
+    private void playSound(String str){ //Méthode prise et adapté d'un tuto JAVA permettant de lancer une des musiques de notre projet
         try{
             String s = "./musiques/"+str;
             File fichier = new File(s) ;

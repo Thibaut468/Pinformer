@@ -13,7 +13,6 @@ public class Canon extends Bloc {
 
     public Canon(Jeu jeu, int id, int x, int y, int direction, int degats, int interval) {
         super(x,y,id, 0);
-        //62 43
         this.jeu = jeu;
         this.id = id;
         this.direction = direction;
@@ -24,23 +23,25 @@ public class Canon extends Bloc {
 
     @Override
     public void tick() {
-        cpt++;
+        cpt++; //Timer de tir
+        
+        //On update tous les missiles
         for (Missile m : missiles){
             m.tick();
         }
 
+        //On vérifie si on peut tirer
         if(cpt>=interval){
-            //System.out.println("TIR");
             cpt=0;
             if(direction == 1) missiles.add(new Missile(jeu,101, x+largeur, y+10, degats, direction));
             else missiles.add(new Missile(jeu,101, x-40, y+10, degats, direction));
         }
-
+        
         //Collision joueur
         missileDetectionX(20,this.jeu.getMonde().getJoueur());
         missileDetectionY(20,this.jeu.getMonde().getJoueur());
 
-        //Suppresion
+        //Suppresion en cas de missile inactif (utilisé ou hors de map)
         Iterator<Missile> it = missiles.iterator();
         while(it.hasNext()){
             if(it.next().getInactif()) it.remove();
@@ -48,7 +49,7 @@ public class Canon extends Bloc {
     }
 
     @Override
-    public void aff(Graphics g) {
+    public void aff(Graphics g) { //Affichage des missiles
         if(direction==1) g.drawImage(jeu.textures.canonD, x, y, null);
         else g.drawImage(jeu.textures.canonG,x,y,null);
         for (Missile m : missiles){
@@ -56,18 +57,18 @@ public class Canon extends Bloc {
         }
     }
 
-    private void missileDetectionX(int h, Personnage p){
+    private void missileDetectionX(int h, Personnage p){ //On vérifie si le joueur est touché par un missile selon X
         for(Missile m : missiles){
-            if(m.x<p.x && (m.x+m.largeur)>p.x && (p.y+h)>m.y && p.y<(m.y+m.hauteur) && !m.getInactif()){
+            if(m.getX()<p.getX() && (m.getX()+m.largeur)>p.getX() && (p.getY()+h)>m.getY() && p.getY()<(m.getY()+m.hauteur) && !m.getInactif()){
                 m.action(p, "Xm");
                 return;
             }
         }
     }
 
-    private void missileDetectionY(int l, Personnage p){
+    private void missileDetectionY(int l, Personnage p){ //On vérifie si le joueur est touché par un missile selon Y
         for(Missile m : missiles){
-            if(m.y<p.y && (m.y+m.hauteur)>p.y && (p.x+l)>m.x && p.x<(m.x+m.largeur) && !m.getInactif()){
+            if(m.getY()<p.getY() && (m.getY()+m.hauteur)>p.getY() && (p.getX()+l)>m.getX() && p.getX()<(m.getX()+m.largeur) && !m.getInactif()){
                 m.action(p,"Ym");
                 return;
             }

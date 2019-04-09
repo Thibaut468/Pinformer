@@ -3,6 +3,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+//Fenêtre permettant d'initialiser le départ et la vitesse de départ, déterminer avec la barre espace
+
 public class FenetreVitesse extends JFrame implements ActionListener {
 
     public JButton clique;
@@ -21,6 +23,7 @@ public class FenetreVitesse extends JFrame implements ActionListener {
 
         this.timesClicked=0;
 
+        /** Mise en place d'une fenetre en relatif **/
         Dimension dimension = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
         int fheight = (int)dimension.getHeight();
         int fwidth  = (int)dimension.getWidth();
@@ -33,9 +36,10 @@ public class FenetreVitesse extends JFrame implements ActionListener {
 
         Font police = new Font(" Arial ", Font.BOLD, 16);
 
+
         clique = new JButton();
         clique.setFont(police);
-        clique.setText("Cliquer Espace");
+        clique.setText("Appuyer Espace");
         clique.setBounds(8, 100, 170, 50);
         clique.setBackground(Color.black);
         clique.setForeground(Color.white);
@@ -87,13 +91,12 @@ public class FenetreVitesse extends JFrame implements ActionListener {
         }
     }
     
-    private void initAffHauteur(){
+    private void initAffHauteur(){ //On initialise l'affichage de la hauteur
 		y0 = jeu.getMonde().getSpawnY()-48+24;
 		x0 = jeu.getMonde().getSpawnX()+8+24;
 	}
 	
-	private void affHauteur(){
-		//System.out.println("Times Clicked Vitesse : "+timesClicked);
+	private void affHauteur(){ //Affichage simple de la hauteur du saut, équations permettant de déterminer cette hauteur via les équations de trajectoires
 		jeu.setStarterX((int) ((((-2*Math.sin(2*Math.PI/2.5)*Math.pow(timesClicked*9,2))/(2*9.8))+x0)));
 		jeu.setStarterY((int) (y0-((Math.pow(timesClicked*9,2)*Math.sin(Math.PI/2.5)*Math.sin(2*Math.PI/2.5))/(2*9.8))));
 	}

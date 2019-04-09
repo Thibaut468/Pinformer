@@ -47,25 +47,28 @@ public class FenetreMonde extends JFrame implements ActionListener {
 		Font police2 = new Font(" Arial ",Font.BOLD,15);
 		Color couleur = new Color(166, 39, 86);
 
+		/** On met en place tous les affichages de score **/
 		timerN1 = new JLabel("Score : "+(Integer.parseInt(dataMonde[1])/1000)+" secondes", SwingConstants.CENTER);
-		timerN1.setFont(police);
+		timerN1.setFont(police2);
 		timerN1.setForeground(Color.white);
 		timerN1.setBounds(75,110, 150, 50);
 
 		timerN2 = new JLabel("Score : "+(Integer.parseInt(dataMonde[1])/1000)+" secondes", SwingConstants.CENTER);
-		timerN2.setFont(police);
+		timerN2.setFont(police2);
 		timerN2.setForeground(Color.white);
 		timerN2.setBounds(275,110, 150, 50);
 
 		timerN3 = new JLabel("Score : "+(Integer.parseInt(dataMonde[2])/1000)+" secondes", SwingConstants.CENTER);
-		timerN3.setFont(police);
+		timerN3.setFont(police2);
 		timerN3.setForeground(Color.white);
 		timerN3.setBounds(75,210, 150, 50);
 
 		timerN4 = new JLabel("Score : "+(Integer.parseInt(dataMonde[3])/1000)+" secondes", SwingConstants.CENTER);
-		timerN4.setFont(police);
+		timerN4.setFont(police2);
 		timerN4.setForeground(Color.white);
 		timerN4.setBounds(275,210, 150, 50);
+
+		/** Et chaque bouton **/
 
 		boutonNiveau1 = new JButton();
 		boutonNiveau1.setFont(police);
@@ -142,7 +145,7 @@ public class FenetreMonde extends JFrame implements ActionListener {
     }
 
 
-        public void actionPerformed(ActionEvent e) {
+        public void actionPerformed(ActionEvent e) { //Gestion des événements en fonction du bouton sélectionné
 		if (e.getSource()== boutonNiveau1 && !jeuIsRunning){
             jeu = new Jeu("Pinformer",1280,720, 1, dataMonde);
             jeuIsRunning = true;

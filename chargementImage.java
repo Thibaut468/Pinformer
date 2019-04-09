@@ -3,17 +3,20 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import java.io.File;
 
+//Simple classe qui charge absolument toutes les images utilisées dans le jeu dans un soucis d'optimisation
+
 public class chargementImage {
 
     public BufferedImage joueur, backgroundJeu, water, l10, l9,l8, l7, l6, l5, l4, l3, l2, l1, l0, canonD, canonG, missileD, missileG, starter_ferme, starter_ouvert, p_arrivee, p_entier, p_gauche, p_droite, p_milieu, p_ephemere, healer, monstre_contact, tremplin, portail, pic_bas, pic_haut;
 
     public chargementImage(){
 
+        //Lecture du fichier de paramètre
         String fichier = chargementFichier.chargement("./sauvegardes/param.txt");
         String[] separation = fichier.split("\\s+");
         int choix = Integer.parseInt(separation[1]);
 
-        switch(choix){
+        switch(choix){ //On choisi l'image du joueur en fonction du choix fait dans les paramètres
             case 1 :
                 joueur=load("./textures/joueur/joueur1.png");
                 break;
@@ -48,7 +51,7 @@ public class chargementImage {
         monstre_contact = load("./textures/monstre_contact.png");
         backgroundJeu=load("./textures/background.png");
         water=load("./textures/water.png");
-        //plateforme = load("./textures/plateforme.png");
+
         p_entier = load("./textures/P_entier.png");
         p_gauche = load("./textures/P_gauche.png");
         p_droite = load("./textures/P_droite.png");
@@ -68,7 +71,10 @@ public class chargementImage {
 
         starter_ferme = load("./textures/jumper1.png");
         starter_ouvert = load("./textures/jumper2.png");
-        
+
+
+        //On charge la barre de vie
+
         l10=load("./textures/lifebar/100.png");
         l9=load("./textures/lifebar/90.png");
         l8=load("./textures/lifebar/80.png");
