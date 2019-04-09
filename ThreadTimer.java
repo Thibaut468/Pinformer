@@ -1,3 +1,6 @@
+//Cette classe gère le second Thread de notre programme, il permet la gestion du temps pour le starter de départ
+//Ensuite, sa fonction devient celle du timer sur la carte qui correspond au score du joueur
+
 public class ThreadTimer extends Thread {
 
     private Jeu jeu;
@@ -24,7 +27,7 @@ public class ThreadTimer extends Thread {
                     // on attend une seconde avant de continuer à compter
                     sleep(1000);
                 } else {
-                    // on disable le bouton clique parce que l'utilisateur dois plus pouvoir cliquer
+                    // on disable le bouton clique parce que l'utilisateur ne doit plus pouvoir cliquer
                     fenetreVitesse.clique.setEnabled(false);
 
                     // si on est arrive a 0, on indique le nombre de fois que l utilisateur a clique puis on lance le jeu
@@ -32,17 +35,17 @@ public class ThreadTimer extends Thread {
                 }
             }
 
-            jeu.setInit(true);
-            fenetreVitesse.setVisible(false);
+            jeu.setInit(true); //On initialise alors le jeu, le monde devient dynamique
+            fenetreVitesse.setVisible(false); //On cache cette fenetre
             //ON DONNE LE PULSE
             jeu.getMonde().getStarter().action(jeu.getMonde().getJoueur());
             jeu.setStarterEnCours(false);
 
             while(!jeu.getInit()){
-                //attente
+                //attente pour s'assurer que tout est démarré
             }
 
-            while(!jeu.getDead() && !jeu.getFinish()){
+            while(!jeu.getDead() && !jeu.getFinish()){ //Tant que le jeu est en cours, on tick le timer d'affichage pour incrément d'une seconde chaque seconde.
                 jeu.getAffichage().tickTimer();
                 sleep(1000);
             }
