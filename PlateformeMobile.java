@@ -1,3 +1,6 @@
+// Cette classe permet de créer une plateforme mobile selon x ou y
+// De couleur violette dans l'interface graphique
+
 public class PlateformeMobile extends Bloc{
 
     private int vitesse;
@@ -5,7 +8,7 @@ public class PlateformeMobile extends Bloc{
     private int positionInitialeY;
     private int positionFinaleX;
     private int id;
-    private boolean sens = false;
+    private boolean sens = false; //variable permettant de gérer le sens dans lequel va la plateforme
 
     
      public PlateformeMobile(int x, int y, int id, int vitesse, int positionFinaleX){

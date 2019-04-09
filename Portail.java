@@ -1,6 +1,6 @@
 import java.awt.*;
 
-//Le portail teleporte le joueur aléatoirement sur la map
+//Le portail téléporte le joueur aléatoirement sur la map
 
 public class Portail extends Objet {
 

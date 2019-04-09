@@ -1,3 +1,6 @@
+// Cette classe permet de créer une plateforme qui disparait lorsque le joueur arrive dessus
+// De couleur orange dans l'interface graphique
+
 public class PlateformeEphemere extends Bloc {
 
     private PlateformeFixe p;
@@ -14,7 +17,7 @@ public class PlateformeEphemere extends Bloc {
 
         if(activated) compt++;
 
-        int DELAY = 10;
+        int DELAY = 10; // temps avant lequel la plateforme disparait lorsque le personnage est dessus
         if(compt >= DELAY){
             inactif = true;
             activated = false;
