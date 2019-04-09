@@ -1,7 +1,9 @@
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.LinkedList;
+
+//Cette classe gère l'ensemble du monde (chaque composant interagisssant dans le jeu
+//C'est aussi elle qui génère le monde
 
 public class Monde {
 
@@ -20,31 +22,37 @@ public class Monde {
 
     public Monde(String chemin, Jeu jeu){
         this.jeu = jeu;
-        generation(chemin);
+        generation(chemin); //On génère la map
     }
 
     private void generation(String chemin){
+        /** LECTURE DES MONDES DANS UN FICHIER TEXTE **/
         String fichier = chargementFichier.chargement(chemin);
         String[] separation = fichier.split("\\s+");
+
+        //1ère ligne du fichier texte : taille de la map
         largeur = Integer.parseInt(separation[0]);
         hauteur = Integer.parseInt(separation[1]);
+
+        //2ème ligne spawn du joueur
         spawnX = Integer.parseInt(separation[2]);
         spawnY = Integer.parseInt(separation[3]);
 
-
+        //PLACEMENT DES PREMIERS ELEMENTS
         starter = new Starter(spawnX,spawnY,26);
         blocs.add(starter);
         joueur = new Joueur(this.jeu, spawnX+8,spawnY-48,48,48,10,8);
         entites.add(joueur);
 
-        int update = 0;
+        int update = 0; //Variable assurant le parcours des paramètres propres à chaque objets/blocs (voir CR)
+
+        //Cette boucle parcours la totalité du fichier texte et ajoute tous les éléments en fonctions de l'ID au monde
 
         for(int i=4;i<separation.length;i+=update){
             int id = Integer.parseInt(separation[i]);
-            //System.out.println(id);
             int x = Integer.parseInt(separation[i + 1]);
             int y = Integer.parseInt(separation[i + 2]);
-            if(id >= 1 && id <= 4) {
+            if(id >= 1 && id <= 4) { //PlateformeFixe
                 update = 3;
                 switch (id) {
                     case 1:
@@ -62,7 +70,7 @@ public class Monde {
                     default:
                         break;
                 }
-            } else if(id >=5 && id <=12){
+            } else if(id >=5 && id <=12){ //Plateforme mobile
                 int VPLAT = Integer.parseInt(separation[i+3]);
                 int positionFinaleX = Integer.parseInt(separation[i+4]);
                 update = 5;
@@ -147,7 +155,7 @@ public class Monde {
         }
     }
 
-    public void tick(){
+    public void tick(){ //Update général du monde avant affichage
 
         //On supprime les éléments inactifs
         Iterator<Entite> it = entites.iterator();
@@ -179,43 +187,44 @@ public class Monde {
         }
     }
 
-    public boolean blocDetectionY(int y, int x, int l){
+    public boolean blocDetectionY(int y, int x, int l){ //Assure la gestion des collisions entre les personnages et les blocs selon la direction Y
         for(Bloc b : blocs){
-            if(b.getY()<y && (b.getY()+b.hauteur)>y && (x+l)>b.getX() && x<(b.getX()+b.largeur)){
-                c=b;
+            if(b.getY()<y && (b.getY()+b.hauteur)>y && (x+l)>b.getX() && x<(b.getX()+b.largeur)){ //Collision
+                c=b; //Stockage du bloc collisioné courant
                 return true;
             }
         }
         return false;
     }
 
-    public boolean blocDetectionX(int x, int y, int h){
+    public boolean blocDetectionX(int x, int y, int h){ //Assure la gestion des collisions entre les personnages et les blocs selon la direction X
         for(Bloc b : blocs){
-             if(b.getX()<x && (b.getX()+b.largeur)>x && (y+h)>b.getY() && y<(b.getY()+b.hauteur)){
-                 c=b;
+             if(b.getX()<x && (b.getX()+b.largeur)>x && (y+h)>b.getY() && y<(b.getY()+b.hauteur)){ //Collision
+                 c=b; //Stockage du bloc collisioné courant
                  return true;
              }
         }
         return false;
     }
 
-    public boolean objetDetectionX(int x, int y, int h, Personnage p){
+
+    public boolean objetDetectionY(int y, int x, int l, Personnage p){ //Assure la gestion des collisions entre les personnages et les objets selon la direction Y
         for(Entite e : entites){
-            if(e.getX()<x && (e.getX()+e.largeur)>x && (y+h)>e.getY() && y<(e.getY()+e.hauteur) && !e.getInactif()){
-                e.action(p, "X");
+            if(e.getY()<y && (e.getY()+e.hauteur)>y && (x+l)>e.getX() && x<(e.getX()+e.largeur) && !e.getInactif()){ //Collision
+                if(e.getId()!=22) { //Tremplin ne s'active pas selon Y
+                    e.action(p, "Y"); //L'objet effectue son action sur le joueur
                     return true;
+                }
             }
         }
         return false;
     }
 
-    public boolean objetDetectionY(int y, int x, int l, Personnage p){
+    public boolean objetDetectionX(int x, int y, int h, Personnage p){ //Assure la gestion des collisions entre les personnages et les objets selon la direction X
         for(Entite e : entites){
-            if(e.getY()<y && (e.getY()+e.hauteur)>y && (x+l)>e.getX() && x<(e.getX()+e.largeur) && !e.getInactif()){
-                if(e.getId()!=22) { //Tremplin
-                    e.action(p, "Y");
-                    return true;
-                }
+            if(e.getX()<x && (e.getX()+e.largeur)>x && (y+h)>e.getY() && y<(e.getY()+e.hauteur) && !e.getInactif()){ //Collision
+                e.action(p, "X"); //L'objet effectue son action sur le joueur
+                return true;
             }
         }
         return false;

@@ -3,6 +3,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
 
+//Cette classe instancie et "manage" toutes les parties du jeu
+
 public class Jeu implements Runnable, KeyListener {
     private Affichage affichage;
     private int largeur;
@@ -50,13 +52,17 @@ public class Jeu implements Runnable, KeyListener {
         this.dataMonde = dataMonde;
         this.niveau = niveau;
 
-        this.keys = new boolean[4];
+        this.keys = new boolean[4]; //on crée un tableau de 4 touches (haut bas gauche droite), activé = true, désactivé = false
 
+        /** RECUPERATION DES PARAMETRES SUR LE FICHIER TEXTE **/
         String fichier = chargementFichier.chargement("./sauvegardes/param.txt");
         String[] separation = fichier.split("\\s+");
         touche=Integer.parseInt(separation[0]);
 
-        this.textures=new chargementImage();
+        this.textures=new chargementImage(); //On initialise et charge tout les images
+
+        /** CHOIX DU NIVEAU A LANCER **/
+
         switch (niveau) {
             case 1:
                 this.monde = new Monde("./mondes/monde1.txt", this);
@@ -76,15 +82,13 @@ public class Jeu implements Runnable, KeyListener {
         }
     }
 
-    private void init(){
+    private void init(){ //On initialise l'affichage
         affichage = new Affichage(titre, largeur, hauteur);
         this.affichage.getFrame().addKeyListener(this);
     }
 
     private void tick(){
-        //Gestion des fps
-
-        //On regarde les touches au début
+        //On regarde les touches
         haut=keys[0];
         gauche=keys[2];
         droite=keys[3];
@@ -93,7 +97,7 @@ public class Jeu implements Runnable, KeyListener {
         if(initialiser) monde.tick();
     }
 
-    private void aff(){
+    private void aff(){ //Cette méthode gère complètement l'affichage de tous les composants
         //Affichage
         BufferStrategy buff = affichage.getPanel().getBufferStrategy();
         if (buff == null) {
@@ -102,10 +106,11 @@ public class Jeu implements Runnable, KeyListener {
         }
         Graphics g = buff.getDrawGraphics();
         g.clearRect(0, 0, largeur, hauteur);
-        if(!dead && !finish) {
+
+        if(!dead && !finish) { //JEU EN COURS
             //Dessin
             g.drawImage(textures.backgroundJeu, 0, 0, null);
-            if (!sensDefil) {
+            if (!sensDefil) { //Défilement de l'eau sous le niveau avec inversion
                 waterX -= 2;
             } else {
                 waterX += 2;
@@ -115,31 +120,34 @@ public class Jeu implements Runnable, KeyListener {
             g.drawImage(textures.water, waterX, 656, null);
 
             monde.aff(g);
+
             //Affichage hauteur du starter
+
             if(starterEnCours){
-				g.setColor(new Color(255, 84, 91));
-				g.fillRect(starterX,starterY,15,5);
+				g.setColor(new Color(255, 122, 47));
+				g.fillRect(starterX,starterY,15,15);
 			}
             //Gère les buffeurs d'affichage
             buff.show();
             g.dispose();
-        } if(dead && !finish){
+
+        } if(dead && !finish){ //PERSONNAGE MORT - FIN DU JEU
             g.setFont(new Font("Courier", Font.BOLD,70));
             g.setColor(new Color(65, 15, 34));
             g.drawString("GAME OVER",400,720/2);
             buff.show();
             g.dispose();
-        } if (finish && !dead){
-            if(!saved) saveTime();
+        } if (finish && !dead){ //VICTOIRE - FIN DU JEU
+            if(!saved) saveTime(); //On sauvegarde les résultats
 			g.setFont(new Font("Courier", Font.BOLD,70));
             g.setColor(new Color(65, 15, 34));
-            g.drawString("VICTOIRE",400,720/2);
+            g.drawString("VICTOIRE !",400,720/2);
             buff.show();
             g.dispose();
 		}
     }
 
-    private void saveTime(){
+    private void saveTime(){ //Si il y a victoire, sauvegarde du temps dans un fichier texte pour affichage du score et débloquage des niveaux
         saved=true;
         double totalms = affichage.getTotalms();
         String[] lignes = new String[4];
@@ -150,7 +158,7 @@ public class Jeu implements Runnable, KeyListener {
         chargementFichier.ecritureParam("./sauvegardes/mondes.txt", lignes);
     }
 
-    public void run(){
+    public void run(){ //Cette classe gère totalement la fluidité du jeu à un CAP de 60 FPS - Game Loop inspiré de game loop très connus trouvable sur des tutos JAVA
 
         init();
 
@@ -260,12 +268,11 @@ public class Jeu implements Runnable, KeyListener {
         }
     }
 
-    // méthode exécutée à chaque fois qu’une touche unicode est utilisée (donc pas CTRL, SHIFT ou ALT par exemple)
     public void keyTyped(KeyEvent e) {
         //Vide
     }
 
-    public synchronized void start(){
+    public synchronized void start(){ //LANCEMENT DU THREAD - Synchronized pour éviter des multi thread desssus
         if(running){
             return;
         }
@@ -274,7 +281,7 @@ public class Jeu implements Runnable, KeyListener {
         t.start();
     }
 
-    private synchronized void stop(){
+    private synchronized void stop(){ //FERMETURE DU THREAD
         if(!running) {
             return;
         }

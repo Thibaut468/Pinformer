@@ -48,7 +48,7 @@ public class FenetreMonde extends JFrame implements ActionListener {
 		Color couleur = new Color(166, 39, 86);
 
 		/** On met en place tous les affichages de score **/
-		timerN1 = new JLabel("Score : "+(Integer.parseInt(dataMonde[1])/1000)+" secondes", SwingConstants.CENTER);
+		timerN1 = new JLabel("Score : "+(Integer.parseInt(dataMonde[0])/1000)+" secondes", SwingConstants.CENTER);
 		timerN1.setFont(police2);
 		timerN1.setForeground(Color.white);
 		timerN1.setBounds(75,110, 150, 50);

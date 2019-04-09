@@ -1,5 +1,8 @@
 import java.awt.*;
 
+//Cette classe gère l'entité Joueur, et notamment ses déplacements et l'utilisation des différentes touches.
+//Le starter et la trajectoire de ce dernier est indiqué ci dessous.
+
 public class Joueur extends Personnage {
 
     private int compt = 0;
@@ -21,33 +24,24 @@ public class Joueur extends Personnage {
     }
     public void tick() {
 
-        //depX=0;
-        //depY=0;
-
-        if(jeu.getPropulsion()){
+        if(jeu.getPropulsion()){ //Si le starter est lancé, on exécute la trajectoire
             deplacementInit();
-            //System.out.println("Propulseee");
         }
-        if(jeu.getInit() && !jeu.getPropulsion()) {
-            //System.out.println("Jeu");
-            if (!(compt == 0)) compt--;
+        if(jeu.getInit() && !jeu.getPropulsion()) { //Si le jeu est initialisé et que la propulsion est terminée, on laisse les commandes au joueur
+            if (!(compt == 0)) compt--; //Timer de saut du personnage
 
-            ///if(super.jeu.haut && vie<10) vie++;
-            //if(super.jeu.bas && vie>0) vie--;
+            if (super.jeu.gauche) super.depX = -vitesse; //SI TOUCHE DE GAUCHE
+            if (super.jeu.droite) super.depX = vitesse; //SI TOUCHE DE DROITE
+            if (!super.jeu.gauche && !super.jeu.droite) super.glissade = true; //ON ACTIVE LES FROTTEMENTS SI L'UTILISATEUR N'APPUIE PLUS POUR FREINER LE PERSONNAGE
 
-            if (super.jeu.gauche) super.depX = -vitesse;
-            if (super.jeu.droite) super.depX = vitesse;
-            if (!super.jeu.gauche && !super.jeu.droite) super.glissade = true;
-
-            super.chute();
-            super.frottements();
-            if (super.jeu.haut && !jumping && compt == 0) {
-                super.saut(25);
-                compt += 15;
+            super.chute(); //Application de la gravité
+            super.frottements(); //Application des frottements
+            if (super.jeu.haut && !jumping && compt == 0) { //Si le personnage ne saute pas, et que son timer de saut est réinitialisé
+                super.saut(25); //Saut
+                compt += 15; //On relance un timer
             }
-            //if(super.enTrainDeSauter) super.saut(60,8);
-            //if(super.jeu.haut && !enTrainDeSauter) super.saut(60,8);
-            super.deplacement();
+
+            super.deplacement(); //On effectue tous les déplacements
         }
     }
 
@@ -92,53 +86,40 @@ public class Joueur extends Personnage {
                 break;
         }
     }
-    
-    /* il faut récupérér nombre de fois cliqué : c'est dans fenetre vitesse, et c'est timesclicked je ne sais pas comment faire déplacer le personnage initialement déso je vous laisse faire, mais toute la méthode est écrite ici il suffit de faire l'affichage graphique!
-     * en gros j'arrive pas a faire en sorte qu'il apparaisse pas directement sur une des plateformes
-     * de plus des conditions de collisions avec les plateformes
-     */
+
 
      public void deplacementInit() {
-     /*
-     * il faut que le x0 et le y0 mis en paramètre soit une plateforme en bas et qu'elle soit de x0 = 700 et y0=750, choisi toujours comme point de départ initial du joueur !
-     * il faut trouver un moyen d'arêter le saut lorsque la y du joueur soit égal à l'un des y d'une plateforme qu'il rencontre
-     * vraiment les collision idk :
-      */
-		if(!starterStarted){
-			v0 = starterVitesse*9;
-			//System.out.println("Times Clicked Perso : "+starterVitesse);
-			starterStarted = true;
+
+		if(!starterStarted){ //Si le starter n'est pas encore démarré
+			v0 = starterVitesse*9; //On définit la vitesse en fonction des appuis sur ESPACE
+			starterStarted = true; //On lance le starter
 		}
         
         double alphar= Math.PI/2.5;
         
-        int xmax = (int) (x0-(v0*v0)/(10*Math.sin(2*alphar)));
-        //System.out.println(xmax);
-        
-                
+        int xmax = (int) (x0-(v0*v0)/(10*Math.sin(2*alphar))); //On prévoit le x max
+
+         //MISE EN PLACE DE L'EQUATION DE LA TRAJECTOIRE
         int pas = 1;
         for (int i=0; i<3; i++) {
-            if(a>xmax && y<720){    ///il faut rajouter ici une condition sur le x et y du joueur, arrêter la boucle lorsque le x et y du joueur soit égal à celui d'une plateforme + que ce soit une plateforme assez haute, style : y = 50
-                //System.out.println("Tick Propulsion");
+            if(a>xmax && y<720){
                 int y = (int)(y0+(+9.8/(2*(v0*v0)*Math.pow((Math.cos(alphar)),2))*(x-x0)*(x-x0)+(x-x0)*Math.tan(alphar)));
-                //System.out.println(yBuff-y);
                 this.setX(a);
                 this.setY(y); //le signe est changé par rapport au word car le repère en fenetre java est inversé (y vers le bas)
                 a-=pas;
-                //System.out.println("y="+y);
-                //System.out.println("a="+a);
             } else {
-                //System.out.println("Fin propulsion");
                 jeu.setPropulsion(false);
             }
             if(yBuff-y<0){
                 jeu.setPropulsion(false);
-                depX=-15;
+                depX=-starterVitesse*2; //Coefficient pour l'atterissage
             }
             yBuff=y;
 
         }
     }
+
+    /** GETTERS AND SETTERS **/
 
     public void setStarterVitesse(int v){ this.starterVitesse = v;}
 

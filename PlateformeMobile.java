@@ -62,6 +62,8 @@ public class PlateformeMobile extends Bloc{
         }
     }
 
+    /** GETTERS AND SETTERS **/
+
     public int getVitesse(){
          if(!sens) return vitesse;
          if(sens) return -vitesse;
