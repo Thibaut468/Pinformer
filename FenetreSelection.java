@@ -105,7 +105,7 @@ public class FenetreSelection extends JFrame implements ActionListener {
             parametres.setVisible(true);
         }
         if (e.getSource()==boutonCredits){
-            JOptionPane.showMessageDialog(this,"Bienvenue dans Pinformer les loulous");
+            JOptionPane.showMessageDialog(this,"Pinformer, jeu cree par Julie, Zineb, Thibaut et Adrien");
         }
         if (e.getSource()==boutonQuitter){
             System.exit(0);
@@ -139,4 +139,5 @@ public class FenetreSelection extends JFrame implements ActionListener {
             e.printStackTrace();
         }
     }
+
 }
