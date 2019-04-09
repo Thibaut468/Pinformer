@@ -158,7 +158,7 @@ public class Jeu implements Runnable, KeyListener {
         chargementFichier.ecritureParam("./sauvegardes/mondes.txt", lignes);
     }
 
-    public void run(){ //Cette classe gère totalement la fluidité du jeu à un CAP de 60 FPS - Game Loop inspiré de game loop très connus trouvable sur des tutos JAVA
+    public void run(){ //Cette méthode gère totalement la fluidité du jeu à un CAP de 60 FPS - Game Loop inspiré de game loop très connus trouvable sur des tutos JAVA
 
         init();
 
