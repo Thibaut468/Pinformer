@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 
@@ -10,8 +11,8 @@ public class Monde {
     private int hauteur;
     private int spawnX;
     private int spawnY;
-    private LinkedList<Bloc> blocs = new LinkedList<Bloc>();
-    private LinkedList<Entite> entites = new LinkedList<Entite>();
+    private ArrayList<Bloc> blocs = new ArrayList<>();
+    private ArrayList<Entite> entites = new ArrayList<>();
     private Joueur joueur;
     private Starter starter;
     public Bloc c;
