@@ -34,6 +34,9 @@ public class FenetreMonde extends JFrame implements ActionListener {
 		this.setResizable(false); 
 		this.setVisible(false);
 
+		ImageIcon ico = new ImageIcon("./textures/icone.png");
+		this.setIconImage(ico.getImage());
+
 		/** Lecture du fichier texte contenant les parametres **/
 		String fichier = chargementFichier.chargement("./sauvegardes/mondes.txt");
 		String[] separation = fichier.split("\\s+");

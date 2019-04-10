@@ -27,6 +27,9 @@ public class FenetreSelection extends JFrame implements ActionListener {
         menu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         menu.setResizable(false);
 
+        ImageIcon ico = new ImageIcon("./textures/icone.png");
+        menu.setIconImage(ico.getImage());
+
         Font police = new Font(" Arial ",Font.BOLD,18);
 
         Color couleur = new Color(166, 39, 86);
@@ -105,7 +108,13 @@ public class FenetreSelection extends JFrame implements ActionListener {
             parametres.setVisible(true);
         }
         if (e.getSource()==boutonCredits){
-            JOptionPane.showMessageDialog(this,"Pinformer, jeu cree par Julie, Zineb, Thibaut et Adrien");
+            Object[] message = {
+                    "             PINFORMER",
+                    "            Jeu cree par",
+                    " Julie, Zineb, Thibaut et Adrien",
+                    "    PROJET IF - S4 - 2018/2019"
+            };
+            JOptionPane.showMessageDialog(this,message,"CREDITS",JOptionPane.INFORMATION_MESSAGE);
         }
         if (e.getSource()==boutonQuitter){
             System.exit(0);

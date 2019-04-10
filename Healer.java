@@ -25,7 +25,7 @@ public class Healer extends Objet {
     } //Affichage de son sprite
     
     private void heal(Personnage p, int vieDonnee){ //Méthode rendant de la vie au personnage ou en enlevant en fonction de son ID
-        if(id==20){
+        if(id==20){ //HEALER --> Soigne
             if((p.getVie()+vieDonnee)>10){ //Plafond sup à 10
                 p.setVie(10);
             }else {
@@ -33,7 +33,7 @@ public class Healer extends Objet {
             }
         }
 
-        if(id==21){
+        if(id==21){ //DRAINER --> Retire vie
             if((p.getVie()-vieDonnee)<0){ //Plafond inf à 0
                 p.setVie(0);
             } else {

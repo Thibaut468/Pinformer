@@ -9,7 +9,7 @@ public abstract class Personnage extends Entite {
     protected Jeu jeu;
     private final double GRAVITE = 2; //VARIABLE QUI GERE LA GRAVITE, MODIFIABLE
     private final double FROTTEMENTS = 1; //VARIABLE QUI GERE LES FROTTEMENTS, MODIFIABLE
-    private final int VMAX = 25;
+    private final int VMAX = 15;
     protected boolean glissade = false;
     protected boolean falling = true;
     protected boolean jumping = true;

@@ -36,6 +36,9 @@ import java.awt.event.*;
 			this.setLocationRelativeTo(null);
 			this.setResizable(false); 
 			this.setVisible(false);	 // Fenêtre non visible au lancement du jeu
+
+			ImageIcon ico = new ImageIcon("./textures/icone.png");
+			this.setIconImage(ico.getImage());
 			
 		    /** Polices utilisées pour l'écriture des boutons **/
 			Font police1 = new Font(" Arial ",Font.BOLD,9);
