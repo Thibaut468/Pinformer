@@ -48,29 +48,28 @@ public class chargementImage {
 
         }
 
-        monstre_contact = load("./textures/monstre_contact.png");
-        backgroundJeu=load("./textures/background.png");
-        water=load("./textures/water.png");
+        monstre_contact = load("./textures/objets/monstre_contact.png");
+        backgroundJeu=load("./textures/fonds/background.png");
+        water=load("./textures/fonds/water.png");
 
-        p_entier = load("./textures/P_entier.png");
-        p_gauche = load("./textures/P_gauche.png");
-        p_droite = load("./textures/P_droite.png");
-        p_milieu = load("./textures/P_milieu.png");
-        p_arrivee = load("./textures/P_arrivee.png");
-        p_ephemere = load("./textures/P_ephemere.png");
+        p_entier = load("./textures/plateformes/P_entier.png");
+        p_gauche = load("./textures/plateformes/P_gauche.png");
+        p_droite = load("./textures/plateformes/P_droite.png");
+        p_milieu = load("./textures/plateformes/P_milieu.png");
+        p_arrivee = load("./textures/plateformes/P_arrivee.png");
+        p_ephemere = load("./textures/plateformes/P_ephemere.png");
 
-        healer = load("./textures/coeur.png");
-        tremplin = load("./textures/tremplin.png");
-        portail = load("./textures/portail48.png");
-        pic_bas = load("./textures/pic_bas.png");
-        pic_haut = load("./textures/pic_haut.png");
-        canonD = load("./textures/canonD.png");
-        canonG = load("./textures/canonG.png");
-        missileD = load ("./textures/missileD.png");
-        missileG = load ("./textures/missileG.png");
-
-        starter_ferme = load("./textures/jumper1.png");
-        starter_ouvert = load("./textures/jumper2.png");
+        healer = load("./textures/objets/coeur.png");
+        tremplin = load("./textures/objets/tremplin.png");
+        portail = load("./textures/objets/portail48.png");
+        pic_bas = load("./textures/objets/pic_bas.png");
+        pic_haut = load("./textures/objets/pic_haut.png");
+        canonD = load("./textures/objets/canonD.png");
+        canonG = load("./textures/objets/canonG.png");
+        missileD = load ("./textures/objets/missileD.png");
+        missileG = load ("./textures/objets/missileG.png");
+        starter_ferme = load("./textures/objets/jumper1.png");
+        starter_ouvert = load("./textures/objets/jumper2.png");
 
 
         //On charge la barre de vie

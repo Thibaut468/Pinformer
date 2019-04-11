@@ -37,7 +37,7 @@ import java.awt.event.*;
 			this.setResizable(false); 
 			this.setVisible(false);	 // Fenêtre non visible au lancement du jeu
 
-			ImageIcon ico = new ImageIcon("./textures/icone.png");
+			ImageIcon ico = new ImageIcon("./textures/fonds/icone.png");
 			this.setIconImage(ico.getImage());
 			
 		    /** Polices utilisées pour l'écriture des boutons **/
@@ -179,7 +179,7 @@ import java.awt.event.*;
 			
 			/** Création et ajout de l'image de fond au conteneur **/
 			JLabel imageFondParametre;
-			imageFondParametre = new JLabel(new ImageIcon("./textures/fond_parametres.png"));  //image dans un dossier textures et de non fond_parametres
+			imageFondParametre = new JLabel(new ImageIcon("./textures/fonds/fond_parametres.png"));  //image dans un dossier textures et de non fond_parametres
 			imageFondParametre.setLocation(0,0);
 			imageFondParametre.setSize(500,500);
 			conteneur1.add(imageFondParametre);

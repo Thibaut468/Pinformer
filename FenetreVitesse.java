@@ -34,7 +34,7 @@ public class FenetreVitesse extends JFrame implements ActionListener {
         this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
         this.setResizable(false);
 
-        ImageIcon ico = new ImageIcon("./textures/icone.png");
+        ImageIcon ico = new ImageIcon("./textures/fonds/icone.png");
         this.setIconImage(ico.getImage());
 
         Font police = new Font(" Arial ", Font.BOLD, 16);

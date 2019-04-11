@@ -27,7 +27,7 @@ public class FenetreSelection extends JFrame implements ActionListener {
         menu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         menu.setResizable(false);
 
-        ImageIcon ico = new ImageIcon("./textures/icone.png");
+        ImageIcon ico = new ImageIcon("./textures/fonds/icone.png");
         menu.setIconImage(ico.getImage());
 
         Font police = new Font(" Arial ",Font.BOLD,18);
@@ -77,7 +77,7 @@ public class FenetreSelection extends JFrame implements ActionListener {
         conteneur1.add(boutonQuitter);
 		
 		JLabel imageFond;
-		imageFond = new JLabel(new ImageIcon("./textures/fond_menu.png"));
+		imageFond = new JLabel(new ImageIcon("./textures/fonds/fond_menu.png"));
 		imageFond.setLocation(0,0);
 		imageFond.setSize(500,500);
 		conteneur1.add(imageFond);

@@ -23,7 +23,7 @@ public class Affichage {
         frame.setResizable(false);
         frame.setVisible(true);
 
-        ImageIcon ico = new ImageIcon("./textures/icone.png");
+        ImageIcon ico = new ImageIcon("./textures/fonds/icone.png");
         frame.setIconImage(ico.getImage());
 
         //On utilise un panel de façon à pouvoir utiliser des buffer d'images (propre à la gestion des FPS)

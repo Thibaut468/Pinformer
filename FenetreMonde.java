@@ -34,7 +34,7 @@ public class FenetreMonde extends JFrame implements ActionListener {
 		this.setResizable(false); 
 		this.setVisible(false);
 
-		ImageIcon ico = new ImageIcon("./textures/icone.png");
+		ImageIcon ico = new ImageIcon("./textures/fonds/icone.png");
 		this.setIconImage(ico.getImage());
 
 		/** Lecture du fichier texte contenant les parametres **/
@@ -131,7 +131,7 @@ public class FenetreMonde extends JFrame implements ActionListener {
         conteneur1.add(boutonRetour);
 
         JLabel imageFondMonde;
-		imageFondMonde = new JLabel(new ImageIcon("./textures/fond_menu.png"));
+		imageFondMonde = new JLabel(new ImageIcon("./textures/fonds/fond_menu.png"));
 		imageFondMonde.setLocation(0,0);
 		imageFondMonde.setSize(500,500);
 	
