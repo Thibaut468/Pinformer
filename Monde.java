@@ -27,7 +27,7 @@ public class Monde {
 
     private void generation(String chemin){
         /** LECTURE DES MONDES DANS UN FICHIER TEXTE **/
-        String fichier = chargementFichier.chargement(chemin);
+        String fichier = chargementFichier.chargement(chemin, false);
         String[] separation = fichier.split("\\s+");
 
         //1ère ligne du fichier texte : taille de la map

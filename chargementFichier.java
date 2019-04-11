@@ -1,4 +1,5 @@
 import java.io.*;
+import java.net.URL;
 
 //Classe un peu difficile, prise en grande partie sur un cours de P2I-2 (données capteurs) mais adapté pour le cas présent, permet de lire un fichier texte placé dans un dossier annexe au code
 //Le chemin est spécifié par un string et ce sont des méthodes statiques que l'on peut récupérer partout dans nos class.
@@ -6,11 +7,16 @@ import java.io.*;
 
 public class chargementFichier {
 
-    public static String chargement(String chemin){
+    public static String chargement(String chemin, boolean jar){
         StringBuilder builder = new StringBuilder();
-
-        try{
-            BufferedReader br = new BufferedReader(new FileReader(chemin)); //Création d'un buffer qui récupère le fichier texte
+        URL url = ClassLoader.getSystemClassLoader().getResource(chemin);
+        try {
+            BufferedReader br;
+            if (jar) {
+                br = new BufferedReader(new InputStreamReader(url.openStream())); //Création d'un buffer qui récupère le fichier texte
+            } else{
+                br = new BufferedReader(new FileReader(chemin));
+            }
             String ligne;
             ligne=br.readLine(); //On ligne chaque ligne du buffer
             while(ligne != null){

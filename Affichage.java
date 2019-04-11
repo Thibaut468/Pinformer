@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.net.URL;
 
 public class Affichage {
 
@@ -23,7 +24,7 @@ public class Affichage {
         frame.setResizable(false);
         frame.setVisible(true);
 
-        ImageIcon ico = new ImageIcon("./textures/fonds/icone.png");
+        ImageIcon ico = new ImageIcon(getClass().getResource("/textures/fonds/icone.png"));
         frame.setIconImage(ico.getImage());
 
         //On utilise un panel de façon à pouvoir utiliser des buffer d'images (propre à la gestion des FPS)

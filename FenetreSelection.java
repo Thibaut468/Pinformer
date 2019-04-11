@@ -2,7 +2,7 @@ import javax.sound.sampled.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.io.File;
+import java.io.*;
 
 /** FENETRE PRINCIPALE AVANT JEU **/
 
@@ -19,6 +19,9 @@ public class FenetreSelection extends JFrame implements ActionListener {
 
     public FenetreSelection(){
 
+        //Initialisation du JAR et des fichiers externes
+        init();
+
         /** Création frame principale du menu **/
         menu = new JFrame();
         menu.setTitle("Menu du jeu");
@@ -27,7 +30,7 @@ public class FenetreSelection extends JFrame implements ActionListener {
         menu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         menu.setResizable(false);
 
-        ImageIcon ico = new ImageIcon("./textures/fonds/icone.png");
+        ImageIcon ico = new ImageIcon(getClass().getResource("/textures/fonds/icone.png"));
         menu.setIconImage(ico.getImage());
 
         Font police = new Font(" Arial ",Font.BOLD,18);
@@ -77,7 +80,7 @@ public class FenetreSelection extends JFrame implements ActionListener {
         conteneur1.add(boutonQuitter);
 		
 		JLabel imageFond;
-		imageFond = new JLabel(new ImageIcon("./textures/fonds/fond_menu.png"));
+		imageFond = new JLabel(new ImageIcon(getClass().getResource("/textures/fonds/fond_menu.png")));
 		imageFond.setLocation(0,0);
 		imageFond.setSize(500,500);
 		conteneur1.add(imageFond);
@@ -123,10 +126,8 @@ public class FenetreSelection extends JFrame implements ActionListener {
 
     private void playSound(String str){ //Méthode prise et adapté d'un tuto JAVA permettant de lancer une des musiques de notre projet
         try{
-            String s = "./musiques/"+str;
-            File fichier = new File(s) ;
-            AudioInputStream AudioInput = AudioSystem.getAudioInputStream(fichier);
-
+            String s = "/musiques/"+str;
+            AudioInputStream AudioInput = AudioSystem.getAudioInputStream(getClass().getResource(s));
 
             int bytesPerFrame = AudioInput.getFormat().getFrameSize();
             int numBytes = 1024 * bytesPerFrame;
@@ -149,4 +150,25 @@ public class FenetreSelection extends JFrame implements ActionListener {
         }
     }
 
+    public void init(){
+        File Nparam = new File("./param.txt");
+        File Nmondes = new File("./mondes.txt");
+
+        try {
+            if (!Nparam.exists()) { //on sors le fichier param du JAR
+                String param = chargementFichier.chargement("sauvegardes/param.txt", true);
+                String[] separation = param.split("\\s+");
+                chargementFichier.ecritureParam("./param.txt",separation);
+            }
+
+            if (!Nmondes.exists()) { //On sort le fichier mondes du JAR
+                Nmondes.createNewFile();
+                String param = chargementFichier.chargement("sauvegardes/mondes.txt", true);
+                String[] separation = param.split("\\s+");
+                chargementFichier.ecritureParam("./mondes.txt",separation);
+            }
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

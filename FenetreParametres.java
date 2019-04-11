@@ -37,7 +37,7 @@ import java.awt.event.*;
 			this.setResizable(false); 
 			this.setVisible(false);	 // Fenêtre non visible au lancement du jeu
 
-			ImageIcon ico = new ImageIcon("./textures/fonds/icone.png");
+			ImageIcon ico = new ImageIcon(getClass().getResource("/textures/fonds/icone.png"));
 			this.setIconImage(ico.getImage());
 			
 		    /** Polices utilisées pour l'écriture des boutons **/
@@ -46,7 +46,7 @@ import java.awt.event.*;
 
 
 			/** Lecture du fichier texte contenant les parametres **/
-			String fichier = chargementFichier.chargement("./sauvegardes/param.txt");
+			String fichier = chargementFichier.chargement("./param.txt", false);
 			String[] separation = fichier.split("\\s+");
 			param[0]=separation[0];
 			touche = Integer.parseInt(separation[0]);
@@ -179,7 +179,7 @@ import java.awt.event.*;
 			
 			/** Création et ajout de l'image de fond au conteneur **/
 			JLabel imageFondParametre;
-			imageFondParametre = new JLabel(new ImageIcon("./textures/fonds/fond_parametres.png"));  //image dans un dossier textures et de non fond_parametres
+			imageFondParametre = new JLabel(new ImageIcon(getClass().getResource("/textures/fonds/fond_parametres.png")));  //image dans un dossier textures et de non fond_parametres
 			imageFondParametre.setLocation(0,0);
 			imageFondParametre.setSize(500,500);
 			conteneur1.add(imageFondParametre);
@@ -271,7 +271,7 @@ import java.awt.event.*;
                     param[0]="2";
 				}
 
-				chargementFichier.ecritureParam("./sauvegardes/param.txt", param);
+				chargementFichier.ecritureParam("./param.txt", param);
 				this.setVisible(false);  // Appui sur sauvegarde rend la fenêtre invisible
 			}
 			

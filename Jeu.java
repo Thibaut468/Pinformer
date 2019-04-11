@@ -55,7 +55,7 @@ public class Jeu implements Runnable, KeyListener {
         this.keys = new boolean[4]; //on crée un tableau de 4 touches (haut bas gauche droite), activé = true, désactivé = false
 
         /** RECUPERATION DES PARAMETRES SUR LE FICHIER TEXTE **/
-        String fichier = chargementFichier.chargement("./sauvegardes/param.txt");
+        String fichier = chargementFichier.chargement("./param.txt", false);
         String[] separation = fichier.split("\\s+");
         touche=Integer.parseInt(separation[0]);
 
@@ -155,7 +155,7 @@ public class Jeu implements Runnable, KeyListener {
 
         if(totalms<Integer.parseInt(lignes[niveau-1]) || Integer.parseInt(lignes[niveau-1])==0) lignes[niveau-1]=Integer.toString((int)totalms);
 
-        chargementFichier.ecritureParam("./sauvegardes/mondes.txt", lignes);
+        chargementFichier.ecritureParam("./mondes.txt", lignes);
     }
 
     public void run(){ //Cette méthode gère totalement la fluidité du jeu à un CAP de 60 FPS - Game Loop inspiré de game loop très connus trouvable sur des tutos JAVA

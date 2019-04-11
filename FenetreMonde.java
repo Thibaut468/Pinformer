@@ -34,11 +34,11 @@ public class FenetreMonde extends JFrame implements ActionListener {
 		this.setResizable(false); 
 		this.setVisible(false);
 
-		ImageIcon ico = new ImageIcon("./textures/fonds/icone.png");
+		ImageIcon ico = new ImageIcon(getClass().getResource("/textures/fonds/icone.png"));
 		this.setIconImage(ico.getImage());
 
 		/** Lecture du fichier texte contenant les parametres **/
-		String fichier = chargementFichier.chargement("./sauvegardes/mondes.txt");
+		String fichier = chargementFichier.chargement("./mondes.txt", false);
 		String[] separation = fichier.split("\\s+");
 		lastNivDebloque = 1;
 		for(int i=0; i<separation.length;i++){
@@ -131,7 +131,7 @@ public class FenetreMonde extends JFrame implements ActionListener {
         conteneur1.add(boutonRetour);
 
         JLabel imageFondMonde;
-		imageFondMonde = new JLabel(new ImageIcon("./textures/fonds/fond_menu.png"));
+		imageFondMonde = new JLabel(new ImageIcon(getClass().getResource("/textures/fonds/fond_menu.png")));
 		imageFondMonde.setLocation(0,0);
 		imageFondMonde.setSize(500,500);
 	
@@ -150,6 +150,12 @@ public class FenetreMonde extends JFrame implements ActionListener {
 
         public void actionPerformed(ActionEvent e) { //Gestion des événements en fonction du bouton sélectionné
 		if (e.getSource()== boutonNiveau1 && !jeuIsRunning){
+			Object[] message = {
+					"Niveau en cours de chargement",
+					" Appuyer sur OK et patienter",
+					"               Bon jeu !"
+			};
+			JOptionPane.showMessageDialog(this,message,"CHARGEMENT",JOptionPane.INFORMATION_MESSAGE);
             jeu = new Jeu("Pinformer",1280,720, 1, dataMonde);
             jeuIsRunning = true;
             jeu.start();
