@@ -124,7 +124,7 @@ public class Jeu implements Runnable, KeyListener {
             //Affichage hauteur du starter
 
             if(starterEnCours){
-				g.setColor(new Color(255, 122, 47));
+				g.setColor(new Color(255, 39, 73));
 				g.fillRect(starterX,starterY,15,15);
 			}
             //Gère les buffeurs d'affichage
