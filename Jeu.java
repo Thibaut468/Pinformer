@@ -65,19 +65,19 @@ public class Jeu implements Runnable, KeyListener {
 
         switch (niveau) {
             case 1:
-                this.monde = new Monde("/mondes/monde1.txt", this);
+                this.monde = new Monde("mondes/monde1.txt", this);
                 break;
             case 2:
-                this.monde = new Monde("/mondes/monde2.txt", this);
+                this.monde = new Monde("mondes/monde2.txt", this);
                 break;
             case 3:
-                this.monde = new Monde("/mondes/monde3.txt", this);
+                this.monde = new Monde("mondes/monde3.txt", this);
                 break;
             case 4:
-                this.monde = new Monde("/mondes/monde4.txt", this);
+                this.monde = new Monde("mondes/monde4.txt", this);
                 break;
             default:
-                this.monde = new Monde("/mondes/monde1.txt", this);
+                this.monde = new Monde("mondes/monde1.txt", this);
                 break;
         }
     }
